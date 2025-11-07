@@ -58,11 +58,11 @@ aws:
     bucket-name: ${AWS_S3_BUCKET}
   region: ${AWS_REGION}
 
-  # sms api key
-  sms:
-    api:
-      access: ${SMS_ACCESS}
-      secret: ${SMS_SECRET_KEY}
+# sms api key
+sms:
+  api:
+    access: ${SMS_ACCESS}
+    secret: ${SMS_SECRET_KEY}
 
 
 
