@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.CompanyMapper">
+<!--    id로 회사 조회-->
+    <select id="selectCompanyById" resultType="CompanyDTO">
+        select c.user_id, c.company_name, c.company_info, c.company_url, profile_file.file_path as companyProfileFile,
+               background_file.file_path as companyBackgroundFile, cs.company_sector_name, csc.company_scale_name
+        from tbl_company c
+                 left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+                 left join tbl_file profile_file on cpf.file_id = profile_file.id
+                 left join tbl_company_background_file cbf on c.user_id = cbf.company_id
+                 left join tbl_file background_file on cbf.file_id = background_file.id
+                 left join tbl_company_sector_category csec on c.user_id = csec.company_id
+                 left join tbl_company_sector cs on csec.company_sector_id = cs.id
+                 left join tbl_company_scale_category_bridge cscb on c.user_id = cscb.company_id
+                 left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        where c.user_id = #{companyId}
+    </select>
+<!--    팔로워 수 조회-->
+    <select id="selectFollowerCountByCompanyId" resultType="int">
+        select count(*)
+        from tbl_follow f
+        join tbl_company c
+        on f.company_id=c.user_id
+        where f.follow_status='active'
+        and f.company_id=#{companyId}
+    </select>
+<!--    체험 공고 수 조회-->
+    <select id="selectExperienceById" resultType="int">
+        select count(*)
+        from tbl_experience_notice e
+        join tbl_company c
+        on e.company_id=c.user_id
+        where e.experience_notice_status='active'
+        and e.company_id=#{companyId}
+    </select>
+<!--    인턴 공고 수 조회-->
+    <select id="selectInternById" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+        join tbl_company c
+        on i.company_id=c.user_id
+        where i.intern_notice_status='active'
+        and i.company_id=#{companyId}
+    </select>
+<!--    회사 규모 조회-->
+    <select id="selectScaleById" resultType="String">
+        select s.company_scale_name
+        from tbl_company_scale_category s
+        join tbl_company_scale_category_bridge sb
+        on s.id=sb.company_scale_category_id
+        join tbl_company c
+        on c.user_id=sb.company_id
+        where sb.company_id=#{companyId}
+    </select>
+    <insert id="insertCompany" useGeneratedKeys="true" keyProperty="userId">
+        insert into tbl_company(user_id,company_name)
+        values (#{userId},#{companyName})
+    </insert>
+
+
+<!-- 기업 검색 -->
+    <sql id="search">
+        <if test="search.keyword != null and search.keyword != ''">
+            and c.company_name like concat('%', #{search.keyword}, '%')
+        </if>
+        <if test="search.job != null and search.job != ''">
+            and cs.company_sector_name in
+            <foreach item="item" collection="search.job.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="search.scale != null and search.scale != ''">
+            and csc.company_scale_name in
+            <foreach item="item" collection="search.scale.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </sql>
+
+<!-- 기업 목록 -->
+    <select id="selectCompanyAll">
+        select c.user_id, c.company_name, c.company_info, background_file.file_path as companyBackgroundFile,
+               profile_file.file_path as companyProfileFile, csc.company_scale_name, cs.company_sector_name
+        from tbl_company c
+        join tbl_user u on c.user_id = u.id
+        left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+        left join tbl_file profile_file on cpf.file_id = profile_file.id
+        left join tbl_company_background_file cbf on c.user_id = cbf.company_id
+        left join tbl_file background_file on cbf.file_id = background_file.id
+        left join tbl_company_sector_category csec on c.user_id = csec.company_id
+        left join tbl_company_sector cs on csec.company_sector_id = cs.id
+        left join tbl_company_scale_category_bridge cscb on c.user_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        where u.user_status = 'active'
+        and u.user_role = 'company'
+        <include refid="search"/>
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!-- 기업 수 -->
+    <select id="selectCompanyCountByUserId" resultType="int">
+        select count(distinct c.user_id)
+        from tbl_company c
+        join tbl_user u on c.user_id = u.id
+        left join tbl_company_sector_category csec on c.user_id = csec.company_id
+        left join tbl_company_sector cs on csec.company_sector_id = cs.id
+        left join tbl_company_scale_category_bridge cscb on c.user_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        where u.user_status = 'active'
+        and u.user_role = 'company'
+        <include refid="search"/>
+    </select>
+
+<!-- 인기 기업 팔로워 순 5개 -->
+    <select id="selectCompaniesByFollowerCount" resultType="CompanyDTO">
+        select c.user_id as userId, c.company_name as companyName, profile_file.file_path as companyProfileFile,
+               background_file.file_path as companyBackgroundFile, count(f.id) as followerCount
+        from tbl_company c
+        join tbl_user u on c.user_id = u.id
+        join tbl_follow f on c.user_id = f.company_id
+        and f.follow_status = 'active'
+        left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+        left join tbl_file profile_file on cpf.file_id = profile_file.id
+        left join tbl_company_background_file cbf on c.user_id = cbf.company_id
+        left join tbl_file background_file on cbf.file_id = background_file.id
+        where u.user_status = 'active'
+        and u.user_role = 'company'
+        group by c.user_id, c.company_name, profile_file.file_path, background_file.file_path
+        order by followerCount desc
+        limit 5
+    </select>
+
+<!-- 등록기간 지나지 않은 체험 공고 -->
+    <select id="selectExperienceByEndDate" resultType="int">
+        select count(*)
+        from tbl_experience_notice e
+                 join tbl_company c
+                      on e.company_id=c.user_id
+        where e.experience_notice_status='active'
+          and e.experience_notice_end_date >= now()
+          and e.company_id=#{companyId}
+    </select>
+<!-- 등록기간 지나지 않은 인턴 공고 수 조회-->
+    <select id="selectInternByEndDate" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+                 join tbl_company c
+                      on i.company_id=c.user_id
+        where i.intern_notice_status='active'
+          and i.intern_notice_end_date >= now()
+          and i.company_id=#{companyId}
+    </select>
+
+<!-- 기업 목록 조회   -->
+
+    <sql id="searchCompany">
+        <if test="keyword != null and keyword != ''">
+            and (
+            company_scale_name like concat('%', #{keyword}, '%') or
+            user_email like concat('%', #{keyword}, '%') or
+            job_name like concat('%', #{keyword}, '%') or
+            company_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+    <select id="selectCompanyList">
+        select user_id ,user_name, company_name, user_email, user_phone, company_url, job_name, follow_count, company_scale_name
+        from vw_user_company_job_follow_scale
+        where user_status = 'active'
+        <include refid="searchCompany"/>
+        order by user_id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <!--  목록 개수  -->
+    <select id="selectCompanyCount">
+        select count(*)
+        from vw_user_company_job_follow_scale
+        where user_status = 'active'
+        <include refid="searchCompany"/>
+    </select>
+
+    <!-- 회원 아이디로 조회 -->
+    <select id="selectCompany">
+        select user_id, user_name, company_name, user_email, user_phone, company_url, job_name, user_status, follow_count, company_scale_name
+        from vw_user_company_job_follow_scale
+        where user_status = 'active' and user_id = #{userId}
+    </select>
+
+</mapper>

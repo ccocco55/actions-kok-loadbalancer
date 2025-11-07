@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콕(KOK) 관리자</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/admin/main-page.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="kok">
+        <div id="kok-notify-container"></div>
+        <div class="popup-manager" style="width: 0px;"></div>
+        <!-- 사이드 바 -->
+        <aside id="kok-side">
+            <div class="d-flex flex-column" id="side-wrapper">
+                <div class="side-header">
+                    <div class="app-wrapper">
+                        <div class="provider-name hover-spin">
+                            <span class="comp-provider-name">
+                                <span class="pn-name">관리자 모드</span>
+                            </span>
+                        </div>
+                        <a class="app-name d-flex justify-content-between align-items-center">
+                            <span th:text="${admin.username}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-wrapper flex-grow-1">
+                    <ul class="menu-list">
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin" id="menu-home" class="menu-btn d-flex w-100 current">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M10.8 3.65a2 2 0 0 1 2.4 0l7 5.25a2 2 0 0 1 .8 1.6V19a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3h-2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8.5a2 2 0 0 1 .8-1.6z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">HOME</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10M9 14a5 5 0 0 0-5 5v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a5 5 0 0 0-5-5z"></path>
+                                </svg>
+                                <span class="menu-name">회원관리</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                    <!-- 리스트가 보이는 상태의 아이콘 i class="mdi mdi-chevron-down" -->
+                                </div>
+                            </a>
+                            <!-- 리스트가 보이는 상태 ul class="menu-sub-list collapse show" -->
+                            <ul class="menu-sub-list collapse" id="menu-6109064136799700f1ebced6">
+                                <li class="submenu menu-item">
+                                    <!-- 클릭 한 부분 active -->
+                                    <a href="/admin/member" class="kok-link">
+                                        -
+                                        일반회원
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/company" class="kok-link">
+                                        -
+                                        기업회원
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/experience" class="menu-btn d-flex w-100" id="menu-experience">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
+                                </svg>
+                                <span class="menu-name">체험</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/employ" class="menu-btn d-flex w-100" id="menu-employ">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">인턴</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M13.694 6.8a1.2 1.2 0 0 0-1.184 1.003l-1.333 8a1.2 1.2 0 0 0 1.184 1.397h6.13a1.2 1.2 0 0 0 1.154-.87l1.294-4.53h-2.5a2.8 2.8 0 0 1-2.745-3.349l.33-1.65zm3.943.094-.374 1.87A1.2 1.2 0 0 0 18.44 10.2h2.582a1.2 1.2 0 0 0-.173-.22L18.02 7.152a1.2 1.2 0 0 0-.383-.258m-6.705.646a2.8 2.8 0 0 1 2.762-2.34h3.478a2.8 2.8 0 0 1 1.98.82l2.828 2.83a2.8 2.8 0 0 1 .82 1.98V11q0 .113-.03.22l-1.586 5.55a2.8 2.8 0 0 1-2.693 2.03h-6.13a2.8 2.8 0 0 1-2.762-3.26zM3.2 9a.8.8 0 0 1 .8-.8h5a.8.8 0 1 1 0 1.6H4a.8.8 0 0 1-.8-.8m-2 3a.8.8 0 0 1 .8-.8h6a.8.8 0 0 1 0 1.6H2a.8.8 0 0 1-.8-.8m2 3a.8.8 0 0 1 .8-.8h3a.8.8 0 0 1 0 1.6H4a.8.8 0 0 1-.8-.8" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">배너</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <ul class="menu-sub-list collapse" id="menu-6284cdfecf9f6d001b046f3a">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/advertise" class="kok-link">
+                                        -
+                                        광고신청
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/banner" class="kok-link">
+                                        -
+                                        현수막
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100" id="menu-payment">
+                                <svg fill="" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M2.2 7A2.8 2.8 0 0 1 5 4.2h14A2.8 2.8 0 0 1 21.8 7v5a.8.8 0 1 1-1.6 0V9.8H3.8V17A1.2 1.2 0 0 0 5 18.2h6a.8.8 0 0 1 0 1.6H5A2.8 2.8 0 0 1 2.2 17zm1.6 1.2h16.4V7A1.2 1.2 0 0 0 19 5.8H5A1.2 1.2 0 0 0 3.8 7zM6.2 13a.8.8 0 0 1 .8-.8h5a.8.8 0 0 1 0 1.6H7a.8.8 0 0 1-.8-.8M18 14.2a.8.8 0 0 1 .8.8v2.2H21a.8.8 0 0 1 0 1.6h-2.2V21a.8.8 0 0 1-1.6 0v-2.2H15a.8.8 0 1 1 0-1.6h2.2V15a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">결제</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <ul class="menu-sub-list collapse" id="">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/advertise" class="kok-link">
+                                        -
+                                        광고비
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/experience" class="kok-link">
+                                        -
+                                        체험비
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <!-- 상단 부분 -->
+        <div id="kok-main" class="has-menu">
+            <div id="header-wrapper">
+                <div id="kok-header" class="d-flex false">
+                    <div class="flex-grow-1"></div>
+                    <div>
+                        <div class="header-menu-group d-flex">
+                            <!-- 상단 신고 게시글 목록 이동 -->
+                            <a href="/admin/notify/post" class="kok-link mr-3">
+                                <div class="header-menu-btn-manage">
+                                    <i class="mdi mdi-text-box-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 고객지원 - 자주 묻는 질문 이동 -->
+                            <a href="/admin/support" class="kok-link mr-3">
+                                <div class="header-menu-btn-notice">
+                                    <i class="mdi mdi-bullhorn-variant-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 관리자 이메일 -->
+                            <div class="user-menu">
+                                <div class="user-menu-wrapper d-flex align-items-center cursor-pointer" id="user-menu-handler">
+                                    <div class="user-avatar">E</div>
+                                    <div class="user-menu-email" th:text="${admin.userEmail}"></div>
+                                </div>
+                                <!-- 리스트가 보여질 때 -->
+                                <!-- <div class="user-menu-content dropdown-menu dropdown-menu-right show" style="position: absolute; transform: translate3d(1698px, 62px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-end"> -->
+                                <div class="user-menu-content dropdown-menu dropdown-menu-right">
+                                    <ul class="menu-body list-unstyled">     
+                                        <li>
+                                            <a href="" class="d-block text-dark" id="logout">
+                                                <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
+                                                로그아웃
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/admin/join" class="d-block text-dark">
+                                                <i class="mdi mdi-account-box-outline mr-2 mdi-18px"></i>
+                                                관리자 등록
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page ana-user-index wide-page">
+                <div class="page-header">
+                    <div class="page-title">HOME</div>
+                    <div class="page-subtitle"></div>
+                </div>
+                <div class="page-body">
+                    <div class="tab-box">
+                        <!-- 메인 차트 시작 -->
+                        <div class="tab-body">
+                            <div class="tab-wrapper user-tab">
+                                <div class="chart-row row">
+                                    <div class="col-12 col-xl-8">
+                                        <div class="chart-row row">
+                                            <!-- 첫 번째 차트 -->
+                                            <div class="col-12 col-lg-6">
+                                                <div class="chart-box">
+                                                    <div class="chart-wrapper">
+                                                        <div id="first-chart" class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                            <div style="position: relative; width: 446px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+                                                                <canvas width="669" height="450" style="position:absolute; left:0px; top:0px; width:446px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
+                                                            </div>
+                                                            <div class="" style="position:absolute; display:block; border-style:solid; white-space:nowrap; z-index:9999999; box-shadow:rgba(0, 0, 0, 0.2) 1px 2px 10px; transition:opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color:rgb(255, 255, 255); border-width:1px; border-radius:4px; color:rgb(102, 102, 102); font: 14px / 21px &quot;Microsoft YaHei&quot;; padding: 10px; top: 0px; left: 0px; transform: translate3d(286px, 97px, 0px); border-color: rgb(255, 255, 255); pointer-events: none; visibility: hidden; opacity: 0;">
+                                                                <div style="font-size: 11px">2025-07-22 
+                                                                    <span style="color: #839099">화</span>
+                                                                </div>
+                                                                <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#6387f9;"></span>
+                                                                방문: 
+                                                                <span style="font-weight: bold">0명</span>
+                                                                <br>
+                                                                <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#ff9933;"></span> 
+                                                                판매건수: 
+                                                                <span style="font-weight: bold">0건</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 두 번째 차트 -->
+                                            <div class="col-12 col-lg-6">
+                                                <div class="chart-box">
+                                                    <div class="chart-wrapper">
+                                                        <div id="second-chart" class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                            <div style="position:relative; width:446px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
+                                                                <canvas width="669" height="450" style="position:absolute; left:0px; top:0px; width:446px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
+                                                            </div>
+                                                            <div class="" style="position:absolute; display:block; border-style:solid; white-space:nowrap; z-index:9999999; box-shadow:rgba(0, 0, 0, 0.2) 1px 2px 10px; transition:opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color:rgb(255, 255, 255); border-width:1px; border-radius:4px; color:rgb(102, 102, 102); font:14px / 21px &quot;Microsoft YaHei&quot;; padding:10px; top:0px; left:0px; transform:translate3d(229px, 115px, 0px); border-color:rgb(255, 255, 255); pointer-events:none; visibility:hidden; opacity:0;">
+                                                                <div style="font-size:11px">2025-07-27 
+                                                                    <span style="color:#f2460d">일</span>
+                                                                </div>
+                                                                <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#6387f9;"></span>
+                                                                방문: 
+                                                                <span style="font-weight: bold">0명</span>
+                                                                <br>
+                                                                <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#ff9933;"></span>
+                                                                판매건수: 
+                                                                <span style="font-weight:bold">0건</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="chart-box access-data-list">
+                                            <div class="row" id="row">
+                                                <div class="col-12 col-md-6 col-lg-3">
+                                                    <div class="access-data data-member-page">
+                                                        <div class="title">[회원] 평균 체험 지원 수</div>
+                                                        <div class="value">
+                                                            <span class="icon"><i class="mdi mdi-file-send-outline"></i></span>-<span class="unit">회</span>                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-lg-3">
+                                                    <div class="access-data data-member-page">
+                                                        <div class="title">[회원] 평균 인턴 지원 수</div>
+                                                        <div class="value">
+                                                            <span class="icon"><i class="mdi mdi-file-send-outline"></i></span>-<span class="unit">회</span>                                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-lg-3">
+                                                    <div class="access-data data-non-member-page">
+                                                        <div class="title">[기업회원] 평균 체험 모집 수</div>
+                                                        <div class="value">
+                                                            <span class="icon"><i class="mdi mdi-file-send-outline"></i></span>-<span class="unit">회</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-lg-3">
+                                                    <div class="access-data data-non-member-page">
+                                                        <div class="title">[기업회원] 평균 인턴 모집 수</div>
+                                                        <div class="value">
+                                                            <span class="icon"><i class="mdi mdi-file-send-outline"></i></span>-<span class="unit">회</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-12 col-xl-4">
+                                        <div class="chart-box user-price-box">
+                                            <div class="box-header">
+                                                <div class="box-title"></div>
+                                            </div>
+                                            <div class="box-body" id="box-body">
+                                                <table class="user-price-table justify-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>일반회원</th>
+                                                            <th></th>
+                                                            <th>기업회원</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="td-class" rowspan="3">
+                                                                <p>지원</p>
+                                                                <p>·</p>
+                                                                <p>모집</p>
+                                                            </td>
+                                                            <td class="td-value value-new">0</td>
+                                                            <td class="td-field">체험</td>
+                                                            <td class="td-value value-new">0</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td-value value-revisit">0</td>
+                                                            <td class="td-field">인턴</td>
+                                                            <td class="td-value value-revisit">0</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td-value value-total">0</td>
+                                                            <td class="td-field">전체</td>
+                                                            <td class="td-value value-total">0</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td-divider" colspan="4"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="td-class" rowspan="2">결제</td>
+                                                            <td class="td-value value-new">0</td>
+                                                            <td class="td-field">체험비</td>
+                                                            <td class="td-value value-new">-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="td-value value-revisit">-</td>
+                                                            <td class="td-field">광고비</td>
+                                                            <td class="td-value value-revisit">0</td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td class="td-divider" colspan="3"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-row row">
+                                    <!-- 세 번째 차트 -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="chart-box">
+                                            <div class="chart-wrapper">
+                                                <div id="third-chart" class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                    <div style="position:relative; width:684px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
+                                                        <canvas width="1026" height="450" style="position:absolute; left:0px; top:0px; width:684px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
+                                                    </div>
+                                                    <div class="" style="position:absolute; display:block; border-style:solid; white-space:nowrap; z-index:9999999; box-shadow:rgba(0, 0, 0, 0.2) 1px 2px 10px; transition:opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color:rgb(255, 255, 255); border-width:1px; border-radius:4px; color:rgb(102, 102, 102); font:14px / 21px &quot;Microsoft YaHei&quot;; padding:10px; top:0px; left:0px; transform:translate3d(503px, 111px, 0px); border-color:rgb(255, 255, 255); pointer-events:none; visibility:hidden; opacity:0;">
+                                                        <div style="font-size:11px">2025-07-24
+                                                            <span style="color:#839099">목</span>
+                                                        </div>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#6387f9;"></span>
+                                                        방문자: 
+                                                        <span style="font-weight:bold">0명</span>
+                                                        <br>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#ff9933;"></span>
+                                                        구매자: 
+                                                        <span style="font-weight:bold">0명</span>
+                                                        <br>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#5cb85c;"></span>
+                                                        구매전환율(%): 
+                                                        <span style="font-weight:bold">0%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 네 번째 차트 -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="chart-box">
+                                            <div class="chart-wrapper">
+                                                <div id="fourth-chart" class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                    <div style="position:relative; width:684px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
+                                                        <canvas width="1026" height="450" style="position:absolute; left:0px; top:0px; width:684px; height:300px; user-select: none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
+                                                    </div>
+                                                    <div class="" style="position:absolute; display:block; border-style:solid; white-space:nowrap; z-index:9999999; box-shadow:rgba(0, 0, 0, 0.2) 1px 2px 10px; transition:opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color:rgb(255, 255, 255); border-width:1px; border-radius:4px; color:rgb(102, 102, 102); font:14px / 21px &quot;Microsoft YaHei&quot;; padding:10px; top:0px; left:0px; transform:translate3d(189px, 150px, 0px); border-color:rgb(255, 255, 255); pointer-events:none; visibility:hidden; opacity:0;">
+                                                        <div style="font-size:11px">2025-07-15 
+                                                            <span style="color:#839099">화</span>
+                                                        </div>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#6387f9;"></span>
+                                                        방문자: 
+                                                        <span style="font-weight:bold">0명</span>
+                                                        <br>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#ff9933;"></span>
+                                                        구매자: 
+                                                        <span style="font-weight:bold">0명</span>
+                                                        <br>
+                                                        <span style="display:inline-block; margin-right:4px; border-radius:10px; width:10px; height:10px; background-color:#5cb85c;"></span>
+                                                        구매전환율(%): 
+                                                        <span style="font-weight:bold">0명</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-footer"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/admin/main-page/module/service.js"></script>
+<script src="/js/admin/main-page/module/layout.js"></script>
+<script src="/js/admin/logout/module/service.js"></script>
+<script src="/js/admin/logout/event.js"></script>
+<script src="/js/admin/main-page/event.js"></script>
+</html>

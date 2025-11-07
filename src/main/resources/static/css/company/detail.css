@@ -1,0 +1,562 @@
+/* 버튼 */
+.btn-primary {
+    color: #fff;
+    background-color: #0aa5ff;
+}
+
+.btn-default {
+    background-color: rgba(86, 105, 143, 0.0600);
+}
+
+/* 프로필 */
+.profile-card {
+    border-radius: 12px 12px 0 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.profile-content {
+    flex-direction: column;
+    padding: 16px;
+    background: #ffffff;
+    width: 100%;
+    gap: 16px;
+    display: flex;
+}
+
+.profile-header {
+    align-items: center;
+    gap: 12px;
+    display: flex;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-btn-wrap .btn-follow {
+    width: 100%;
+    height: 36px;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+/* 탭 */
+.tab-container {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 12px;
+    background: #fff;
+    display: flex;
+}
+
+.tab-container .tab-inner {
+    width: 100%;
+    border-bottom: 1px solid rgba(24,37,61,0.0600);
+}
+
+.company-intro {
+    padding: 0 8px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.btn-tab {
+    justify-content: center;
+    align-items: center;
+    padding: 12px 8px;
+    gap: 6px;
+    cursor: pointer;
+    display: flex;
+}
+
+.btn-tab.active {
+    margin-bottom: 0;
+    border-bottom: 2px solid rgba(18, 19, 20, 1);
+}
+
+.btn-tab.active p {
+    color: rgba(18,19,20,1);
+    font-weight: 500;
+}
+
+/* content */
+.content-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 16px;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.content {
+    flex-direction: row;
+    width: 100%;
+    max-width: 1000px;
+    justify-content: space-between;
+    display: flex;
+    gap: 16px;
+}
+
+.content-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.content-box.pd-0 {
+    padding: 0;
+}
+
+.main-wrapper {
+    width: 662px;
+}
+
+.main-wrapper .tab-container + .content-section .content-box:first-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.content-box + .content-box {
+    margin-top: 20px;
+}
+
+.content-title {
+    letter-spacing: -.36px;
+    color: rgba(18,19,20,1);
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+}
+
+.side-wrapper {
+    width: 320px;
+}
+
+/* banner */
+.banner-section {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    display: flex;
+}
+
+.banner-container {  
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.banner-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.banner-wrapper img {
+    width: 100%;
+    height: 200px;
+    aspect-ratio: 5 / 1;
+    border-radius: 12px;
+}
+
+/* 기업정보 */
+.company-info-item {
+    display: flex;
+    padding: 12px 0;
+}
+
+.company-info-item .label {
+    width: 100px;
+    color: rgba(18,19,20,0.6000);
+    letter-spacing: -.28px;
+}
+
+.company-info-item .value {
+    width: calc(100% - 100px);
+    letter-spacing: -.28px;
+}
+
+/* stats-list */
+.stats-list {
+    display: flex;
+    gap: 12px;
+    padding: 0 8px;
+}
+
+.stat-item {
+    display: flex;
+    gap: 6px;
+}
+
+.stat-label {
+    color: rgba(18,19,20,1);
+    font-weight: 400;
+    opacity: .9;
+}
+
+.stat-value {
+    font-weight: 500;
+}
+
+/* 서치박스 */
+.search-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    border-radius: 999px;
+    height: 36px;
+}
+
+.search-input input {
+    width: 100%;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    z-index: 999;
+    display: none;
+    height: auto;
+    right: 0;
+    max-height: 700px;
+    position: absolute;
+    top: 40px;
+    width: 220px;
+    border-radius: 16px;
+    color: rgba(18,19,20,0.6000);
+    letter-spacing: -.24px;
+    font-size: 12px;
+    line-height: 18px;
+    border: 1px solid rgba(24,37,61,0.0600);
+    background-color: #fff;
+    box-shadow: 0px 4px 20px 0px rgba(24,37,61,0.0600);
+}
+
+.dropdown-name {
+    padding: 15px 20px 0;
+}
+
+.dropdown-content {
+    padding: 8px;
+}
+
+.dropdown-list {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin !important;
+    scrollbar-gutter: stable !important;
+    scrollbar-color: rgba(18,19,20,0.2400) transparent !important;
+}
+
+.dropdown-btn {
+    width: 100%;
+    padding: 10px 12px;
+    position: relative;
+}
+
+.dropdown-btn p {
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: rgba(18,19,20,1);
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -.28px;
+}
+
+.dropdown-btn span {
+    display: block;
+    text-align: left;
+}
+
+.dropdown-btn.active::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0'/%3E%3C/svg%3E") no-repeat center/contain;
+    background-size: cover;
+    transform: translateY(-50%);
+}
+
+.dropdown-actions {
+    padding: 12px;
+    gap: 6px;
+    display: flex;
+}
+
+.dropdown-actions button {
+    padding: 0 8px;
+    min-height: 36px;
+    max-height: 36px;
+    align-items: center;
+    background-color: rgba(86,105,143,0.0600);
+    border-radius: 999px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -.28px;
+    color: rgba(18,19,20,1);
+}
+
+.dropdown-actions .apply-btn {
+    background-color: #0aa5ff;
+    color: #fff;
+}
+
+/* 채용공고 - 검색 */
+.search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.search-input {
+    flex: 1;
+    background-color: rgba(86,105,143,0.0600);
+    border-radius: 999px;
+}
+
+.dropdown-open-btn {
+    display: flex;
+    height: 36px;
+    padding: 8px;
+    border-radius: 999px;
+    background-color: rgba(86,105,143,0.0600);
+}
+
+.dropdown-open-btn p {
+    padding: 0 4px;
+}
+
+.dropdown-container:has(.dropdown-open-btn.active) .dropdown-menu{
+    display: block;
+}
+
+/* card-list */
+.card-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-link {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+}
+
+.card-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: rgba(86,105,143,0.0600);
+}
+
+.card-content .card-title {
+    color: rgba(18,19,20,1);
+    letter-spacing: -.32px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.card-content .card-desc {
+    color: rgba(18,19,20,0.6000);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+/* pagenation */
+.pagenation {
+    margin: 20px auto 0;
+    display: flex;
+    gap: 5px;
+}
+
+.pagenation .page-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgba(86,105,143,0.0600);
+}
+
+.pagenation .page-item.prev svg {
+    rotate: 90deg;
+}
+
+.pagenation .page-item.next svg {
+    rotate: -90deg;
+}
+
+.pagenation .page-item.active {
+    color: #fff;
+    background-color: #0aa5ff;
+}
+
+.pagenation .page-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* 바로가기 */
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.content-list.home-list .content-img-thumb {
+    width: 24px;
+    height: 24px;
+}
+
+.content-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.content-img-thumb {
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.content-text .title {
+    font-weight: 500;
+    letter-spacing: -.28px;
+    color: rgba(18,19,20,1);
+}
+
+.content-text .desc a {
+    color: #0088FF;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    letter-spacing: -.24px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.content-link {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+    padding: 8px 8px 8px 0;
+}
+
+
+/* 토스트 팝업 */
+.toast-warning {
+    max-width: 90vw;
+    min-width: 360px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    background-color: rgba(18,19,20,1);
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px 0px rgba(24,37,61,0.0600);
+    opacity: 0;
+    transition: .5s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast-warning-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: -.28px;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.toast-inner {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.toast-warning.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.toast-subText {
+    font-size: 14px;
+}
+
+.keyword-delete {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: 100%;
+    padding: 0 12px;
+    transform: translateY(-50%);
+    color: rgba(18, 19, 20, 0.4000);
+}
+
+/* 리스트 - 버튼 */
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-btn {
+    border-radius: 8px;
+    padding: 6px 10px;
+    background-color: rgba(86,105,143,0.0600);
+}
+
+.sort-btn.active {
+    color: #fff;
+    background-color: #0aa5ff;
+}
+
+.member-name {
+    letter-spacing: -.4px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+}
+

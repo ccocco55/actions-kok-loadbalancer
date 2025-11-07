@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleMainMapper">
+    <!-- 활성화된 체험 공고 수 -->
+    <select id="countActiveExperienceNotice">
+        select count(distinct id)
+        from tbl_experience_notice
+        where experience_notice_status = 'active'
+          and company_id = #{companyId}
+    </select>
+
+    <!-- 전체 체험 공고 수 -->
+    <select id="countAllExperienceNotice">
+        select count(distinct id)
+        from tbl_experience_notice
+        where company_id = #{companyId}
+    </select>
+
+    <!-- 활성화된 인턴 공고 수 -->
+    <select id="countActiveInternNotice">
+        select count(distinct id)
+        from tbl_intern_notice
+        where intern_notice_status = 'active'
+          and company_id = #{companyId}
+    </select>
+
+    <!-- 전체 인턴 고용 공고 수 -->
+    <select id="countAllInternNotice">
+        select count(distinct id)
+        from tbl_intern_notice
+        where company_id = #{companyId}
+    </select>
+
+    <select id="selectRecentActiveExperienceMembers">
+        select
+            u.id as user_id,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            re.created_datetime::date as request_date,
+            en.id as experience_notice_id,
+            en.experience_notice_title
+        from tbl_request_experience re
+             join tbl_experience_notice en on re.experience_notice_id = en.id
+             join tbl_user u on re.member_id = u.id
+        where u.user_status = 'active'
+          and en.company_id = #{companyId}
+        order by re.created_datetime desc
+        limit 4
+    </select>
+</mapper>

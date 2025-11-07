@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.EvaluationMapper">
+    <!--    insert-->
+    <insert id="insertEvaluation">
+        insert into tbl_evaluation(evaluation_content, evaluation_avg_score, request_experience_id, member_id, company_id)
+        values (#{evaluationContent}, #{evaluationAvgScore}, #{requestExperienceId}, #{memberId}, #{companyId})
+    </insert>
+    <!--    개수 조회-->
+    <select id="selectCount">
+        select count(*)
+        from tbl_evaluation
+        where member_id=#{id}
+    </select>
+    <!--    해당 체험의 평가 개수 조회-->
+    <select id="selectCountThis">
+        select count(*)
+        from tbl_evaluation
+        where member_id=#{memberId}
+          and request_experience_id=#{requestExperienceId}
+    </select>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleExperienceApplicationMapper">
+    <!-- 체험 상세 - 지원자 조회 -->
+    <select id="selectApplicationDetail">
+        select distinct
+            re.id as request_id,
+            re.request_experience_status,
+            re.created_datetime as request_datetime,
+            u.id as user_id,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            en.id as experience_notice_id,
+            en.experience_notice_title,
+            en.company_id,
+            f.id as resumeFileId,
+            f.file_path,
+            f.file_name
+        from tbl_request_experience re
+            join tbl_user u
+                on re.member_id = u.id
+            join tbl_experience_notice en
+                on re.experience_notice_id = en.id
+            left join tbl_member_storage_file msf
+                  on msf.member_id = u.id
+            left join tbl_file f
+                  on msf.file_id = f.id
+        where re.member_id = #{memberId}
+            and en.id = #{experienceNoticeId}
+        order by re.id desc
+        limit 1
+    </select>
+
+    <!-- 이력서 -->
+    <select id="selectResumeFileByMemberId" resultType="com.example.kok.dto.FileDTO">
+        select
+            f.id,
+            f.file_origin_name,
+            f.file_path,
+            f.file_name
+        from tbl_request_experience re
+             join tbl_request_experience_file ref
+                  on re.id = ref.request_experience_id
+             join tbl_file f
+                  on ref.file_id = f.id
+        where re.member_id = #{memberId}
+          and re.experience_notice_id = #{experienceNoticeId}
+    </select>
+
+    <!-- 현재 공고에 지원한 지원자 상세 조회 -->
+    <select id="selectApplicantsByNoticeId">
+        select
+            re.id as request_id,
+            re.member_id as user_id,
+            re.request_experience_status,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            re.created_datetime
+        from tbl_request_experience re
+                 join tbl_user u on re.member_id = u.id
+        where re.experience_notice_id = #{experienceNoticeId}
+        order by re.id desc
+    </select>
+
+    <!-- 평가하기 가능 여부 판별에 필요한 요소 조회-->
+    <select id="selectEvalOk">
+        select e.experience_end_date, re.experience_notice_id, re.request_experience_status, re.member_id
+        from tbl_experience_notice e
+        join tbl_request_experience re
+        on e.id=re.experience_notice_id
+        join tbl_user u
+        on re.member_id=u.id
+        where e.id=#{experienceNoticeId}
+        and u.id=#{memberId}
+    </select>
+
+    <!-- 지원자 상태 변경 -->
+    <update id="updateApplicantStatus">
+        update tbl_request_experience
+        set request_experience_status = #{requestExperienceStatus},
+            updated_datetime = now()
+        where member_id = #{userId}
+            and experience_notice_id = #{experienceNoticeId};
+    </update>
+</mapper>

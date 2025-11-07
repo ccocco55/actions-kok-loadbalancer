@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/member/login.css">
+    <title>로그인 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <main class="main">
+            <div data-theme="light" class="login-page">
+                <div class="login-container">
+
+                    <!-- 좌측 이미지 -->
+                    <div class="image-container pc">
+                        <img src="/images/member/login_image.jpg" preload="auto"  style="border-radius: 12px; height: 100%; object-fit: cover; width: 100%; z-index: 0;">
+                        <div class="logo-pos">
+                            <div class="logo-container">
+                                <!-- 로고 -->
+                                <div fill="currentColor" height="32" width="186" aria-label="logo" role="img">
+                                    <img src="/images/member/kok.png" style="height: 60px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 우측 입력창 -->
+                    <div class="right-side">
+                        <div class="input-container member">
+                            <div class="login-title">
+                                <div class="title-content">자주 사용하는 방법으로
+                                    시작하세요.
+                                </div>
+                            </div>
+                            <div class="input-content-container">
+                                <!-- 일반회원/기업회원 선택 버튼 -->
+                                <div class="select-container">
+                                    <div class="select-login-type general-member">
+                                        <p class="general-p">일반 회원</p>
+                                    </div>
+                                    <div class="select-login-type company-member">
+                                        <p class="company-p">기업 회원</p>
+                                    </div>
+                                </div>
+                                <div class="login-content-container" style="height: 376px;">
+                                    <div class="width100">
+                                        <div class="login-content">
+                                            <div class="email-password-container">
+                                                <!-- 이메일 입력칸 -->
+                                                <div class="email-container">
+                                                    <div class="email-input-container">
+                                                        <div class="email-content">
+                                                            <div class="email-content-style">이메일</div>
+                                                        </div>
+                                                        <div class="email-input-box01">
+                                                            <div class="email-input-box02" style="cursor: text;">
+                                                                <input  placeholder="example@email.com" class="email-input" value="" style="cursor: text;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 비밀번호 입력칸 -->
+                                                <div class="password-container">
+                                                    <div class="password-input-container">
+                                                        <div class="password-content">
+                                                            <div class="password-content-style">비밀번호</div>
+                                                        </div>
+                                                        <div class="password-input-box01">
+                                                            <div class="password-input-box02" style="cursor: text;">
+                                                                <input  placeholder="비밀번호" class="password-input" type="password" value="" style="cursor: text;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="role" name="userRole"  style="display: none" value="member">
+        
+                                            <!-- 로그인 버튼 -->
+                                            <button class="login-button login-disabled" type="button" style=" margin-top: 25px; margin-bottom: 6px;">
+                                                <span class="login-button-span">로그인</span>
+                                            </button>
+        
+                                            <!-- 회원가입/이메일 찾기/비밀번호 찾기 -->
+                                            <div class="three-button"> 
+                                                <a onclick="window.location.href='/member/join-member'" class="join-member show">회원가입</a>
+                                                <a onclick="window.location.href='/member/join-company'" class="join-company">기업 회원가입</a>
+                                                <a onclick="window.location.href='/member/find-email'" class="find-email">이메일 찾기</a>
+                                                <a onclick="window.location.href='/member/find-password'"class="find-password">비밀번호 찾기</a>
+                                            </div>
+                                            
+                                            <!-- 간편(소셜) 로그인 -->
+                                            <div class="social-login-title"> 간편 로그인 </div>
+                                            <div class="social-login-container">
+                                                <div class="width100">
+                                                    <div class="social-login-boxes">
+                                                        <!-- 구글 -->
+                                                        <div class="google-box">
+                                                            <button id="google-login" class="google-box-button" type="button" style="backdrop-filter: none;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="28" width="28">
+                                                                    <path fill="#FC4C53" d="M33.813 17.334H20v5.68h7.893c-.346 1.826-1.386 3.373-2.946 4.413-1.307.88-2.974 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.018l.018-.013A8.8 8.8 0 0 1 11.32 20c0-.973.173-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.613 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.574 4.2-1.574 6.573s.574 4.6 1.574 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.267-3" style="fill: color(display-p3 0.9882 0.298 0.3255); fill-opacity: 1;"></path>
+                                                                    <mask id="google_svg__a" width="30" height="30" x="5" y="5" maskUnits="userSpaceOnUse" style="mask-type: luminance;">
+                                                                        <path fill="#fff" d="M33.814 17.334H20v5.68h7.894c-.347 1.826-1.387 3.373-2.947 4.413-1.307.88-2.973 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.017l.017-.013A8.8 8.8 0 0 1 11.32 20c0-.973.174-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.614 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.573 4.2-1.573 6.573s.573 4.6 1.573 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.266-3" style="fill: rgb(255, 255, 255); fill-opacity: 1;"></path>
+                                                                    </mask>
+                                                                    <g mask="url(#google_svg__a)">
+                                                                        <path fill="url(#google_svg__b)" d="M8.862 36.055c5.71 0 10.34-6.25 10.34-13.958 0-7.71-4.63-13.959-10.34-13.959s-10.34 6.25-10.34 13.959 4.63 13.958 10.34 13.958"></path>
+                                                                        <path fill="url(#google_svg__c)" d="M26.695 50.215c11.52-1.44 19.972-9.693 18.88-18.436S34.259 17.116 22.74 18.555 2.768 28.247 3.86 36.99s11.316 14.664 22.835 13.225"></path>
+                                                                        <path fill="url(#google_svg__d)" d="m18.807 15.04.654 7.461.832 4.996 9.816 9.131 11.476-21.196z"></path>
+                                                                    </g>
+                                                                    <defs>
+                                                                        <radialGradient id="google_svg__b" cx="0" cy="0" r="1" gradientTransform="matrix(10.3404 0 0 13.958 8.862 22.096)" gradientUnits="userSpaceOnUse">
+                                                                            <stop offset="0.368" stop-color="#FFCF09" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 1;"></stop>
+                                                                            <stop offset="0.718" stop-color="#FFCF09" stop-opacity="0.7" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 0.7;"></stop>
+                                                                            <stop offset="1" stop-color="#FFCF09" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                                        </radialGradient>
+                                                                        <radialGradient id="google_svg__c" cx="0" cy="0" r="1" gradientTransform="matrix(20.8579 -2.60538 1.9774 15.83048 24.718 34.385)" gradientUnits="userSpaceOnUse">
+                                                                            <stop offset="0.383" stop-color="#34A853" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 1;"></stop>
+                                                                            <stop offset="0.706" stop-color="#34A853" stop-opacity="0.7" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 0.7;"></stop>
+                                                                            <stop offset="1" stop-color="#34A853" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                                        </radialGradient>
+                                                                        <linearGradient id="google_svg__d" x1="35.412" x2="20.198" y1="12.382" y2="31.066" gradientUnits="userSpaceOnUse">
+                                                                            <stop offset="0.671" stop-color="#4285F4" style="stop-color: color(display-p3 0.2588 0.5216 0.9569); stop-opacity: 1;"></stop>
+                                                                            <stop offset="0.885" stop-color="#4285F4" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        <!-- 네이버 -->
+                                                        <div class="naver-box">
+                                                            <button id="naver-login" class="naver-box-button" type="button" style="backdrop-filter: none;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 40 40" height="28" width="28">
+                                                                    <path d="m24.136 31.9-8.394-12.313v12.314H7V8.099h8.864l8.394 12.322V8.1H33v23.802z"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        <!-- 카카오 -->
+                                                        <div class="kakao-box">
+                                                            <button id="kakao-login" class="kakao-box-button" type="button" style="backdrop-filter: none;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="28" width="28">
+                                                                    <path fill="#1E1E1E" fill-rule="evenodd" d="M5 18.027c-.019-6.544 6.682-11.87 14.966-11.893S34.98 11.396 35 17.94s-6.682 11.87-14.966 11.893a19 19 0 0 1-2.697-.183l-6.07 4.122a.43.43 0 0 1-.675-.474l1.399-5.286C7.8 25.923 5.012 22.235 5 18.027m6.721 3.87c.443-.002.717-.29.716-.754l-.015-5.211 1.508-.004c.475-.002.642-.353.641-.654a.636.636 0 0 0-.645-.652l-4.452.013a.633.633 0 0 0-.64.656c.001.3.17.652.644.65l1.509-.004.015 5.21c.001.463.276.75.72.75m7.22-.143c.127.091.284.134.44.12a.63.63 0 0 0 .654-.621 1.2 1.2 0 0 0-.083-.369l-2.034-5.502c-.189-.53-.58-.833-1.071-.832-.56.002-.917.435-1.065.84l-2.067 5.523a.8.8 0 0 0-.065.315.68.68 0 0 0 .708.661.655.655 0 0 0 .689-.512l.318-.97 2.998-.01.317.981c.04.152.132.285.26.376m5.89-.353a.7.7 0 0 0 .06-.25.64.64 0 0 0-.17-.479.69.69 0 0 0-.517-.198l-1.99.006-.014-5.196c-.002-.462-.277-.748-.72-.747-.442 0-.717.289-.715.75l.016 5.709c.002.497.284.793.753.792l2.674-.008a.65.65 0 0 0 .624-.38m5.321.442c.154 0 .66-.043.714-.565.038-.293-.137-.52-.349-.794v-.001l-2.052-2.67 1.723-1.747q.091-.105.17-.191l.005-.006c.234-.26.351-.39.351-.588.008-.422-.341-.651-.688-.66a.8.8 0 0 0-.57.264l-2.52 2.642-.006-2.3a.675.675 0 0 0-.72-.704.69.69 0 0 0-.716.709l.017 5.939c.001.41.29.685.72.683a.687.687 0 0 0 .716-.687l-.006-1.932.514-.527 1.893 2.564c.277.373.427.54.692.566q.056.005.112.005m-14.388-2.71 1.071-3.268.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.1176 0.1176 0.1176); fill-opacity: 1;"></path>
+                                                                    <path fill="#FEE300" d="M12.437 21.143c.001.463-.273.752-.716.753s-.718-.286-.719-.749l-.015-5.21-1.51.004c-.473.002-.642-.35-.642-.65a.634.634 0 0 1 .64-.656l4.451-.013a.634.634 0 0 1 .645.652c0 .3-.166.652-.641.654l-1.508.004z" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
+                                                                    <path fill="#FEE300" fill-rule="evenodd" d="M19.381 21.875a.67.67 0 0 1-.701-.497l-.317-.98-2.998.009-.318.97a.655.655 0 0 1-.689.512.68.68 0 0 1-.708-.661.8.8 0 0 1 .065-.316l2.067-5.522c.148-.405.505-.838 1.065-.84.491-.001.882.302 1.07.832l2.035 5.502q.07.178.083.369a.63.63 0 0 1-.654.622m-3.617-2.741 1.071-3.269.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
+                                                                    <path fill="#FEE300" d="M24.892 21.152a.654.654 0 0 1-.684.628l-2.674.008c-.47.001-.751-.295-.753-.792l-.016-5.708c-.002-.462.273-.75.715-.751.443-.002.718.285.72.747l.015 5.196 1.99-.006a.7.7 0 0 1 .517.198.64.64 0 0 1 .17.48M30.866 21.278c-.054.522-.56.564-.714.565q-.056 0-.112-.005c-.265-.027-.415-.193-.692-.566l-1.893-2.564-.514.527.006 1.932a.687.687 0 0 1-.716.687c-.43.002-.719-.273-.72-.683l-.017-5.94a.69.69 0 0 1 .717-.708.676.676 0 0 1 .719.705l.006 2.3 2.52-2.643a.8.8 0 0 1 .57-.263c.347.008.696.237.688.66 0 .197-.117.327-.351.587l-.005.006q-.079.085-.17.19l-1.723 1.748 2.051 2.67h.001c.212.275.387.502.35.795" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 개인정보 처리방침 -->
+                                        <div class="personal-information-container" style="padding-top: 20px;">
+                                            <div class="personal-information">
+                                                <div draggable="false" class="checksign" style="border-radius: 0px; height: 16px; padding: 0px;">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="16" role="img" width="16">카
+                                                        <use href="#check-thick-outline"></use>
+                                                    </svg>
+                                                </div>
+                                                <span class="personal-information-content01">계정 생성 시 서비스 이용을 위한 필수 항목인 <span class="personal-information-content02">서비스 이용약관</span>과 <span class="personal-information-content02">개인정보 처리방침</span>에 동의합니다.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 닫기 버튼 -->
+                    <div class="x-button-container">
+                        <button onclick="window.location.href='/experience/list'" class="x-button" type="button" style="backdrop-filter: blur(calc(var(--blurs-standard) / 2));">
+                            <div draggable="false" class="x-button-symbol" style="border-radius: 0px; height: 24px; padding: 0px;">
+                                <svg aria-label="icon" color="foregrounds.neutral.secondary" fill="currentColor" height="24" role="img" width="24">
+                                    <use href="#close-outline"></use>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 로그인 오류 -->
+            <div id="toast-login" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg aria-label="icon" color="foregrounds.surface.static" fill="currentColor" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12.141 5.07a4.8 4.8 0 1 1 6.788 6.789l-1.414 1.414a.8.8 0 1 1-1.131-1.131l1.414-1.415a3.2 3.2 0 0 0-4.526-4.525l-1.414 1.414a.8.8 0 0 1-1.131-1.131zm3.253 3.536a.8.8 0 0 1 0 1.131l-5.657 5.657a.8.8 0 0 1-1.132-1.131l5.657-5.657a.8.8 0 0 1 1.132 0m-7.778 2.121a.8.8 0 0 1 0 1.132L6.2 13.273a3.2 3.2 0 0 0 4.526 4.525l1.414-1.414a.8.8 0 0 1 1.131 1.131l-1.414 1.415a4.8 4.8 0 0 1-6.788-6.788l1.414-1.415a.8.8 0 0 1 1.132 0" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>일치하는 계정 정보가 없습니다.</p>
+                    </div>
+                    <p class="toast-p">이메일 또는 비밀번호를 다시 확인해주세요. 로그인에 문제가 있는 경우 지원센터로 문의해주세요.</p>
+                </div>
+            </div>
+        
+            <!-- toast - 이메일 오류 -->
+            <div id="toast-email" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>email: 올바른 형식의 이메일 주소여야 합니다</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 비밀번호 오류 -->
+            <div id="toast-password" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>password: 입력 오류</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 심볼 -->
+            <section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section>
+            <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+                <!-- 우측 닫기 심볼 -->
+                <symbol id="close-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                </symbol>
+                <!-- 개인정보 체크 심볼 -->
+                <symbol id="check-thick-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M20.49 5.51a1.4 1.4 0 0 1 0 1.98l-11 11a1.4 1.4 0 0 1-1.98 0l-4-4a1.4 1.4 0 0 1 1.98-1.98l3.01 3.01L18.51 5.51a1.4 1.4 0 0 1 1.98 0" fill-rule="evenodd"></path>
+                </symbol>
+            </svg>
+        </main>
+    </div>
+</body>
+<script src="/js/member/login/module/service.js"></script>
+<script src="/js/member/login/event.js"></script>
+</html>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleExperienceNoticeMapper">
+    <!-- 기업별 체험 공고 목록 조회 -->
+    <select id="selectExperienceByCompany">
+        select en.id,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_start_date,
+               en.experience_end_date,
+               en.experience_notice_status,
+               en.company_id,
+               en.created_datetime,
+               en.updated_datetime,
+               jc.job_name as job_category_name,
+               count(distinct re.id) as applicant_count,
+               count(distinct sen.member_id) as save_count
+        from tbl_experience_notice en
+             join tbl_experience_job_category ejc
+                  on en.id = ejc.experience_notice_id
+             join tbl_job_category jc
+                  on ejc.job_category = jc.id
+             left join tbl_request_experience re
+                       on en.id = re.experience_notice_id
+             left join tbl_save_experience_notice sen
+                       on en.id = sen.experience_notice_id
+        where en.company_id = #{companyId}
+            <if test="status != null">
+                <choose>
+                    <when test="status.name() == 'ACTIVE'">
+                        and en.experience_notice_status = 'active'
+                    </when>
+                    <otherwise>
+                        and en.experience_notice_status = 'inactive'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (
+                en.experience_notice_title like concat('%', #{keyword}, '%')
+                or en.experience_notice_subtitle like concat('%', #{keyword}, '%')
+                or jc.job_name like concat('%', #{keyword}, '%')
+                )
+            </if>
+        group by en.id, jc.job_name
+        order by en.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <!-- 기업별 체험 공고 개수 조회 (페이징용) -->
+    <select id="selectCountByCompany">
+        select count(distinct en.id)
+        from tbl_experience_notice en
+            join tbl_experience_job_category ejc on en.id = ejc.experience_notice_id
+            join tbl_job_category jc on ejc.job_category = jc.id
+        where en.company_id = #{companyId}
+            <if test="status != null">
+                <choose>
+                    <when test="status.name() == 'ACTIVE'">
+                        and en.experience_notice_status = 'active'
+                    </when>
+                    <otherwise>
+                        and en.experience_notice_status = 'inactive'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (
+                    en.experience_notice_title like concat('%', #{keyword}, '%')
+                    or en.experience_notice_subtitle like concat('%', #{keyword}, '%')
+                    or jc.job_name ilike concat('%', #{keyword}, '%')
+                )
+            </if>
+    </select>
+
+    <!-- 공고 상태 업데이트 (활성/비활성 전환) -->
+    <update id="updateNoticeStatus">
+        update tbl_experience_notice
+        set experience_notice_status = #{status},
+            updated_datetime = now()
+        where id = #{noticeId}
+    </update>
+
+    <!-- 기업별 지원자 수 조회 -->
+    <select id="selectRequestCountByCompany">
+        select count(distinct re.id)
+        from tbl_experience_notice en
+            left join tbl_request_experience re
+                on en.id = re.experience_notice_id
+        where en.company_id = #{companyId}
+            <if test="active">
+                and en.experience_notice_status = 'active'
+            </if>
+    </select>
+
+    <!-- 체험 공고 등록 -->
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id" parameterType="ConsoleExperienceNoticeRequestDTO">
+        insert into tbl_experience_notice
+        (
+            experience_notice_title,
+            experience_notice_subtitle,
+            experience_notice_start_date,
+            experience_notice_end_date,
+            experience_start_date,
+            experience_end_date,
+            company_id,
+            experience_notice_introduce_job,
+            experience_main_tasks,
+            experience_notice_etc,
+            created_datetime,
+            updated_datetime
+        )
+        values
+            (
+                #{experienceNoticeTitle},
+                #{experienceNoticeSubtitle},
+                #{experienceNoticeStartDate},
+                #{experienceNoticeEndDate},
+                #{experienceStartDate},
+                #{experienceEndDate},
+                #{companyId},
+                #{experienceNoticeIntroduceJob},
+                #{experienceMainTasks},
+                #{experienceNoticeEtc},
+                now(),
+                now()
+            )
+    </insert>
+
+    <!-- 직군 테이블 insert -->
+    <insert id="insertNoticeJobCategory">
+        insert into tbl_experience_job_category (experience_notice_id, job_category)
+        values (#{id}, #{jobCategoryId})
+    </insert>
+
+    <!-- 공고 수정 -->
+    <update id="updateNotice">
+        update tbl_experience_notice
+        set
+            experience_notice_title = #{experienceNoticeTitle},
+            experience_notice_subtitle = #{experienceNoticeSubtitle},
+            experience_notice_start_date = #{experienceNoticeStartDate},
+            experience_notice_end_date = #{experienceNoticeEndDate},
+            experience_start_date = #{experienceStartDate},
+            experience_end_date = #{experienceEndDate},
+            experience_notice_introduce_job = #{experienceNoticeIntroduceJob},
+            experience_main_tasks = #{experienceMainTasks},
+            experience_notice_etc = #{experienceNoticeEtc},
+            updated_datetime = now()
+        where id = #{id}
+    </update>
+
+    <!-- 공고 수정 시 직군 매핑 수정 -->
+    <update id="updateNoticeJobCategory">
+        update tbl_experience_job_category
+        set job_category = #{jobCategoryId}
+        where experience_notice_id = #{id}
+    </update>
+
+    <!-- 공고 상세 조회 - 지원자/스크랩 수 포함 -->
+    <select id="selectExperienceDetailById">
+        select
+            en.id,
+            en.experience_notice_title,
+            en.experience_notice_subtitle,
+            en.experience_notice_start_date,
+            en.experience_notice_end_date,
+            en.experience_start_date,
+            en.experience_end_date,
+            en.company_id,
+            en.experience_notice_introduce_job,
+            en.experience_main_tasks,
+            en.experience_notice_etc,
+            jc.id as job_category_id,
+            jc.job_name as job_category_name,
+            count(distinct re.id) as applicant_count,
+            count(distinct sen.member_id) as save_count
+        from tbl_experience_notice en
+                 join tbl_experience_job_category ejc
+                      on en.id = ejc.experience_notice_id
+                 join tbl_job_category jc
+                      on ejc.job_category = jc.id
+                 left join tbl_request_experience re
+                           on en.id = re.experience_notice_id
+                 left join tbl_save_experience_notice sen
+                           on en.id = sen.experience_notice_id
+        where en.id = #{id}
+        group by en.id, jc.id, jc.job_name
+    </select>
+
+    <!-- 단일 공고 조회 - 수정 페이지용 -->
+    <select id="selectById">
+        select
+            en.id,
+            en.experience_notice_title,
+            en.experience_notice_subtitle,
+            en.experience_notice_start_date,
+            en.experience_notice_end_date,
+            en.experience_start_date,
+            en.experience_end_date,
+            en.company_id,
+            en.experience_notice_introduce_job,
+            en.experience_main_tasks,
+            en.experience_notice_etc,
+            jc.id as job_category_id,
+            jc.job_name as job_category_name,
+            count(distinct re.id) as applicant_count,
+            count(distinct sen.member_id) as save_count
+        from tbl_experience_notice en
+             join tbl_experience_job_category ejc
+                  on en.id = ejc.experience_notice_id
+             join tbl_job_category jc
+                  on ejc.job_category = jc.id
+             left join tbl_request_experience re
+                       on en.id = re.experience_notice_id
+             left join tbl_save_experience_notice sen
+                       on en.id = sen.experience_notice_id
+        where en.id = #{id}
+        group by en.id, jc.id
+    </select>
+
+    <!-- 체험 지원서 삭제 -->
+    <delete id="deleteRequestExperienceByNoticeId">
+        delete from tbl_request_experience
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 스크랩 데이터 삭제 -->
+    <delete id="deleteSaveExperienceByNoticeId">
+        delete from tbl_save_experience_notice
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 직군 매핑 삭제 -->
+    <delete id="deleteJobCategoryByNoticeId">
+        delete from tbl_experience_job_category
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 체험 공고 삭제 -->
+    <delete id="deleteExperienceNoticeById">
+        delete from tbl_experience_notice
+        where id = #{id}
+    </delete>
+
+    <!-- 마감일 지나면 inactive -->
+    <update id="updateExperienceNoticeStatusToInactive">
+    <![CDATA[
+        update tbl_experience_notice
+        set experience_notice_status = 'inactive'
+        where experience_notice_end_date <= current_date
+    ]]>
+    </update>
+</mapper>

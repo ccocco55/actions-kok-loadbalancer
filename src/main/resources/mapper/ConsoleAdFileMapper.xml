@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleAdFileMapper">
+    <select id="selectAdBackgroundFileByAdId">
+        select
+            f.id,
+            f.file_origin_name,
+            f.file_name,
+            f.file_path,
+            f.file_size,
+            f.file_content_type,
+            f.created_datetime,
+            f.updated_datetime
+        from tbl_file f
+                 join tbl_advertisement_background_file abf
+                      on f.id = abf.file_id
+        where abf.advertisement_id = #{advertisementId}
+        order by f.created_datetime desc
+    </select>
+
+    <!-- 이미지 등록 -->
+    <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (
+            file_origin_name,
+            file_name,
+            file_path,
+            file_size,
+            file_content_type
+        ) values (
+            #{fileOriginName},
+            #{fileName},
+            #{filePath},
+            #{fileSize},
+            #{fileContentType}
+        )
+    </insert>
+
+    <!-- 광고 배경이미지 연결 -->
+    <insert id="insertAdBackgroundFile">
+        insert into tbl_advertisement_background_file (file_id, advertisement_id)
+        values (#{fileId}, #{advertisementId})
+    </insert>
+
+    <!-- 광고 배경이미지 삭제 -->
+    <delete id="deleteFilesByAdId">
+        delete from tbl_advertisement_background_file
+        where advertisement_id = #{advertisementId}
+    </delete>
+
+    <!-- 파일 자체 삭제 -->
+    <delete id="deleteFileByAdvertisementId">
+        delete from tbl_file
+        where id in (
+            select file_id
+            from tbl_advertisement_background_file
+            where advertisement_id = #{advertisementId}
+        )
+    </delete>
+</mapper>
+

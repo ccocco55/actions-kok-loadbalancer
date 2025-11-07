@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kok</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main-page/login-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+</head>
+<body>
+    <div class="header-wrap">
+        <div class="header">
+            <div class="header-space"></div>
+            <div class="header-login-box">
+                <button type="button" class="header-login avatar">
+                            <img class="account-info-popover" style="padding: 0px;color:transparent;border-radius:999px;cursor:default;max-height:36px;max-width:36px;min-height:36px;min-width:36px;object-fit:contain" th:src="${userDTO.memberProfileUrl}">
+                </button>
+                <input id="id" type="text" style="display: none" th:value="${userDTO.id}">
+                <!-- 프로필 드롭다운 -->
+                <div class="profile-modal">
+                    <div class="profile-modal-header">
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
+                        <div class="member-name" th:text="${userDTO.username}+' 님'"></div>
+                            </th:replace>
+                        </th:block>
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue()=='company'}">
+                                <div class="member-name" th:text="${userDTO.companyName}+' 님'"></div>
+                            </th:replace>
+                        </th:block>
+
+                    </div>
+                    <div class="profile-modal-body">
+                        <div class="list-wrap">
+                            <div class="list">
+                                <!-- 내 프로필 -->
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
+                                <a onclick="window.location.href='/mypage/page'">
+                                    <div class="profile-modal-list-section">
+                                        <div class="profile-modal-list-content-wrap">
+                                            <div class="profile-modal-list-content">
+                                                <div class="profile-modal-icon-wrap">
+                                                    <div class="profile-modal-icon">
+                                                        <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                            <path clip-rule="evenodd" d="M12 3.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4M7.2 7a4.8 4.8 0 1 1 9.6 0 4.8 4.8 0 0 1-9.6 0M9 15.8A3.2 3.2 0 0 0 5.8 19v2a.8.8 0 0 1-1.6 0v-2A4.8 4.8 0 0 1 9 14.2h6a4.8 4.8 0 0 1 4.8 4.8v2a.8.8 0 0 1-1.6 0v-2a3.2 3.2 0 0 0-3.2-3.2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-modal-text-wrap">
+                                                    <p class="profile-modal-text">내 프로필</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                    </th:replace>
+                                </th:block>
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='company'}">
+                                        <a onclick="window.location.href='/company/list'">
+                                            <div class="profile-modal-list-section">
+                                                <div class="profile-modal-list-content-wrap">
+                                                    <div class="profile-modal-list-content">
+                                                        <div class="profile-modal-icon-wrap">
+                                                            <div class="profile-modal-icon">
+                                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                                    <path clip-rule="evenodd" d="M12 3.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4M7.2 7a4.8 4.8 0 1 1 9.6 0 4.8 4.8 0 0 1-9.6 0M9 15.8A3.2 3.2 0 0 0 5.8 19v2a.8.8 0 0 1-1.6 0v-2A4.8 4.8 0 0 1 9 14.2h6a4.8 4.8 0 0 1 4.8 4.8v2a.8.8 0 0 1-1.6 0v-2a3.2 3.2 0 0 0-3.2-3.2z" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <div class="profile-modal-text-wrap">
+                                                            <p class="profile-modal-text">내 프로필</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </th:replace>
+                                </th:block>
+                                <!-- 지원 내역 -->
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
+                                        <button type="button" class="profile-modal-list-section-history">
+                                            <div class="profile-modal-list-content-wrap">
+                                                <div class="profile-modal-list-content">
+                                                    <div class="profile-modal-icon-wrap">
+                                                        <div class="profile-modal-icon">
+                                                            <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                                <path clip-rule="evenodd" d="m5.603 11.798.82-.853a.8.8 0 1 1 1.153 1.11L5.541 14.17l-.014.014-.165.163a.8.8 0 0 1-1.125 0l-2.3-2.278a.8.8 0 1 1 1.126-1.137L4 11.86c.076-4.804 4.041-8.66 8.9-8.66 4.906 0 8.9 3.93 8.9 8.8 0 4.869-3.994 8.8-8.9 8.8a8.92 8.92 0 0 1-6.919-3.265.8.8 0 1 1 1.238-1.014A7.32 7.32 0 0 0 12.9 19.2c4.041 0 7.3-3.233 7.3-7.2s-3.259-7.2-7.3-7.2c-3.972 0-7.189 3.124-7.297 6.998M13 8.2a.8.8 0 0 1 .8.8v3.072l2.644 1.763a.8.8 0 1 1-.888 1.33l-3-2a.8.8 0 0 1-.356-.665V9a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-modal-text-wrap">
+                                                        <p class="profile-modal-text">지원 내역</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </th:replace>
+                                </th:block>
+
+                                <div  class="profile-modal-list-section">
+                                    <div class="profile-modal-list-content-wrap">
+                                        <div id="logout" class="profile-modal-list-content">
+                                            <div class="profile-modal-icon-wrap">
+                                                <div class="profile-modal-icon">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                        <path clip-rule="evenodd" d="M8.2 3a.8.8 0 0 1 .8-.8h8A2.8 2.8 0 0 1 19.8 5v14a2.8 2.8 0 0 1-2.8 2.8H9a.8.8 0 0 1 0-1.6h8a1.2 1.2 0 0 0 1.2-1.2V5A1.2 1.2 0 0 0 17 3.8H9a.8.8 0 0 1-.8-.8m2.234 4.435a.8.8 0 0 1 1.132 0l4 4a.8.8 0 0 1 0 1.13l-4 4a.8.8 0 1 1-1.132-1.13L13.07 12.8H5a.8.8 0 0 1 .001-1.6h8.069l-2.635-2.634a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="profile-modal-text-wrap">
+                                                <p class="profile-modal-text">로그아웃</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 지원 내역 모달창 -->
+    <div class="history-modal-background">
+        <div class="history-modal-wrap">
+            <div class="history-modal">
+                <div class="history-modal-top">
+                    <div class="history-modal-top-content-wrap">
+                        <div class="history-modal-top-content">
+                            <div class="history-modal-top-section-active detail">
+                                <p class="history-modal-top-section-text-active">체험</p>
+                            </div>
+                            <div class="history-modal-top-section detail">
+                                <p class="history-modal-top-section-text">인턴</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-modal-space"></div>
+                    <div class="history-modal-close-wrap">
+                        <button class="history-modal-close-button">
+                            <p class="history-modal-close-text">닫기</p>
+                        </button>
+                    </div>
+                </div>
+                <!-- 체험 지원내역 -->
+                <div id="requestExperienceWarp" class="history-modal-main history-modal-main-experience">
+
+                </div>
+
+                <!-- 인턴 지원내역 -->
+                <div id="requestInternWarp" class="history-modal-main history-modal-main-employ" style="display:none;">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 지원내역 상세 모달창 -->
+    <div class="history-detail-modal-background">
+        <div class="history-detail-modal-wrap">
+
+        </div>
+    </div>
+</body>
+<script src="/js/main-page/header/module/service.js"></script>
+<script src="/js/main-page/header/module/layout.js"></script>
+<script src="/js/main-page/header/event.js"></script>
+</html>

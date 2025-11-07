@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ExperienceNoticeMapper">
+    <sql id="search">
+        <if test="search.keyword != null">
+            and (
+            lower(e.experience_notice_title) like concat('%', lower(#{search.keyword}), '%') or
+            lower(e.experience_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
+            lower(e.experience_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
+            lower(j.job_name) like concat('%', lower(#{search.keyword}), '%') or
+            lower(c.company_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+
+    <sql id="companyExperienceNoticeSearch">
+        <if test="search.keyword != null and search.keyword != ''">
+            and (
+            lower(e.experience_notice_title) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_notice_introduce_job) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_notice_etc) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_main_tasks) like concat('%', lower(#{search.keyword}), '%')
+            or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+    <!--    조회-->
+    <select id="selectAllExperienceNotice">
+        select e.id,
+        e.experience_notice_title,
+        e.experience_notice_subtitle,
+        e.experience_notice_etc,
+        e.experience_main_tasks,
+        e.experience_start_date,
+        e.experience_end_date,
+        e.experience_notice_start_date,
+        e.experience_notice_end_date,
+        e.experience_notice_status,
+        e.created_datetime,
+        e.updated_datetime,
+        e.company_id,
+        c.company_name,
+        s.id as scale_id,
+        s.company_scale_name,
+        j.job_name,
+        count(sv.experience_notice_id) as save_count
+        from tbl_experience_notice e
+        join tbl_company c on c.user_id=e.company_id
+        left join tbl_company_scale_category_bridge b on e.company_id = b.company_id
+        left join tbl_company_scale_category s on b.company_scale_category_id = s.id
+        join tbl_experience_job_category ej on ej.experience_notice_id=e.id
+        join tbl_job_category j on j.id=ej.job_category
+        left join tbl_save_experience_notice sv on e.id = sv.experience_notice_id
+        where e.experience_notice_end_date &gt;= now()
+        and e.experience_notice_status='active'
+        <include refid="search"></include>
+        group by e.id,
+        e.experience_notice_title,
+        e.experience_notice_subtitle,
+        e.experience_notice_etc,
+        e.experience_main_tasks,
+        e.experience_start_date,
+        e.experience_end_date,
+        e.experience_notice_start_date,
+        e.experience_notice_end_date,
+        e.experience_notice_status,
+        e.created_datetime,
+        e.updated_datetime,
+        e.company_id,
+        c.company_name,
+        s.id,
+        s.company_scale_name,
+        j.job_name;
+    </select>
+    <!--    전체 개수 조회-->
+    <select id="selectCountAll">
+        select count(*) from tbl_experience_notice
+        where experience_notice_status='active'
+    </select>
+    <!--    체험 공고 단일 조회-->
+    <select id="selectById">
+        select id, experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_main_tasks, experience_start_date, experience_end_date, experience_notice_status, created_datetime, updated_datetime, company_id, experience_notice_start_date, experience_notice_end_date
+        from tbl_experience_notice
+        where id=#{id}
+          and experience_notice_status='active'
+    </select>
+    <!--    직군 조회-->
+    <select id="selectJobNameByExpId">
+        select j.job_name
+        from tbl_job_category j
+                 join tbl_experience_job_category ej
+                      on ej.job_category=j.id
+                 join tbl_experience_notice e
+                      on e.id=ej.experience_notice_id
+        where ej.experience_notice_id=#{id}
+    </select>
+
+    <!-- 최신 체험 공고 4개 조회 -->
+    <select id="selectLatestFour">
+        select c.user_id, c.company_name, cpf.file_id, f.file_path, en.experience_notice_title,
+               en.experience_notice_subtitle, en.created_datetime, en.updated_datetime, en.company_id, en.id
+        from tbl_company c
+                 join tbl_experience_notice en on c.user_id = en.company_id
+                 left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+                 left join tbl_file f on cpf.file_id = f.id
+        where experience_notice_status = 'active'
+        order by created_datetime desc
+        limit 4
+    </select>
+
+    <!-- 기업별 체험 공고 목록 -->
+    <select id="selectExperienceNoticeByCompanyId" resultType="ExperienceNoticeDTO">
+        select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_etc,
+        e.experience_main_tasks, csc.id as scale_id, csc.company_scale_name, j.job_name, e.company_id
+        from tbl_experience_notice e
+        join tbl_company c on c.user_id = e.company_id
+        left join tbl_company_scale_category_bridge cscb on e.company_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        left join tbl_experience_job_category ejc on ejc.experience_notice_id = e.id
+        left join tbl_job_category j on j.id = ejc.job_category
+        where e.experience_notice_end_date >= now()
+        and e.experience_notice_status = 'active'
+        and e.company_id = #{companyId}
+        <include refid="companyExperienceNoticeSearch"></include>
+        order by e.created_datetime desc
+        limit #{criteria.rowCount} offset #{criteria.offset}
+    </select>
+
+    <select id="selectExperienceNoticeCountByCompanyId" resultType="int">
+        select count(*)
+        from tbl_experience_notice e
+        join tbl_company c on c.user_id = e.company_id
+        left join tbl_experience_job_category ejc on ejc.experience_notice_id = e.id
+        left join tbl_job_category j on j.id = ejc.job_category
+        where e.experience_notice_end_date >= now()
+        and e.experience_notice_status = 'active'
+        and e.company_id = #{companyId}
+        <include refid="companyExperienceNoticeSearch"></include>
+    </select>
+
+    <!-- 기업별 체험 조회   -->
+
+    <select id="selectListById">
+        select experience_notice_title, experience_notice_subtitle, experience_notice_status
+        from tbl_experience_notice
+        where company_id = #{userId}
+        order by created_datetime desc
+        limit 3
+    </select>
+
+    <!-- 기업별 체험 개수   -->
+    <select id="companyExperienceCount">
+        select count(*)
+        from tbl_experience_notice
+        where company_id = #{userId}
+    </select>
+    <!--  체험 공고 리스트 조회 -->
+    <select id="selectAllByKeyword">
+        select e.experience_notice_title,e.id,c.company_name,e.company_id from tbl_experience_notice e join tbl_company c
+        on e.company_id = c.user_id
+        where e.experience_notice_status = 'active'
+        <if test="keyword!=null">
+            and( c.company_name like concat('%', #{keyword}, '%')
+            or  e.experience_notice_title like concat('%', #{keyword}, '%')
+            or  e.experience_main_tasks like concat('%', #{keyword}, '%')
+            or  e.experience_notice_subtitle like concat('%', #{keyword}, '%')
+            or  e.experience_notice_introduce_job like concat('%', #{keyword}, '%')
+            or  e.experience_notice_etc like concat('%', #{keyword}, '%'))
+        </if>
+        order by created_datetime desc
+    </select>
+    <select id="selectCompanyNameById">
+        select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_introduce_job, e.experience_notice_etc, e.experience_main_tasks, e.experience_start_date, e.experience_end_date, e.experience_notice_status, e.created_datetime, e.updated_datetime, e.company_id,c.company_name
+        from tbl_experience_notice e join tbl_company c
+                                          on e.company_id = c.user_id
+        where e.id=#{id}
+          and e.experience_notice_status='active'
+    </select>
+</mapper>

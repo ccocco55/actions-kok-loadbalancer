@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminMainPageMapper">
+<!--  회원 - 평균 체험 지원 수  -->
+    <select id="memberExperienceRequestAverage">
+        select (
+                (select count(*)::numeric from tbl_request_experience)
+                    / nullif((select count(*) from tbl_member), 0)
+               )::numeric(10, 2) as memberExperienceRequestAvg
+    </select>
+
+<!--  회원 - 평균 인턴 지원 수  -->
+    <select id="memberInternRequestAverage">
+        select (
+            (select count(*)::numeric from tbl_request_intern)
+                    / nullif((select count(*) from tbl_member), 0)
+               )::numeric(10, 2) as memberInternRequestAvg
+    </select>
+
+<!--  기업 - 평균 체험 모집 수  -->
+    <select id="companyExperienceNoticeAverage">
+        select (
+            (select count(*)::numeric from tbl_experience_notice)
+                    / nullif((select count(*) from tbl_company), 0)
+               )::numeric(10, 2) as companyExperienceNoticeAvg
+    </select>
+
+<!--  기업 - 평균 인턴 모집 수  -->
+    <select id="companyInternNoticeAverage">
+        select (
+            (select count(*)::numeric from tbl_intern_notice)
+                    / nullif((select count(*) from tbl_company), 0)
+               )::numeric(10, 2) as companyInternNoticeAvg
+    </select>
+
+<!--  회원 - 체험 총 개수  -->
+    <select id="memberExperienceRequestTotal">
+        select (select count(*) from tbl_request_experience) as memberExperienceRequestTotal
+    </select>
+
+<!--  회원 - 인턴 총 개수  -->
+    <select id="memberInternRequestTotal">
+        select (select count(*) from tbl_request_intern) as memberInternRequestTotal
+    </select>
+
+<!--  기업 - 체험 총 개수  -->
+    <select id="companyExperienceNoticeTotal">
+        select (select count(*) from tbl_experience_notice) as companyExperienceNoticeTotal
+    </select>
+
+<!--  기업 - 인턴 총 개수  -->
+    <select id="companyInternNoticeTotal">
+        select (select count(*) from tbl_intern_notice) as companyInternNoticeTotal
+    </select>
+
+<!--  회원 - 결제 총 금액  -->
+    <select id="memberPaymentTotal">
+        select (
+            select sum(p.payment_price)
+            from tbl_payment p
+                join tbl_request_experience re
+                    on p.request_experience_id = re.id
+            ) as memberPaymentTotal
+    </select>
+
+<!--  기업 - 결체 총 금액  -->
+    <select id="companyPaymentTotal">
+        select (
+               select sum(p.payment_price)
+               from tbl_payment p
+                        join tbl_advertisement a
+                            on p.advertisement_id = a.id
+               ) as companyPaymentTotal
+    </select>
+
+<!--  차트  -->
+<!--  월간 체험 신청 수  -->
+    <select id="selectCountRequestExperienceByMonth">
+        select count(*) from tbl_request_experience
+        where TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+<!--  월간 체험 공고 수  -->
+    <select id="selectCountExperienceNoticeByMonth">
+        select count(*) from tbl_experience_notice
+        where TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+<!--  월간 인턴 신청 수  -->
+    <select id="selectCountInternRequestByMonth">
+        select count(*) from tbl_request_intern
+        where TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+<!--  월간 인턴 공고 수  -->
+    <select id="selectCountInternNoticeByMonth">
+        select count(*) from tbl_intern_notice
+        where TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(created_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+<!--  월간 체험 결제액  -->
+    <select id="countExperiencePaymentByMonth">
+        select sum(p.payment_price)
+        from tbl_request_experience re
+                join tbl_payment p
+                    on re.id = p.request_experience_id
+        where TO_CHAR(p.payment_paid_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(p.payment_paid_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+<!--  월간 광고 결제액  -->
+    <select id="countAdvertisementPaymentByMonth">
+        select sum(p.payment_price)
+        from tbl_advertisement a
+            join tbl_payment p
+                on a.id = p.advertisement_id
+        where TO_CHAR(payment_paid_datetime, 'YYYY-MM-DD') like concat('%', #{year}, '%')
+        and TO_CHAR(payment_paid_datetime, 'YYYY-MM-DD') like concat('%-', #{month}, '-%')
+    </select>
+
+</mapper>

@@ -1,0 +1,1044 @@
+@font-face {
+    font-family: Material Design Icons;
+    src: url(/font/materialdesignicons-webfont-d5cba82059f88bfa469e.woff2);
+}
+
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #507cf3;
+    --secondary: #bed6d5;
+    --success: #40c8bc;
+    --info: #8baaff;
+    --warning: #f93;
+    --danger: #fe657e;
+    --light: #f8f9fa;
+    --dark: #4e5d6c;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 800px;
+    --breakpoint-md: 992px;
+    --breakpoint-lg: 1200px;
+    --breakpoint-xl: 1700px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
+}
+
+body, html {
+    height: 100%;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+
+body {
+    font-family: Arial, NotoSansKr, Noto Sans, sans-serif;
+    letter-spacing: -.3px;
+    background-color: #f5f5f5;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+aside {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent;
+    color: #007bff;
+}
+
+a, a:active, a:focus, a:hover {
+    color: #525f7f;
+    text-decoration: none !important;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+svg {
+    overflow: hidden;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button.btn {
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.list-inline, .list-unstyled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.flex-grow-1 {
+    flex-grow: 1 !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-dark {
+    color: #4e5d6c !important;
+}
+
+.mr-1, .mx-1 {
+    margin-right: .25rem !important;
+}
+
+.mr-2, .mx-2 {
+    margin-right: .5rem !important;
+}
+
+.mr-3, .mx-3 {
+    margin-right: 1rem !important;
+}
+
+.ml-2, .mx-2 {
+    margin-left: .5rem !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+}
+
+/* 폰트파일 안에 담긴 아이콘 가져오기 */
+.mdi-set, .mdi:before {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font: normal normal normal 24px / 1 Material Design Icons;
+    font-size: inherit;
+    line-height: inherit;
+    text-rendering: auto;
+}
+
+.mdi-account-box-outline:before {
+    content: "\F0007";
+}
+
+.mdi-credit-card-plus-outline:before {
+    content: "\F0676";
+}
+
+.mdi-chevron-right:before {
+    content: "\F0142";
+}
+
+.mdi-chevron-down:before {
+    content: "\F0140";
+}
+
+.mdi-text-box-outline:before {
+    content: "\F09ED";
+}
+
+.mdi-bullhorn-variant-outline:before {
+    content: "\F196F";
+}
+
+.mdi-magnify:before {
+    content: "\F0349";
+}
+
+.mdi-18px.mdi:before {
+    font-size: 18px;
+}
+
+.mdi-bell-outline:before {
+    content: "\F009C";
+}
+
+.mdi-logout-variant:before {
+    content: "\F05FD";
+}
+
+.mdi-timer-outline:before {
+    content: "\F051B";
+}
+
+.mdi-file-send-outline:before {
+    content: "\F1039";
+}
+
+.mdi-timer-outline:before {
+    content: "\F051B";
+}
+
+.mdi-file-send-outline:before {
+    content: "\F1039";
+}
+
+body #kok {
+    height: 100%;
+}
+
+#kok {
+    background-color: #f5f5f5;
+    display: flex;
+}
+
+#kok-notify-container {
+    padding: 20px 20px 0 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 340px;
+    z-index: 1051;
+}
+
+.popup-manager {
+    background-color: gray;
+    height: 0;
+    left: 50%;
+    overflow: visible;
+    position: fixed;
+    top: 10%;
+    transform: translate(-50%);
+    z-index: 1041;
+}
+
+#kok>#kok-side {
+    transition: all .2s;
+    width: 240px;
+}
+
+#kok>#kok-side #side-wrapper {
+    background-color: #fff;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, .06);
+    height: 100%;
+    transition: all .2s;
+    width: 240px;
+}
+
+#kok>#kok-side #side-wrapper .side-header .app-wrapper {
+    padding: 14px 18px 24px;
+    position: relative;
+}
+
+#kok>#kok-side #side-wrapper .side-header .app-wrapper .provider-name {
+    color: #8b9298;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 10px;
+    vertical-align: middle;
+}
+
+.comp-provider-name {
+    white-space: nowrap;
+}
+
+.comp-provider-name span.pn-name {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#kok>#kok-side #side-wrapper .side-header .app-wrapper .app-name {
+    background-color: rgba(80, 124, 243, .07);
+    border-radius: 3px;
+    color: #507cf3;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 14px;
+    transition: background-color .1s;
+}
+
+#kok>#kok-side #side-wrapper .side-header .app-wrapper:after {
+    border-bottom: 1px solid #edeff0;
+    bottom: 0;
+    content: "";
+    height: 0;
+    left: 30px;
+    position: absolute;
+    right: 30px;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper {
+    padding: 20px;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a {
+    border-radius: 3px;
+    color: #292929;
+    font-size: 14px;
+    font-weight: 700;
+    padding: .7rem .5rem;
+    transition: all .4s;
+    vertical-align: middle;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a.current {
+    background-color: #dce5fd;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a:hover {
+    background-color: #eef2fe;
+    color: #292929;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a i {
+    font-size: 17px;
+    vertical-align: middle;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a span.menu-name {
+    line-height: 26px;
+    margin-left: 12px;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 주석 해제 시 리스트가 안보여진다. */
+.collapse:not(.show) {
+    display: none;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list>li {
+    margin-left: 1.1rem;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list>li>a {
+    color: #56626a;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 0 8px 24px;
+    transition: all .2s;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li>ul.menu-sub-list>li>a.active {
+    color: #507cf3;
+    font-weight: bolder;
+}
+
+#kok>#kok-side #side-wrapper>.menu-wrapper>ul.menu-list>li a {
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+#kok #kok-main {
+    flex: 1 1;
+    overflow-y: auto;
+}
+
+#kok-header {
+    height: 50px;
+}
+
+#kok-header .header-menu-group {
+    padding: 20px 30px 0 0;
+}
+
+#kok-header .header-menu-btn-manage {
+    background-color: #fff;
+    border-radius: 50%;
+    color: #56626a;
+    height: 42px;
+    line-height: 42px;
+    position: relative;
+    text-align: center;
+    width: 42px;
+    cursor: pointer;
+}
+
+#kok-header .header-menu-btn-manage:hover {
+    box-shadow: 0 0 8px rgb(89, 102, 122, .15);
+    color: #507cf3;
+    cursor: pointer;
+}
+
+.kok-link .header-menu-btn-manage {
+    position: relative;
+}
+
+.kok-link .header-menu-btn-manage::after {
+    content: "신고 게시글"; 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; 
+    color: #fff; 
+    font-size: 15px; 
+    padding: 0 10px; 
+    border-radius: 9px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    margin-top: 4px;
+}
+
+.kok-link .header-menu-btn-manage:hover::after {
+    opacity: 1;
+}
+
+#kok-header .header-menu-btn-manage i {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#kok-header .header-menu-btn-notice {
+    background-color: #fff;
+    border-radius: 50%;
+    color: #56626a;
+    height: 42px;
+    line-height: 42px;
+    position: relative;
+    text-align: center;
+    width: 42px;
+    cursor: pointer;
+}
+
+#kok-header .header-menu-btn-notice:hover {
+    box-shadow: 0 0 8px rgb(89, 102, 122, .15);
+    color: #507cf3;
+    cursor: pointer;
+}
+
+.kok-link .header-menu-btn-notice {
+    position: relative;
+}
+
+.kok-link .header-menu-btn-notice::after {
+    content: "고객지원"; 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333; 
+    color: #fff; 
+    font-size: 15px; 
+    padding: 0 10px; 
+    border-radius: 9px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    margin-top: 4px;
+}
+
+.kok-link .header-menu-btn-notice:hover::after {
+    opacity: 1;
+}
+
+#kok-header .header-menu-btn-notice i {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.user-menu .user-menu-wrapper {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px;
+    position: relative;
+    transition: box-shadow .2s;
+}
+
+.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+.user-menu .user-menu-wrapper:hover {
+    box-shadow: 0 0 8px rgb(89, 102, 122, .15);
+}
+
+.user-menu .user-menu-wrapper .user-avatar {
+    background-color: #507cf3;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    width: 32px;
+}
+
+.user-menu .user-menu-wrapper .user-menu-email {
+    font-size: .9rem;
+    letter-spacing: .2px;
+    padding: 0 12px;
+}
+
+/* 관리자 상단 이메일 클릭 시 */
+/* 기준 잡기 위해 넣어둠 */
+.user-menu {
+  position: relative; 
+}
+
+.user-menu .user-menu-content {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(89, 102, 122, .15);
+    color: #4e5d6c;
+    font-size: .9rem;
+    min-width: 180px;
+    overflow: hidden;
+    padding: 0 5px;
+}
+
+.dropdown-menu {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    color: #212529;
+    display: none;
+    float: left;
+    font-size: 1rem;
+    left: 0;
+    list-style: none;
+    margin: .125rem 0 0;
+    min-width: 10rem;
+    padding: .5rem 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+}
+
+.dropdown-menu-right {
+    left: auto;
+    right: 0;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu[x-placement^=bottom] {
+    bottom: auto;
+    right: auto;
+}
+
+.user-menu .user-menu-content ul.menu-body {
+    margin-bottom: 0;
+}
+
+.user-menu .user-menu-content ul.menu-body li {
+    align-items: center;
+    border-bottom: 1px solid #f9f9f9;
+    display: flex;
+    font-weight: 500;
+    padding: 0;
+    position: relative;
+}
+
+.user-menu .user-menu-content ul.menu-body li a {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.user-menu .user-menu-content ul.menu-body li:hover a {
+    color: #507cf3 !important;
+}
+
+/* 메인 화면 */
+.page {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px 50px;
+}
+
+.page.wide-page {
+    max-width: 1800px;
+}
+
+.page .page-header {
+    padding-bottom: 20px;
+}
+
+.page .page-header .page-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.page .page-header .page-subtitle {
+    color: #8b9298;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.tab-box .tab-row {
+    margin-bottom: 24px;
+    padding: 12px 0;
+}
+
+.white-panel {
+    background-color: #fff;
+    border-radius: 6px;
+}
+
+.tab-box ul.tab-name-list {
+    margin-bottom: 0;
+    padding: 10px 20px;
+}
+
+.tab-box ul.tab-name-list li.tab-name {
+    border-radius: 30px;
+    color: #507cf3;
+    display: inline-block;
+    font-weight: 700;
+    padding: 8px 24px;
+}
+
+.tab-box ul.tab-name-list li.tab-name:hover {
+    cursor: pointer;
+}
+
+.tab-box ul.tab-name-list li.tab-name.active {
+    background-color: #507cf3;
+    box-shadow: inset 0 -2px 4px rgba(41, 41, 41, .1);
+    color: #fff;
+}
+
+.tab-box .tab-row .filter-col {
+    text-align: right;
+}
+
+.tab-box .tab-row .filter-col .kok-chart-date {
+    padding: 12px 30px;
+}
+
+.row .col-auto {
+    flex: 0 0 auto;
+    max-width: 100%;
+    width: auto;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    width: 100%;
+}
+
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .col-lg {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .col-xl-8 {
+        flex: 0 0 66.66666667%;
+        max-width: 66.66666667%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .col-xl-4 {
+        flex: 0 0 33.33333333%;
+        max-width: 33.33333333%;
+    }
+}
+
+.btn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #212529;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    text-align: center;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -webkit-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+}
+
+.btn-primary {
+    background-color: #507cf3;
+    border-color: #507cf3;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #2c61f1;
+    border-color: #2058f0;
+    color: #fff;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn-light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.btn-group, .btn-group-vertical {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+}
+
+.btn-group>.btn {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+.btn-light.focus, .btn-light:focus, .btn-light:hover {
+    background-color: #e2e6ea;
+    color: #212529;
+}
+
+.btn-group>.btn.active, .btn-group>.btn:hover{
+    z-index: 1;
+}
+
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn-group>.btn:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.tab-box .tab-row .filter-col .kok-chart-date .btn-group button {
+    border: 1px solid #e9eaf0;
+    box-sizing: border-box;
+    height: 45px;
+    margin-left: -1px;
+    padding: 0 20px;
+}
+
+.tab-box .tab-row .filter-col .kok-chart-date .btn-group button.active {
+    background-color: #507cf3;
+    border: 1px solid #507cf3;
+    color: #fff;
+}
+
+.kok-date-range-input-container {
+    display: inline-block;
+    position: relative;
+}
+
+.kok-date-range-input-container>.date {
+    border: 1px solid #e9eaf0;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0;
+    max-width: 170px;
+    overflow: hidden;
+    padding: .5rem;
+    vertical-align: middle;
+}
+
+.tab-box .tab-row .filter-col .kok-chart-date .kok-date-range-input-container .form-group.date {
+    height: 45px;
+}
+
+.kok-date-range-input-container>.date .input-col {
+    cursor: text;
+    display: block;
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+    width: 1%;
+}
+
+.kok-date-range-input-container>.date input.date-input {
+    border: 0;
+    color: #507cf3;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    outline: 0;
+    width: 100%;
+}
+
+.kok-date-range-input-container>.date .icon-col {
+    display: flex;
+}
+
+.comp-icon {
+    display: inline-block;
+}
+
+.tab-box .tab-row .filter-col .kok-chart-date>button {
+    height: 45px;
+    margin-left: 6px;
+    padding: 0 12px;
+}
+
+/* 메인 차트부분 시작 + col-12 디자인 부분은 위에 표기 */
+.chart-box {
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 8px;
+    box-shadow: 0 0 10px hsla(196, 7%, 71%, .1);
+    margin-bottom: 20px;
+}
+
+.chart-wrapper {
+    position: relative;
+}
+
+.chart-wrapper div,
+.chart-wrapper svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.kok-chart {
+    display: inline-block;
+    height: 300px;
+    width: 100%;
+}
+
+.ana-user-index .access-data-list>.row {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.ana-user-index .access-data {
+    color: #292929;
+    text-align: center;
+}
+
+.ana-user-index .access-data.data-member-time, .ana-user-index .access-data.data-non-member-time {
+    color: #7366ff;
+}
+
+.ana-user-index .access-data .title {
+    color: #afb7ba;
+    font-weight: 700;
+}
+
+.ana-user-index .access-data .value {
+    font-size: 34px;
+    font-weight: 700;
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+}
+
+.ana-user-index .access-data .value span.icon {
+    font-size: 22px;
+    line-height: 60px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.ana-user-index .access-data .value span.unit {
+    font-size: 20px;
+    line-height: 60px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.ana-user-index .access-data.data-member-page, .ana-user-index .access-data.data-non-member-page {
+    color: #f93;
+}
+
+.chart-box .box-header {
+    padding: 20px 20px 0;
+}
+
+.chart-box .box-header .box-title {
+    color: #292929;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.ana-user-index .user-price-box .box-body {
+    padding: 0 10px 10px;
+}
+
+.tab-box table.justify-table {
+    width: 100%;
+}
+
+.tab-box table.justify-table th {
+    padding: 10px 0;
+}
+
+.tab-box table.justify-table td, .tab-box table.justify-table th {
+    text-align: center;
+}
+
+.tab-box table.justify-table td {
+    background-color: #f5f6f7;
+    border-bottom: 1px solid #ededed;
+    padding: 14px 0;
+}
+
+.tab-box table.justify-table td.td-class {
+    background-color: #e9eaf0;
+    border-right: 2px solid #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 10px;
+    width: 40px;
+}
+
+.tab-box table.justify-table td.td-value {
+    font-size: 17px;
+}
+
+.tab-box table.justify-table td.td-value.value-new {
+    color: #fe657e;
+}
+
+.tab-box table.justify-table td.td-field {
+    color: rgba(43, 43, 43, .6);
+    font-size: 12px;
+}
+
+.tab-box table.justify-table td.td-value.value-revisit {
+    color: #40c8bc;
+}
+
+.tab-box table.justify-table td.td-value.value-total {
+    color: #8950fc;
+}
+
+.tab-box table.justify-table td.td-divider {
+    background-color: #fff;
+    border-bottom: none;
+    height: 10px;
+    line-height: 10px;
+    padding: 0;
+}

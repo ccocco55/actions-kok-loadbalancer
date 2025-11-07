@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/experience/console-experience-application.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>체험 지원서 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="home-wrap">
+                <div class="home-wrap-2">
+                    <div class="home-wrap-inner">
+                        <div class="home-wrap-inner-2">
+                            <div class="back-back">
+                                <a th:href="@{'/enterprise-console/experience/applicate-list/' + ${applicantDetail.experienceNoticeId}}"  class="back-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                                    뒤로가기
+                                </a>
+                            </div>
+                            <div class="home-top-wrap">
+                                <div class="home-top">
+                                    <h1 th:text="${applicantDetail.userName}" class="top-h1"></h1>
+                                    <p th:text="${applicantDetail.experienceNoticeTitle}" class="top-p">지원한 공고 제목 들어갈 자리</p>
+                                </div>
+                                <button class="new-exp">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="new-exp-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                                    평가하기
+                                </button>
+                            </div>
+                            <div class="application-main">
+                                <div class="left-area">
+                                    <div class="cards">
+                                        <div class="card-top">
+                                            <div class="card-top-texts">
+                                                <div class="card-top-texts2">
+                                                    <div class="card-top-text-main">지원자 정보</div>
+                                                    <div class="card-top-text-sub"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="info-wrap">
+                                                <div class="info-line">
+                                                    <div>
+                                                        <label for="" class="info-key">이름</label>
+                                                        <div th:text="${applicantDetail.userName}" class="info-value"></div>
+                                                    </div>
+                                                    <div>
+                                                        <label for="" class="info-key">전화번호</label>
+                                                        <div th:text="${applicantDetail.userPhone}" class="info-value"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-line">
+                                                    <div>
+                                                        <label for="" class="info-key">이메일</label>
+                                                        <div th:text="${applicantDetail.userEmail}" class="info-value"></div>
+                                                    </div>
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">직군</label>-->
+<!--                                                        <div class="info-value">SW 개발</div>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">url</label>-->
+<!--                                                        <a href="" class="info-key">www.kok.com</a>-->
+<!--                                                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper-1">
+                                        <div class="wrapper-2">
+                                            <div class="cards">
+                                                <div class="card-top">
+                                                    <div class="card-top-texts">
+                                                        <div class="card-top-texts2">
+                                                            <div class="card-top-text-main">이력서</div>
+                                                            <div class="card-top-text-sub">선택 항목, URL 허용</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-content">
+                                                    <!-- 이력서일 경우 -->
+                                                    <div class="application" th:if="${applicantDetail.resumeFileId != null}">
+                                                        <div class="application-title">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="appli-svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                                            <div class="appli-title-text">
+                                                                <p class="appli-title-p">이력서</p>
+                                                            </div>
+                                                        </div>
+                                                        <button class="download-btn"
+                                                                th:data-file-id="${applicantDetail.resumeFileId}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                 stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3">
+                                                                <path d="M15 3h6v6"></path>
+                                                                <path d="M10 14 21 3"></path>
+                                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                            </svg>
+                                                            다운로드
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- URL일 경우 -->
+<!--                                                    <div class="application">-->
+<!--                                                        <div class="application-title">-->
+<!--                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="appli-svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>-->
+<!--                                                            <div class="appli-title-text">-->
+<!--                                                                <p class="appli-title-p">URL</p>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                        <button class="url-btn">-->
+<!--                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>-->
+<!--                                                            이동-->
+<!--                                                        </button>-->
+<!--                                                    </div>-->
+                                                    <!-- URL일 경우 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-area">
+                                    <div class="cards">
+                                        <div class="card-top">
+                                            <div class="card-top-texts">
+                                                <div class="card-top-texts2">
+                                                    <div class="card-top-text-main">진행 상태</div>
+                                                    <div class="card-top-text-sub"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="yoso">
+                                                <label for="" class="info-key">지원 일시</label>
+                                                <div class="datetime-applicate">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datetime-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                    <p th:text="${applicantDetail.requestDatetime}" class="datetime"></p>
+                                                </div>
+                                            </div>
+                                            <div class="yoso">
+                                                <label for="" class="info-key">상태 변경</label>
+                                                <div class="select-container">
+                                                    <button class="status-button">
+                                                        <span class="status-button-span"
+                                                              th:text="${applicantDetail.requestExperienceStatus.name() == 'ACCEPT' ? '합격'
+                                                              : (applicantDetail.requestExperienceStatus.name() == 'REJECT' ? '불합격' : '서류 검토 중')}"></span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                    </button>
+                                                    <div class="job">
+                                                        <div class="job-1">
+                                                            <div class="job-2">
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestExperienceStatus.name() == 'AWAIT' ? ' active' : ''}">
+                                                                    <div class="job-5">
+                                                                        <p class="job-6">서류 검토 중</p>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestExperienceStatus.name() == 'ACCEPT' ? ' active' : ''}">
+                                                                    <div class="job-5">
+                                                                        <p class="job-6">합격</p>
+                                                                    </div>
+                                                                </button>
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestExperienceStatus.name() == 'REJECT' ? ' active' : ''}">
+                                                                    <div class="job-5">
+                                                                        <p class="job-6">불합격</p>
+                                                                    </div>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="yoso">
+                                                <label for="" class="info-key">현재 상태</label>
+                                                <div class="status-mark">
+                                                    <span class="status-mark-span" th:text="${applicantDetail.requestExperienceStatus.name() == 'ACCEPT' ? '합격'
+                                                    : (applicantDetail.requestExperienceStatus.name() == 'REJECT' ? '불합격' : '서류 검토 중')}"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+    <div class="popup-container">
+        <div class="pop-content">
+            <div class="pop-title-wrap">
+                <h2 class="pop-title"><span th:text="${applicantDetail.userName}"></span>님의 지원서를 '합격' 상태로 변경하시겠습니까?</h2>
+                <p class="pop-desc">진행 상태 변경이 바로 적용됩니다.</p>
+            </div>
+            <div class="pop-buttons">
+                <button class="btn-no">취소</button>
+                <button class="btn-yes">진행 상태 변경</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script th:inline="javascript">
+    const memberId = [[${memberId}]];
+    const experienceNoticeId = [[${experienceNoticeId}]];
+    const applicantDetail=[[${applicantDetail}]];
+</script>
+<script src="/js/console/sidebar/event.js"></script>
+<script src="/js/console/ex-application/module/service.js"></script>
+<script src="/js/console/ex-application/event.js"></script>
+</html>

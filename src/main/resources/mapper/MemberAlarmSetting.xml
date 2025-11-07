@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.MemberAlarmSettingMapper">
+    <insert id="insertByMemberId">
+        insert into tbl_member_alarm_setting(member_id)
+        values (#{memberId})
+    </insert>
+<!--    멤버 id로 알람 테이블 id 조회-->
+    <select id="selectByMemberId">
+        select id
+        from tbl_member_alarm_setting
+        where member_id=#{memberId}
+    </select>
+<!--  멤버 id로 알람 테이블 전체 조회  -->
+    <select id="selectAllByMemberId">
+        select *
+        from tbl_member_alarm_setting
+        where member_id=#{memberId}
+    </select>
+    <update id="updateByKeywordToActive">
+        update tbl_member_alarm_setting
+        set ${keyword} = 'active'
+        where id = ${id}
+    </update>
+    <update id="updateByKeywordToInactive">
+        update tbl_member_alarm_setting
+        set ${keyword} = 'inactive'
+        where id = ${id}
+    </update>
+    <!--  공고 id로 알림 보낼 email 조회  -->
+    <select id="selectByNoticeId">
+        select u.user_name,u.user_email,u.sns_email from tbl_experience_notice e
+            join tbl_company c
+               on e.company_id = c.user_id
+            join tbl_follow f
+               on c.user_id = f.company_id
+            join tbl_member_alarm_setting a
+               on f.member_id = a.member_id
+            join tbl_user u
+               on a.member_id = u.id
+        where e.id=${id} and a.company_experience_notice_alarm = 'active'and u.user_status='active'
+
+    </select>
+    <select id="selectByInturnNoticeId">
+        select u.user_name,u.user_email,u.sns_email from tbl_intern_notice i
+                                                             join tbl_company c
+                                                                  on i.company_id = c.user_id
+                                                             join tbl_follow f
+                                                                  on c.user_id = f.company_id
+                                                             join tbl_member_alarm_setting a
+                                                                  on f.member_id = a.member_id
+                                                             join tbl_user u
+                                                                  on a.member_id = u.id
+        where i.id=${id} and a.company_intern_notice_alarm = 'active'and u.user_status='active'
+
+    </select>
+</mapper>

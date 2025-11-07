@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기업 콘솔 | 콕</title>
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/font/font.css">
+</head>
+<body>
+    <!-- 사이드바 시작 -->
+    <div class="sidebar-wrap">
+        <div class="sidebar-hidden"></div>
+        <div class="sidebar-main">
+            <div class="sidebar-main-inner">
+                <div class="sidebar-logo">
+                    <ul class="logo-ul">
+                        <li class="logo-li">
+                            <button class="logo-button" id="ser-ch-button">
+                                <div class="logo-img-div">
+                                    <img src="/images/console/console-logo.png" alt="" class="logo">
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="logo-svg">
+                                    <path d="m7 15 5 5 5-5"></path>
+                                    <path d="m7 9 5-5 5 5"></path>
+                                </svg>
+                            </button>
+                            <div class="service-change-wrap" id="ser-ch-div">
+                                <div class="service-change">
+                                    <div class="ser-ch-title">서비스 전환</div>
+                                    <div class="bar-line-ch"></div>
+                                    <a href="/experience/list" class="home-ch">
+                                        <div class="home-ch-inner">
+                                            <span class="home-ch-title">KOK</span>
+                                            <span class="home-ch-sub-title">콕</span>
+                                        </div>
+                                        <div class="active-service"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <span class="logo-span">콕 기업용 콘솔</span>
+                    </div>
+                </div>
+                <div class="sidebar-list">
+                    <div>
+                        <div class="home-div">
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <a href="/enterprise-console" class="sidebar-a side-hov">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="home-svg">
+                                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                            <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        </svg>
+                                        <span class="sidebar-span">홈</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar-line"></div>
+                    </div>
+                    <div>
+                        <div class="prof-wrap">
+                            <div class="sidebar-text">기본 정보</div>
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <a href="/enterprise-console/profile" class="sidebar-a side-hov">
+                                        <img src="/images/member/kok_logo.png" alt="" class="prof-img">
+                                        <span class="sidebar-span">기업 프로필</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar-line"></div>
+                    </div>
+                    <div>
+                        <div class="exp-wrap">
+                            <div class="sidebar-text">체험</div>
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <button class="side-list-button side-hov" id="list-exp-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="home-svg">
+                                            <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                            <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                                        </svg>
+                                        <span class="sidebar-span">체험 공고</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="svg-updown">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="sidebar-sub-div" id="list-exp">
+                                        <ul class="sidebar-sub-ul">
+                                            <li class="sidebar-sub-li">
+                                                <a href="/enterprise-console/experience/list" class="sidebar-sub-a">
+                                                    <span class="sidebar-span">체험 공고 목록</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-sub-li">
+                                                <a href="/enterprise-console/experience/create" class="sidebar-sub-a">
+                                                    <span class="sidebar-span">체험 공고 등록</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar-line"></div>
+                    </div>
+                    <div>
+                        <div class="hire-wrap">
+                            <div class="sidebar-text">인턴</div>
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <button class="side-list-button side-hov" id="list-intern-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="home-svg">
+                                            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path>
+                                            <path d="M22 10v6"></path>
+                                            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+                                        </svg>
+                                        <span class="sidebar-span">인턴 고용 공고</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="svg-updown">
+                                            <path d="m9 18 6-6-6-6"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="sidebar-sub-div" id="list-intern">
+                                        <ul class="sidebar-sub-ul">
+                                            <li class="sidebar-sub-li">
+                                                <a href="/enterprise-console/intern/list" class="sidebar-sub-a">
+                                                    <span class="sidebar-span">인턴 고용 공고 목록</span>
+                                                </a>
+                                            </li>
+                                            <li class="sidebar-sub-li">
+                                                <a href="/enterprise-console/intern/create" class="sidebar-sub-a">
+                                                    <span class="sidebar-span">인턴 고용 공고 등록</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar-line"></div>
+                    </div>
+                    <div>
+                        <div class="prof-wrap">
+                            <div class="sidebar-text">광고</div>
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <a href="/enterprise-console/ad/list" class="sidebar-a side-hov">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="home-svg">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5v14"></path>
+                                        </svg>
+                                        <span class="sidebar-span">광고 목록</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bar-line"></div>
+                    </div>
+                    <div>
+                        <div class="prof-wrap">
+                            <div class="sidebar-text">결제</div>
+                            <ul class="sidebar-ul">
+                                <li class="sidebar-li">
+                                    <a href="/enterprise-console/payment" class="sidebar-a side-hov">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round" class="home-svg">
+                                            <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                                            <line x1="2" x2="22" y1="10" y2="10"></line>
+                                        </svg>
+                                        <span>결제 관리</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="bar-line"></div>
+                        <div class="footer-title">콕 기업용 콘솔</div>
+                        <div class="footer-main-wrap">
+                            <div class="footer-main">
+                                <p class="footer-p">© 2025 KOK, 주식회사 콕, 콕 팀, 대한민국 서울특별시 테헤란로, 00000,
+                                    test@rocketpunch.com, +82 10-0000-00000</p>
+                                <div class="footer-sub">
+                                    <p class="footer-p">사업자등록번호 000-00-00000</p>
+                                    <p class="footer-p">통신판매업신고번호 2025-지역이름-0000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-profile">
+                    <ul class="side-prof-ul">
+                        <li class="side-prof-li">
+                            <button class="side-prof-button side-hov">
+                                <div class="side-prof-div">
+                                    <span th:text="${userDTO.companyName}" class="side-name"></span>
+                                    <span class="side-job">콕 기업용 콘솔</span>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="console-ch">
+            <div class="console-ch-inner">
+                <span class="console-ch-title">Enterprise console</span>
+                <span class="console-ch-sub-title">기업 콘솔</span>
+            </div>
+            <div class="active-service"></div>
+        </div>
+    </div>
+    <!-- 사이드바 끝 -->
+</body>
+</html>

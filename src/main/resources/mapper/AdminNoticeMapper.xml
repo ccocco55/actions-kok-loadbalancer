@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminNoticeMapper">
+
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_admin_notice (admin_notice_title, admin_notice_content)
+        values (#{adminNoticeTitle}, #{adminNoticeContent})
+    </insert>
+
+    <select id="selectNoticeFromId">
+        select id, admin_notice_title, admin_notice_content, notice_status, created_datetime, updated_datetime
+        from tbl_admin_notice
+        where id = #{id} and notice_status = 'active'
+    </select>
+
+    <select id="selectNoticeAll">
+        select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
+        from tbl_admin_notice
+        where notice_status = 'active'
+        order by id desc
+        limit #{count} offset #{offset}
+    </select>
+
+    <select id="countNoticeAll">
+        select count(*) from tbl_admin_notice
+        where notice_status = 'active'
+    </select>
+
+    <update id="updateNoticeFromId">
+        update tbl_admin_notice
+        set admin_notice_title = #{adminNoticeTitle}, admin_notice_content = #{adminNoticeContent}, updated_datetime = current_timestamp
+        where notice_status = 'active' and id = #{id}
+    </update>
+    
+    <update id="deleteNoticeFromId">
+        update tbl_admin_notice
+        set notice_status = 'inactive'
+        where notice_status = 'active' and id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/advertisement/console-add-list.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>광고 목록 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="add-list-wrap">
+                <div class="add-list-wrap2">
+                    <div class="add-list-wrap-inner">
+                        <div class="add-list-wrap-inner2">
+                            <div class="add-list-top">
+                                <div>
+                                    <h1 class="top-h1">광고</h1>
+                                    <p class="top-p">광고를 관리하세요</p>
+                                </div>
+                                <div class="new-add-btn">
+                                    <a href="/enterprise-console/ad/create" class="new-add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="new-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                                        새 광고
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="ad-total-wrap" class="up-cards"></div>
+                            <div class="search-area ad">
+                                <div class="search-div">
+                                    <div class="search-search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-svg"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                                        <input type="text" class="search-input" placeholder="광고 제목 검색">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="list-top">
+                                    <div class="list-top-main">광고 목록</div>
+                                    <div class="list-top-sub">등록된 광고를 관리하세요</div>
+                                </div>
+                                <div id="ad-list-table" class="list-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script th:inline="javascript">
+    const companyId = [[${companyId}]];
+</script>
+<script src="/js/console/add-list/module/service.js"></script>
+<script src="/js/console/add-list/module/layout.js"></script>
+<script src="/js/console/add-list/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-home.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>기업 홈 | 콕</title>
+</head>
+<body>
+<div class="wrap-enter">
+    <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+    <main class="main">
+        <header class="header">
+            <div class="header-wrap">
+                <nav class="breadcrumb">
+                    <ol class="header-ol">
+                        <li class="header-li">
+                            <span class="header-span">기업용 콘솔</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+        <div class="home-wrap">
+            <div class="home-wrap-2">
+                <div class="home-wrap-inner">
+                    <div class="home-wrap-inner-2">
+                        <div class="home-top">
+                            <div>
+                                <h1 class="top-h1">기업 콘솔</h1>
+                                <p class="top-p">기업 채용 및 브랜딩을 위한 통합 관리 플랫폼</p>
+                            </div>
+                        </div>
+                        <section class="home-section">
+                            <div class="card-group">
+                                <div class="card">
+                                    <div class="card-title">
+                                        <div class="card-main-title">체험 공고</div>
+                                        <div class="card-sub-title">체험 공고 등록 및 관리</div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="content-main-div">
+                                            <div class="content-main-inner">
+                                                <div class="text-content">
+                                                    <div class="content-number" th:text="${activeCount}">0</div>
+                                                    <div class="content-text">활성화된 체험 공고</div>
+                                                </div>
+                                                <div class="text-content">
+                                                    <div class="content-number" th:text="${totalCount}">0</div>
+                                                    <div class="content-text">전체 체험 공고</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="button-wrap">
+                                            <a href="/enterprise-console/experience/list" class="white-button">체험 공고 목록</a>
+                                            <a href="/enterprise-console/experience/create" class="black-button">체험 공고 등록</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-title">
+                                        <div class="card-main-title">인턴 채용 공고</div>
+                                        <div class="card-sub-title">인턴 채용 공고 등록 및 관리</div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="content-main-div">
+                                            <div class="content-main-inner">
+                                                <div class="text-content">
+                                                    <div class="content-number" th:text="${activeInternCount}">0</div>
+                                                    <div class="content-text">활성화된 인턴 공고</div>
+                                                </div>
+                                                <div class="text-content">
+                                                    <div class="content-number" th:text="${totalInternCount}">0</div>
+                                                    <div class="content-text">전체 인턴 공고</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="button-wrap">
+                                            <a href="/enterprise-console/intern/list" class="white-button">인턴 고용 공고 목록</a>
+                                            <a href="/enterprise-console/intern/create" class="black-button">인턴 고용 공고 등록</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-title">
+                                        <div class="card-main-title">광고</div>
+                                        <div class="card-sub-title">콕에서 기업을 더 잘 알리고 높은 성과를 확보하세요.</div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="button-wrap">
+                                            <a href="/enterprise-console/ad/create" class="white-button">광고 등록하기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 24px">
+                                <div class="card">
+                                    <div class="card-title">
+                                        <div class="card-main-title">체험자</div>
+                                        <div class="card-sub-title">우리 기업을 신청한 하이커들</div>
+                                    </div>
+                                    <div class="card-content table-content">
+                                        <div class="table-wrap">
+                                            <table class="card-table">
+                                                <thead class="table-head">
+                                                <tr class="thead-tr">
+                                                    <th class="thead-th" style="text-align: center">체험자명</th>
+                                                    <th class="thead-th">체험 공고 제목</th>
+                                                    <th class="thead-th">체험 신청일</th>
+                                                </tr>
+                                                </thead>
+                                                <!-- 데이터 없을 때 -->
+                                                <tbody class="table-body" th:if="${recentMembers == null or recentMembers.size() == 0}">
+                                                    <tr>
+                                                        <td colspan="3" class="tbody-td1 no-data">최근 체험자가 없습니다.</td>
+                                                    </tr>
+                                                </tbody>
+                                                <!-- 데이터 있을 때 -->
+                                                <tbody class="table-body" th:if="${recentMembers != null and recentMembers.size() > 0}">
+                                                    <tr class="tbody-tr" th:each="member : ${recentMembers}">
+                                                        <td class="tbody-td1" th:text="${member.userName}">홍길동</td>
+                                                        <td class="tbody-td2" th:text="${member.experienceNoticeTitle}">체험 공고 제목</td>
+                                                        <td class="tbody-td2" th:text="${member.requestDate}">2025-01-01</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+<script th:inline="javascript">
+    const companyId = [[${companyId}]];
+</script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

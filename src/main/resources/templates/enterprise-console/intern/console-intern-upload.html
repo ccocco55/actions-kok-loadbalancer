@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/experience/console-experience-upload.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>인턴 공고 등록 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="upload-wrap">
+                <div class="upload-wrap2">
+                    <div class="upload-wrap-inner">
+                        <div class="upload-wrap-inner2">
+                            <div class="home-top">
+                                <div>
+                                    <h1 class="top-h1">공고 등록하기</h1>
+                                    <p class="top-p">새로운 인턴 고용 공고를 등록하세요</p>
+                                </div>
+                            </div>
+                            <div class="upload-main">
+                                <div class="write-area">
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">인턴 고용 정보</div>
+                                            <div class="sub-title">기본적인 공고 정보를 입력하세요</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="contents-line">
+                                                <div class="contents">
+                                                    <label for="" class="content-label">
+                                                        인턴 고용 공고 제목
+                                                        <span class="content-span">
+                                                            (최대 30자)
+                                                        </span>
+                                                    </label>
+                                                    <input type="text" class="content-input" placeholder="예: 프론트엔드 개발자">
+                                                </div>
+                                                <div class="contents">
+                                                    <label for="" class="content-label">
+                                                        인턴 고용 공고 부제목
+                                                        <span class="content-span">
+                                                            (최대 50자)
+                                                        </span>
+                                                    </label>
+                                                    <input type="text" class="content-input" placeholder="기술 스택, 주요 업무, 키워드">
+                                                </div>
+                                            </div>
+                                            <div class="contents-line">
+                                                <div class="contents">
+                                                    <label for="" class="content-label">직군</label>
+                                                    <button class="search-btn">
+                                            <span class="search-span">모든 직군</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="category-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                            <div class="job">
+                                            <div class="job-1">
+                                                <div class="job-2">
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">모든 직군</p>
+                                                        </div>
+                                                        <div class="setting-31">
+                                                            <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">SW 개발</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">데이터/AI</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">기획/전략</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">디자인/UX</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">마케팅/PR</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">경영/운영</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">HR/인사</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">회계/재무</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">법률/법무</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">상담/영업</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">교육/복지</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">HW 개발</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">연구/R&D</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">금융/투자</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">의료/바이오</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">건설/부동산</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">미디어/출판</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">제조/생산</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">운전/물류</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">식품/조리</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">숙박/레저</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">서비스</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="job-3">
+                                                        <div class="job-5">
+                                                            <p class="job-6">종교인</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                </div>
+                                                <!-- <div class="contents">
+                                                    <label for="" class="content-label">체험일(시작일, 종료일)</label>
+                                                    <div class="flex">
+                                                        <input type="text" class="content-input-half" placeholder="yyyy-mm-dd">
+                                                        <input type="text" class="content-input-half" placeholder="yyyy-mm-dd">
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">인턴 고용 공고 상세</div>
+                                            <div class="sub-title">상세한 공고 내용을 작성하세요</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="contents">
+                                                <label for="" class="content-label">직무소개</label>
+                                                <textarea name="" id="" class="textarea"></textarea>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="content-label">주요 업무</label>
+                                                <textarea name="" id="" class="textarea"></textarea>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="content-label">참고사항</label>
+                                                <textarea name="" id="" class="textarea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="select-area">
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">게시 기간</div>
+                                            <div class="sub-title">한국 표준시 기준</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="content-wrapper">
+                                                <div class="card-sub">
+                                                    <label for="" class="content-label">시작일</label>
+                                                    <input type="text" class="content-input" placeholder="yyyy-mm-dd">
+                                                </div>
+                                                <div class="card-sub">
+                                                    <label for="" class="content-label">종료일</label>
+                                                    <input type="text" class="content-input" placeholder="yyyy-mm-dd">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">게시 관리</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="buttons">
+                                                <button class="b-btn" id="surego">고용 공고 등록하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </main>
+    </div>
+    <div class="darkback" id="drkb"></div>
+    <div class="sure" id="squa">
+        <div class="sure-title">
+            <h2 class="sure-h2">고용 공고를 등록하시겠습니까?</h2>
+            <p class="sure-p">공고가 즉시 활성화됩니다.</p>
+        </div>
+        <div class="sure-buttons">
+            <button class="sure-no">취소</button>
+            <button class="sure-yes">등록하기</button>
+        </div>
+    </div>
+</body>
+<script src="/js/console/ex-upload/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

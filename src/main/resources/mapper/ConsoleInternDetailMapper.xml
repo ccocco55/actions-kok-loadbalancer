@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleInternDetailMapper">
+    <select id="selectInternDatailByCompany">
+        select en.id,
+                en.intern_notice_title,
+                en.intern_notice_subtitle,
+                en.intern_notice_status,
+                en.company_id,
+                en.created_datetime,
+                en.updated_datetime,
+                jc.job_name as job_category_name
+        from tbl_intern_notice en
+            join tbl_intern_job_category ejc
+                on en.id = ejc.intern_notice_id
+            join tbl_job_category jc
+                on ejc.job_category = jc.id
+            left join tbl_request_intern re
+                on en.id = re.intern_notice_id
+            left join tbl_save_intern_notice sen
+                on en.id = sen.intern_notice_id
+        where en.id = #{internNoticeId}
+        group by en.id, jc.job_name
+    </select>
+
+    <!-- 체험 상세 - 지원자 목록 조회 -->
+    <select id="selectInternApplicantByCompany">
+        select
+            re.id as request_id,
+            re.request_intern_status,
+            re.created_datetime as request_datetime,
+            u.id as user_id,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            en.id as intern_notice_id,
+            en.intern_notice_title,
+            en.company_id
+        from tbl_request_intern re
+        join tbl_user u
+            on re.member_id = u.id
+        join tbl_intern_notice en
+            on re.intern_notice_id = en.id
+        where en.id = #{internNoticeId}
+            and u.user_status = 'active'
+        <if test="status != null">
+            and re.request_intern_status = #{status}
+        </if>
+        order by re.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectInternApplicantCountByCompany">
+        select count(*)
+        from tbl_request_intern re
+        join tbl_user u
+            on re.member_id = u.id
+        join tbl_intern_notice en
+            on re.intern_notice_id = en.id
+        where en.id = #{internNoticeId}
+        and u.user_status = 'active'
+        <if test="status != null">
+            and re.request_intern_status = #{status}
+        </if>
+    </select>
+</mapper>

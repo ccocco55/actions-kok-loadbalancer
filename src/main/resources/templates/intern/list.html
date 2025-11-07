@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/intern/list.css">
+    <!--    <link rel="stylesheet" href="/css/main-page/side-bar.css">-->
+    <!--    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">-->
+    <!--    <link rel="stylesheet" href="/css/main-page/header.css">-->
+    <!--    <link rel="stylesheet" href="/css/main-page/login-header.css">-->
+    <title>인턴공고 | 콕</title>
+</head>
+<body>
+<div id="main-content" class="main-content">
+    <th:block th:if="${userDTO==null}">
+        <div th:replace="~{main-page/side-bar}"></div>
+    </th:block>
+    <th:block th:if="${userDTO!=null}">
+        <div th:replace="~{main-page/login-side-bar}"></div>
+    </th:block>
+    <main class="main main-wrap">
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/mobile-header}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/mobile-login-header}"></div>
+        </th:block>
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/header}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/login-header}"></div>
+        </th:block>
+        <div class="content-layout">
+            <div class="search-container wide">
+                <form th:action="@{/intern/list}" class="search-form" method="get" th:object="${search}">
+                    <div class="search-box">
+                        <div class="search-list">
+                            <div class="search-item search-input-item">
+                                <div class="search-label">
+                                    <label for="keyword-input" class="search-name">키워드</label>
+                                    <div class="info-container">
+                                        <div class="info-icon">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" height="12" role="img" width="12">
+                                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="info-box">
+                                            <strong>키워드 검색</strong>
+                                            <p>기업명, 직무명을 비롯해 공고 내 포함된 단어를 찾을 수 있습니다.
+                                                <br/>예&#41; Next.js, 파워포인트, 점심식대, 대출이자지원, 성과급 등
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" th:field="*{keyword}" id="keyword-input" placeholder="기업명, 직무명, 기술스택, 담당 업무">
+                                <button type="button" class="keyword-delete">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" height="24" role="img" width="24">
+                                        <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="search-item">
+                                <div class="search-label">
+                                    <p class="search-name">직군</p>
+                                </div>
+
+                                <div class="dropdown-container">
+                                    <button class="dropdown-open-btn">전체</button>
+
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-name">직군</p>
+                                        <div class="dropdown-content">
+                                            <ul class="dropdown-list">
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>SW 개발</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>데이터/AI</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>기획/전략</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>디자인/UX</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>마케팅/PR</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>경영/운영</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>HR/인사</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>회계/재무</p>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>법률/법무</p>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <div class="dropdown-actions">
+                                                <button class="select-all-btn">전체 선택</button>
+                                                <button type="button" class="apply-btn" id="sector-compl-btn">적용</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                <div class="search-label">
+                                    <p class="search-name">기업 규모</p>
+                                </div>
+
+                                <div class="dropdown-container">
+                                    <button class="dropdown-open-btn">전체</button>
+
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-name">기업 규모</p>
+                                        <div class="dropdown-content">
+                                            <ul class="dropdown-list">
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>매우 작은 규모</p>
+                                                        <span>30명 미만</span>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>작은 규모</p>
+                                                        <span>30-100명</span>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>중간 규모</p>
+                                                        <span>100-400명</span>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>큰 규모</p>
+                                                        <span>400-2,000명</span>
+                                                    </button>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <button class="dropdown-btn">
+                                                        <p>매우 큰 규모</p>
+                                                        <span>2,000명 초과</span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <div class="dropdown-actions">
+                                                <button class="select-all-btn">전체 선택</button>
+                                                <button type="button" class="apply-btn" id="scale-compl-btn">적용</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="search-button">
+                            <svg viewBox="0 0 24 24" fill="#fff" height="24" role="img" width="24">
+                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="content-container">
+                <div class="content-main">
+                    <div class="sort-options">
+                        <div class="sort-options-item">
+                            <button class="sort-btn active" id="latestBtn">최신순</button>
+                        </div>
+                        <div class="sort-options-item">
+                            <button class="sort-btn" id="populBtn">인기순</button>
+                        </div>
+                        <div class="sort-options-item">
+                            <button class="sort-btn" id="scaleBtn">규모순</button>
+                        </div>
+                    </div>
+                    <div class="int-wrapper">
+                        <div class="list-container">
+                        </div>
+                        <div id="loading" style="display: none; width: 100px; height: 100px; margin: 0 auto; position: fixed; right: 5px; top: 15px;">-->
+                            <img src="/images/experience/loading.gif" style="width: 100%; height: 100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="content-detail">
+                </div>
+                <div class="content-side active">
+                    <div class="content-side-top">
+                        <div class="ad-banner">
+                            <div class="ad-text-box">
+                                <!--                                    <p class="title">000님, 삼성 인턴 합격을 진심으로 축하드립니다!</p>-->
+                                <!--                                    <p class="desc">최신 기술 환경에서 전문성을 키워가며 더 큰 도약을 준비하세요.</p>-->
+                            </div>
+                            <div class="ad-img">
+                                <img th:src="${banner}" alt="">
+                            </div>
+                        </div>
+                        <div class="banner-list">
+                            <div class="ad-banner" th:each="advertisement : ${advertisements}">
+                                <div class="ad-text-box">
+                                    <p class="title" th:text="${advertisement.advertisementMainText}"></p>
+                                    <p class="desc" th:text="${advertisement.advertisementSubText}"></p>
+                                </div>
+                                <div class="ad-img">
+                                    <th:block th:if="${advertisement.filePath==null}">
+                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
+                                    </th:block>
+                                    <th:block th:if="${advertisement.filePath!=null}">
+                                        <img th:src="${advertisement.filePath}" alt="">
+                                    </th:block>
+                                </div>
+                            </div>
+                            <!--                                <div class="ad-banner">-->
+                            <!--                                    <div class="ad-text-box">-->
+                            <!--                                        <p class="title">2차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>-->
+                            <!--                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="ad-img">-->
+                            <!--                                        <img src="/images/experience/ad_bg_img.jpg" alt="">-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="ad-banner">-->
+                            <!--                                    <div class="ad-text-box">-->
+                            <!--                                        <p class="title">3차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>-->
+                            <!--                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="ad-img">-->
+                            <!--                                        <img src="/images/experience/ad_bg_img.jpg" alt="">-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                        </div>
+                    </div>
+                    <!--                        <div class="content-side-bottom">-->
+                    <!--                            <div class="ad-banner">-->
+                    <!--                                <div class="ad-content">-->
+                    <!--                                    <p class="ad-text">기업 담당자이신가요?</p>-->
+                    <!--                                    <strong class="ad-text">콕에 공고를 올려보세요.</strong>-->
+                    <!--                                    <p class="ad-text">콕을 통한 간편 지원은 물론<br/>자사 인턴 페이지 홍보도 가능합니다.</p>-->
+                    <!--                                </div>-->
+
+                    <!--                                <div class="ad-action">-->
+                    <!--                                    <button class="ad-btn">게시</button>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                </div>
+            </div>
+        </div>
+        <div th:replace="~{main-page/mobile-footer}"></div>
+    </main>
+</div>
+
+<!-- toast - red -->
+<div id="toast-red" class="toast-warning">
+    <div class="toast-warning-content">
+        <div class="toast-inner">
+            <div class="toast-icon">
+                <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                    <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="toast-text">키워드는 50자 이내로 입력해주세요</p>
+        </div>
+    </div>
+</div>
+
+<!-- toast - white -->
+<div id="toast-white" class="toast-warning">
+    <div class="toast-warning-content">
+        <div class="toast-inner">
+            <div class="toast-icon">
+                <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">
+                    <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="toast-text">인턴 공고 저장했습니다.</p>
+        </div>
+    </div>
+</div>
+
+<!-- toast - 공유하기 -->
+<div id="toast-share" class="toast-warning">
+    <div class="toast-warning-content">
+        <div class="toast-inner">
+            <div class="toast-icon">
+                <svg aria-label="icon" color="foregrounds.surface.static" fill="currentColor" height="20" role="img" width="20">
+                    <path clip-rule="evenodd" d="M12.141 5.07a4.8 4.8 0 1 1 6.788 6.789l-1.414 1.414a.8.8 0 1 1-1.131-1.131l1.414-1.415a3.2 3.2 0 0 0-4.526-4.525l-1.414 1.414a.8.8 0 0 1-1.131-1.131zm3.253 3.536a.8.8 0 0 1 0 1.131l-5.657 5.657a.8.8 0 0 1-1.132-1.131l5.657-5.657a.8.8 0 0 1 1.132 0m-7.778 2.121a.8.8 0 0 1 0 1.132L6.2 13.273a3.2 3.2 0 0 0 4.526 4.525l1.414-1.414a.8.8 0 0 1 1.131 1.131l-1.414 1.415a4.8 4.8 0 0 1-6.788-6.788l1.414-1.415a.8.8 0 0 1 1.132 0" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="toast-text">인턴 공고 링크를 복사했습니다.</p>
+        </div>
+        <p class="url-share">https://www.rocketpunch.com/jobs/157187</p>
+    </div>
+</div>
+
+<!-- toast - 보관함 유형, 파일 정보 누락 -->
+<div id="toast-library" class="toast-warning">
+    <div class="toast-warning-content">
+        <div class="toast-inner">
+            <div class="toast-icon">
+                <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                    <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="toast-text">필수 정보 누락</p>
+        </div>
+        <p class="toast-subText">파일을 선택해주세요.</p>
+    </div>
+</div>
+
+<!-- popup - 간편지원하기 -->
+<div id="quick-apply-popup" class="popup-container pop-side">
+    <div class="popup-inner">
+        <div class="popup-header">
+            <strong class="popup-title">간편 지원하기</strong>
+            <button class="popup-close popup-remove">닫기</button>
+        </div>
+
+        <form action="">
+            <div class="popup-body">
+                <ul class="form-list form-row">
+                    <li class="form-item">
+                        <label class="form-label" for="name-input">이름<span class="must">*</span></label>
+                        <div class="form-field">
+                            <input type="text" id="name-input" placeholder="이름">
+                        </div>
+                    </li>
+                    <li class="form-item">
+                        <label class="form-label" for="email-input">이메일<span class="must">*</span></label>
+                        <div class="form-field">
+                            <input type="text" id="email-input" placeholder="example@gmail.com">
+                        </div>
+                    </li>
+                    <li class="form-item">
+                        <label class="form-label" for="phone-input">전화번호<span class="must">*</span></label>
+                        <div class="form-field">
+                            <input type="text" id="phone-input" placeholder="전화번호" maxlength="13" oninput="formatPhoneNumber(this)">
+                        </div>
+                    </li>
+                    <li class="form-item line">
+                        <p class="form-label">이력서<span class="must">*</span></p>
+                        <div class="form-field">
+                            <input type="hidden" id="resume-value">
+                            <button type="button" class="file-btn popup-trigger" data-target="#resume-check-popup">파일 선택 가능</button>
+                        </div>
+                    </li>
+                    <li class="form-item line">
+                        <p class="form-label">URL</p>
+                        <div class="form-field">
+                            <input id="url-input" placeholder="https://www.example.com">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="popup-action line">
+                <button type="button" class="pop-btn btn-primary">간편 지원하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- popup - 이력서 -->
+<div id="resume-check-popup" class="popup-container pop-side">
+
+</div>
+
+<!-- popup - 이력서등록 -->
+<!-- data-sticky="true" 남아야 하는 팝업일때 붙임 -->
+<div id="resume-upload-popup" class="popup-container pop-center" data-sticky="true">
+    <div class="popup-inner">
+        <div class="popup-header">
+            <strong class="popup-title">보관함 등록</strong>
+            <button class="popup-close popup-library-close">닫기</button>
+        </div>
+        <form action="">
+            <div class="popup-body">
+                <div class="form-list form-grid">
+                    <!--                        <div class="form-item flex-1-1">-->
+                    <!--                            <label class="form-label" for="type-input">유형<span class="must">*</span></label>-->
+                    <!--                            <div class="form-field form-field-dropdown">-->
+                    <!--                                <input type="text" id="type-input" class="dropdown-trigger" data-target="#dropdown2" placeholder="선택 또는 입력" readonly>-->
+
+                    <!--                                <div id="dropdown2" class="option-menu">-->
+                    <!--                                    <ul class="option-list">-->
+                    <!--                                        <li class="option-item option-input">-->
+                    <!--                                            <button type="button" class="option-btn">-->
+                    <!--                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">-->
+                    <!--                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>-->
+                    <!--                                                </svg>-->
+                    <!--                                                <p>직접 입력</p>-->
+                    <!--                                            </button>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="option-item">-->
+                    <!--                                            <button type="button" class="option-btn">-->
+                    <!--                                                <p>이력서</p>-->
+                    <!--                                            </button>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="option-item">-->
+                    <!--                                            <button type="button" class="option-btn">-->
+                    <!--                                                <p>포트폴리오</p>-->
+                    <!--                                            </button>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="option-item">-->
+                    <!--                                            <button type="button" class="option-btn">-->
+                    <!--                                                <p>자기소개서</p>-->
+                    <!--                                            </button>-->
+                    <!--                                        </li>-->
+                    <!--                                    </ul>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <div class="form-item flex-3">
+                        <label class="form-label" for="file-input">파일<span class="must">*</span></label>
+                        <div class="form-field">
+                            <!-- 실제 파일 input은 숨김 -->
+                            <input type="file" id="file-input" name="files" hidden multiple>
+                            <!-- 파일명이 표시될 커스텀 영역 -->
+                            <label for="file-input" class="form-file-label">파일</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-action">
+                <button id="pop-apply" class="pop-btn btn-primary">등록하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- popup - 닫기 메세지 -->
+<div id="message-popup" class="popup-container pop-center pop-default">
+    <div class="popup-inner">
+        <div class="popup-body">
+            <div class="popup-title-box">
+                <strong class="popup-title">변경사항이 저장되지 않았습니다.</strong>
+                <p class="popup-sub-title">지금 나가면 변경사항이 반영되지 않습니다.<br/>그래도 나가시겠습니까?</p>
+            </div>
+        </div>
+        <div class="popup-action popup-btn-row">
+            <button class="pop-btn btn-primary popup-all-close">저장하지 않고 나가기</button>
+            <button class="pop-btn btn-default popup-continue popup-remove">계속 작성하기</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const search = [[${search}]];
+    const keyword = [[${search.keyword}]];
+    const sharedCompanyId = [[${sharedCompanyId}]];
+    const sharedInternId = [[${sharedInternId}]];
+</script>
+<!--<script src="/js/main-page/side-bar/event.js"></script>-->
+<!--<script src="/js/main-page/header/module/service.js"></script>-->
+<!--<script src="/js/main-page/header/module/layout.js"></script>-->
+<!--<script src="/js/main-page/header/event.js"></script>-->
+<script src="/js/intern/module/service.js"></script>
+<script src="/js/intern/module/layout.js"></script>
+<script src="/js/intern/event.js"></script>
+</html>

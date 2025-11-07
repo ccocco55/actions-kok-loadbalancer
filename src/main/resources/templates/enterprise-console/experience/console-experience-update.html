@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/experience/console-experience-upload.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>체험 공고 수정 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="upload-wrap">
+                <form action="" method="post" id="ex-form">
+                    <input type="hidden" name="id" th:value="${notice.id}">
+                    <input type="hidden" name="jobCategoryId">
+                    <div class="upload-wrap2">
+                        <div class="upload-wrap-inner">
+                            <div class="upload-wrap-inner2">
+                                <div th:if="${page} == 'create'" class="home-top">
+                                    <div>
+                                        <h1 class="top-h1">체험 공고 등록하기</h1>
+                                        <p class="top-p">새로운 체험 공고를 등록하세요</p>
+                                    </div>
+                                </div>
+                                <div th:unless="${page} == 'create'" class="home-top">
+                                    <div class="back-back">
+                                        <a href="/enterprise-console/experience/list" class="back-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                                            뒤로가기
+                                        </a>
+                                    </div>
+                                    <div class="home-top-title-wrap">
+                                        <div>
+                                            <h1 class="top-h1">공고 수정하기</h1>
+                                            <p class="top-p">등록한 체험 공고를 수정하세요.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upload-main">
+                                    <div class="write-area">
+                                        <div class="cards">
+                                            <div class="card-title">
+                                                <div class="main-title">체험 정보</div>
+                                                <div class="sub-title">기본적인 체험 정보를 입력하세요</div>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="contents-line">
+                                                    <div class="contents">
+                                                        <label class="content-label">
+                                                            체험 공고 제목
+                                                            <span class="must">*</span>
+                                                            <span class="content-span">
+                                                                (최대 30자)
+                                                            </span>
+                                                        </label>
+                                                        <input name="experienceNoticeTitle" type="text" id="content-title" class="content-input validate-length" maxlength="30" placeholder="예: 프론트엔드 개발자" th:value="${notice.experienceNoticeTitle}">
+                                                    </div>
+                                                    <div class="contents">
+                                                        <label class="content-label">
+                                                            체험 공고 부제목
+                                                            <span class="must">*</span>
+                                                            <span class="content-span">
+                                                                (최대 50자)
+                                                            </span>
+                                                        </label>
+                                                        <input name="experienceNoticeSubtitle" type="text" id="content-subtitle" class="content-input validate-length" maxlength="50" placeholder="기술 스택, 주요 업무, 키워드" th:value="${notice.experienceNoticeSubtitle}">
+                                                    </div>
+                                                    <div class="contents dropdown-container">
+                                                        <label class="content-label">
+                                                            직군
+                                                            <span class="must">*</span>
+                                                        </label>
+                                                        <button type="button" class="search-btn">
+                                                            <span id="job-category" class="search-span" th:text="${notice.jobCategoryName != null ? notice.jobCategoryName : '직군을 선택하세요'}" th:attr="data-id=${notice.jobCategoryId != null ? notice.jobCategoryId : ''}" th:styleappend="${notice.jobCategoryName != null} ? 'color:#000' : ''"></span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="category-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                        </button>
+                                                        <div class="job dropdown-menu">
+                                                            <div class="job-1">
+                                                                <div class="job-2">
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="1" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 1} ? ' active' : ''">
+                                                                            <p class="job-6">SW 개발</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="2" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 2} ? ' active' : ''">
+                                                                            <p class="job-6">데이터/AI</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="3" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 3} ? ' active' : ''">
+                                                                            <p class="job-6">기획/전략</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="4" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 4} ? ' active' : ''">
+                                                                            <p class="job-6">디자인/UX</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="5" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 5} ? ' active' : ''">
+                                                                            <p class="job-6">마케팅/PR</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="6" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 6} ? ' active' : ''">
+                                                                            <p class="job-6">경영/운영</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="7" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 7} ? ' active' : ''">
+                                                                            <p class="job-6">HR/인사</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="8" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 8} ? ' active' : ''">
+                                                                            <p class="job-6">회계/재무</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="9" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 9} ? ' active' : ''">
+                                                                            <p class="job-6">법률/법무</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="10" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 10} ? ' active' : ''">
+                                                                            <p class="job-6">상담/영업</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="11" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 11} ? ' active' : ''">
+                                                                            <p class="job-6">교육/복지</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="12" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 12} ? ' active' : ''">
+                                                                            <p class="job-6">HW 개발</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="13" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 13} ? ' active' : ''">
+                                                                            <p class="job-6">연구/R&D</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="14" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 14} ? ' active' : ''">
+                                                                            <p class="job-6">금융/투자</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="15" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 15} ? ' active' : ''">
+                                                                            <p class="job-6">의료/바이오</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="16" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 16} ? ' active' : ''">
+                                                                            <p class="job-6">건설/부동산</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="17" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 17} ? ' active' : ''">
+                                                                            <p class="job-6">미디어/출판</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="18" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 18} ? ' active' : ''">
+                                                                            <p class="job-6">제조/생산</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="19" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 19} ? ' active' : ''">
+                                                                            <p class="job-6">운전/물류</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="20" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 20} ? ' active' : ''">
+                                                                            <p class="job-6">식품/조리</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="21" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 21} ? ' active' : ''">
+                                                                            <p class="job-6">숙박/레저</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="22" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 22} ? ' active' : ''">
+                                                                            <p class="job-6">서비스</p>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <button type="button" class="job-5 dropdown-btn" data-id="23" th:classappend="${notice.jobCategoryId != null and notice.jobCategoryId == 23} ? ' active' : ''">
+                                                                            <p class="job-6">종교인</p>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="contents">
+                                                        <label class="content-label">
+                                                            체험일
+                                                            <span class="must">*</span>
+                                                            <span class="content-span">(시작일, 종료일)</span>
+                                                        </label>
+                                                        <div class="flex gap-10 align-items-center date-input-wrap">
+                                                            <input name="experienceStartDate" type="text" id="experience-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceStartDate}">
+                                                            <span>~</span>
+                                                            <input name="experienceEndDate" type="text" id="experience-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceEndDate}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cards">
+                                            <div class="card-title">
+                                                <div class="main-title">체험 공고 상세</div>
+                                                <div class="sub-title">상세한 체험 내용을 작성하세요</div>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="contents">
+                                                    <label class="content-label">직무소개<span class="must">*</span></label>
+                                                    <textarea name="experienceNoticeIntroduceJob" id="introduce-job" class="textarea" th:text="${notice.experienceNoticeIntroduceJob}"></textarea>
+                                                </div>
+                                                <div class="contents">
+                                                    <label class="content-label">주요 업무<span class="must">*</span></label>
+                                                    <textarea name="experienceMainTasks" id="main-tasks" class="textarea" th:text="${notice.experienceMainTasks}"></textarea>
+                                                </div>
+                                                <div class="contents">
+                                                    <label class="content-label">참고사항<span class="must">*</span></label>
+                                                    <textarea name="experienceNoticeEtc" id="notice-etc" class="textarea" th:text="${notice.experienceNoticeEtc}"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="select-area">
+                                        <div class="cards contents">
+                                            <div class="card-title">
+                                                <div class="main-title">게시 기간</div>
+                                                <div class="sub-title">한국 표준시 기준</div>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="content-wrapper">
+                                                    <div class="card-sub">
+                                                        <label class="content-label">시작일<span class="must">*</span></label>
+                                                        <input name="experienceNoticeStartDate" type="text" id="experience-notice-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeStartDate}">
+                                                    </div>
+                                                    <div class="card-sub">
+                                                        <label class="content-label">종료일<span class="must">*</span></label>
+                                                        <input name="experienceNoticeEndDate" type="text" id="experience-notice-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeEndDate}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cards">
+                                            <div class="card-title">
+                                                <div class="main-title">게시 관리</div>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="buttons">
+                                                    <button type="button" th:if="${page} == 'create'" class="b-btn popup-trigger">체험 공고 등록하기</button>
+                                                    <button type="button" th:unless="${page} == 'create'" class="b-btn popup-trigger">체험 공고 수정하기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+         </main>
+    </div>
+    <div class="popup-container">
+        <div class="pop-content">
+            <div th:if="${page} == 'create'" class="pop-title-wrap">
+                <h2 class="pop-title">체험 공고를 등록하시겠습니까?</h2>
+                <p class="pop-desc">공고가 즉시 활성화됩니다.</p>
+            </div>
+            <div th:unless="${page} == 'create'" class="pop-title-wrap">
+                <h2 class="pop-title">공고를 수정하시겠습니까?</h2>
+                <p class="pop-desc">공고 정보가 업데이트됩니다.</p>
+            </div>
+            <div class="pop-buttons">
+                <button class="btn-no">취소</button>
+                <button th:if="${page} == 'create'" id="btn-register-experience" class="btn-yes">등록하기</button>
+                <button th:unless="${page} == 'create'" id="btn-update-experience" class="btn-yes">수정하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script th:inline="javascript">
+    const id = [[${id}]]
+    const page = [[${page}]];
+    const notice = [[${notice}]]
+</script>
+<script src="/js/console/ex-upload/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

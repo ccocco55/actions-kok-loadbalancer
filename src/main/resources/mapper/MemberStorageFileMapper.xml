@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.MemberStorageFileMapper">
+<!--    파일 insert-->
+    <insert id="insertStorageFile">
+        insert into tbl_member_storage_file(file_id, member_id)
+        values(#{fileId}, #{memberId})
+    </insert>
+<!--    멤버 id로 파일 조회-->
+    <select id="selectStorageFilesByMemberId">
+        select f.id, f.file_origin_name, f.file_name, f.file_path, f.file_size, f.file_content_type
+        from tbl_file f
+        join tbl_member_storage_file s
+        on s.file_id=f.id
+        join tbl_member m
+        on m.user_id=s.member_id
+        where s.member_id=#{memberId}
+    </select>
+<!--    파일id로 보관함에서 삭제-->
+    <delete id="deleteStorageFileByFileId">
+        delete from tbl_member_storage_file
+        where file_id=#{fileId}
+    </delete>
+</mapper>

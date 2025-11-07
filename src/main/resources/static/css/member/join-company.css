@@ -1,0 +1,340 @@
+body {
+    background: #fff;
+    color: #09090b;
+}
+
+body {
+    height: 100%;
+    line-height: inherit;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    color: inherit;
+    outline: 2px solid transparent;
+}
+
+.signup-page {
+    justify-content: center;
+    align-items: center;
+    background: #f5f6fa;
+    height: 100svh;
+    width: 100%;
+    display: flex;
+}
+
+.signup-container {
+    max-width: 360px;
+    display: flex;
+}
+
+.signup-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 40px;
+    display: flex;
+}
+
+/* 로그인 페이지로 돌아가는 버튼 */
+.back-button {
+    column-gap: 4px;
+    justify-content: center;
+    align-items: center;
+    max-height: 36px;
+    padding: 0 8px;
+    min-height: 36px;
+    display: inline-flex;
+    width: fit-content;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: -.28px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.back-icon {
+    border-radius: 0px;
+    height: 20px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    mask: none;
+    -webkit-mask: none;
+    display: inline-flex;
+    color: rgba(18,19,20,1);
+}
+
+.back-text {
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    color: rgba(18,19,20,1);
+    cursor: pointer;
+    letter-spacing: -.28px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+/* 회원가입 타이틀 */
+.signup-title-wrapper {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    display: flex;
+}
+
+.signup-title {
+    white-space: pre-line;
+    color: rgba(18,19,20,1);
+    letter-spacing: -.64px;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 46px;
+}
+
+/* 입력란 */
+.signup-form {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    display: flex;
+}
+
+.form-section {
+    align-items: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 15px;
+    display: flex;
+}
+
+.form-label-container {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    display: flex;
+}
+
+.form-group {
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+}
+
+.form-label-wrapper {
+    align-items: center;
+    padding: 0 8px 6px;
+    gap: 4px;
+    width: 100%;
+    display: flex;
+}
+
+.form-label {
+    color: rgba(18,19,20,1);
+    letter-spacing: -.28px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.form-input-wrapper {
+    flex-direction: row;
+    align-items: center;
+    min-height: 44px;
+    min-width: 32px;
+    padding: 6px;
+    background: rgb(0 0 0/0);
+    border-radius: 12px;
+    border: 1px solid rgba(86,105,143,0.1200);
+    width: 100%;
+    display: flex;
+}
+
+.form-input {
+    padding: 8px;
+    width: 100%;
+    flex: 1 0 0;
+    display: flex;
+}
+
+.input-text {
+    background-color: rgb(0 0 0/0);
+    border: none;
+    text-overflow: ellipsis;
+    height: 20px;
+    overflow: hidden;
+    color: rgba(18,19,20,1);
+    width: 100%;
+    outline: none;
+    font-weight: 400;
+    letter-spacing: -.28px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/* 회원가입 버튼 */
+.submit-button {
+    background-color: #0aa5ff;;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    max-height: 56px;
+    min-height: 56px;
+    display: inline-flex;
+    border-radius: 999px;
+    color: rgba(18,19,20,1);
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+}
+
+.submit-text {
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    display: flex;
+    letter-spacing: -.32px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 이용약관 */
+.agreement-wrapper {
+    width: 100%;
+}
+
+.agreement-item {
+    align-items: flex-start;
+    padding: 6px 8px;
+    cursor: pointer;
+    gap: 8px;
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.check-icon {
+    border-radius: 0px;
+    height: 16px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    mask: none;
+    -webkit-mask: none;
+    display: inline-flex;
+    color: rgba(18,19,20,1);
+}
+
+.agreement-text {
+    color: rgba(18,19,20,0.6000);
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+.highlight {
+    text-decoration-line: underline;
+    text-underline-position: under;
+    text-decoration-thickness: .8px;
+    color: rgba(18,19,20,0.6000);
+    cursor: pointer;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+/* 토스트 팝업 */
+.toast-warning {
+    max-width: 90vw;
+    min-width: 360px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    background-color: rgba(18,19,20,1);
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px 0px rgba(24,37,61,0.0600);
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.toast-warning-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: -.28px;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.toast-inner {
+    display: flex;
+    gap: 6px;
+}
+
+.toast-warning.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+	z-index: 1;
+}
+
+.toast-p {
+	font-size: 14px;
+	padding-left: 25px;
+}
+
+
+/* 기본: PC */
+.pc {
+    display: block;
+}
+.mob {
+    display: none;
+}
+
+/* 1023px 이하일 때: 모바일 */
+@media (max-width: 1023px) {
+    .pc {
+        display: none;
+    }
+    .mob {
+        display: block;
+    }
+    body {
+        background: #f5f6fa;
+    }
+    #main-content {
+        background: #f5f6fa;
+    }
+    .signup-page {
+        height: auto;
+        width: 90%;
+        margin: 20px 0 20px 0;
+    }
+    .toast-warning {
+        min-width: 330px;
+    }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/experience/console-experience-upload.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>인턴 지원서 목록 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="upload-wrap">
+                <div class="upload-wrap2">
+                    <div class="upload-wrap-inner">
+                        <div class="upload-wrap-inner2">
+                            <div class="home-top">
+                                <div class="back-back">
+                                    <a href="/enterprise-console/intern/list" class="back-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+                                        인턴 고용 공고 목록으로 돌아가기
+                                    </a>
+                                </div>
+                                <div>
+                                    <h1 class="top-h1" th:text="${internDetail.internNoticeTitle}">인턴 고용 공고 제목</h1>
+                                    <p class="top-p" th:text="${internDetail.internNoticeSubtitle}">인턴 고용 공고 부제목</p>
+                                </div>
+                            </div>
+                            <div class="appli-main">
+                                <div class="write-area">
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">필터</div>
+                                            <div class="sub-title">조건을 설정하여 원하는 지원자를 찾아보세요.</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="contents-line">
+                                                <div class="list-cate">
+                                                    <div class="list-cate-inner-appli" role="tablist">
+                                                        <button class="category-sub all active" id="all-btn">전체</button>
+                                                        <button class="category-sub accept" id="hap-btn">합격</button>
+                                                        <button class="category-sub reject" id="bul-btn">불합격</button>
+                                                        <button class="category-sub await" id="pend-btn">서류 검토 중</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cards">
+                                        <div id="detail-list-table"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading"><img src="/images/experience/loading.gif" class="loading-img"></div>
+         </main>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+<script th:inline="javascript">
+    const internNoticeId = [[${internNoticeId}]];
+</script>
+<script src="/js/console/intern-appli-list/module/service.js"></script>
+<script src="/js/console/intern-appli-list/module/layout.js"></script>
+<script src="/js/console/intern-appli-list/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

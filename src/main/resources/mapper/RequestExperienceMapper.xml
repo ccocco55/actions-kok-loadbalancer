@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.RequestExperienceMapper">
+    <!--    지원서 넣기-->
+    <insert id="insertRequest" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_request_experience(experience_notice_id, member_id, member_alarm_setting_id, request_experience_member_name, request_experience_member_email, request_experience_member_phone, request_experience_member_url, file_id)
+        values(#{experienceNoticeId}, #{memberId}, #{memberAlarmSettingId}, #{requestExperienceMemberName}, #{requestExperienceMemberEmail}, #{requestExperienceMemberPhone}, #{requestExperienceMemberUrl}, #{fileId})
+    </insert>
+
+    <!--  지원 목록 조회  -->
+    <!--  지원 목록 조회  -->
+    <select id="selectRequestById">
+        select r.member_id,
+               c.company_name,
+               e.evaluation_avg_score,
+               n.experience_notice_title,
+               r.request_experience_status,
+               r.created_datetime
+        from tbl_company c
+                 join tbl_experience_notice n
+                      on c.user_id = n.company_id
+                 join tbl_request_experience r
+                      on n.id = r.experience_notice_id
+                 left join tbl_evaluation e
+                           on r.id = e.request_experience_id
+        where r.member_id = #{id}
+        order by r.created_datetime desc
+        limit 3
+    </select>
+
+    <!--  지원 목록 개수 조회  -->
+    <select id="selectRequestCountById">
+        select count(*)
+        from tbl_company c
+                 join tbl_experience_notice n
+                      on c.user_id = n.company_id
+                 join tbl_request_experience r
+                      on n.id = r.experience_notice_id
+                 left join tbl_evaluation e
+                           on r.id = e.request_experience_id
+        where r.member_id = #{id}
+    </select>
+
+    <!--  지원 내역 목록 조회  -->
+    <select id="selectRequestByUserId">
+        select r.id,
+        c.user_id,
+        c.company_name,
+        n.experience_notice_title,
+        r.request_experience_status,
+        r.request_experience_member_name,
+        r.request_experience_member_email,
+        r.request_experience_member_phone,
+        r.request_experience_member_url,
+        r.created_datetime
+        from tbl_company c
+        join tbl_experience_notice n
+        on c.user_id = n.company_id
+        join tbl_request_experience r
+        on n.id = r.experience_notice_id
+        where r.member_id = #{id}
+        AND r.created_datetime >= NOW() - INTERVAL '3 MONTH'
+        <if test="experienceId != null">
+            and r.id = #{experienceId}
+        </if>
+    </select>
+
+    <!--    지원서 개수 조회-->
+    <select id="countRequest">
+        select count(id)
+        from tbl_request_experience
+        where experience_notice_id=#{experienceNoticeId}
+          and member_id=#{memberId}
+          and request_experience_active='active'
+    </select>
+
+    <!--    지원 id 조회-->
+    <select id="selectId">
+        select id
+        from tbl_request_experience
+        where member_id=#{memberId}
+          and experience_notice_id=#{experienceId}
+    </select>
+</mapper>

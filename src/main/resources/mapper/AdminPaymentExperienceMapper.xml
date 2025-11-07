@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminPaymentExperienceMapper">
+    <sql id="searchCategory">
+        <if test="category != null and category != ''">
+            and re.request_experience_status::text = #{category}
+        </if>
+    </sql>
+
+    <sql id="searchKeyword">
+        <if test="keyword != null and keyword != ''">
+            and (
+            u.user_name like concat('%', #{keyword}, '%') or
+            u.user_email like concat('%', #{keyword}, '%') or
+            c.company_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!--  체험 결제 목록  -->
+    <select id="selectPaymentExperienceAllList">
+        select re.id,
+               re.request_experience_status,
+               re.experience_notice_id,
+               re.member_id,
+               u.user_name,
+               u.user_email,
+               p.payment_price,
+               p.payment_paid_datetime,
+               en.experience_notice_title,
+               c.company_name
+        from tbl_request_experience re
+            join tbl_user u
+                on re.member_id = u.id and u.user_role = 'member'
+            join tbl_payment p
+                on re.id = p.request_experience_id
+            join tbl_experience_notice en
+                on en.id = re.experience_notice_id
+            join tbl_company c
+                on en.company_id = c.user_id
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+        order by re.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  체험 결제 총 개수  -->
+    <select id="countAllPaymentExperience">
+        select count(*)
+        from tbl_request_experience re
+            join tbl_user u
+                on re.member_id = u.id and u.user_role = 'member'
+            join tbl_payment p
+                on re.id = p.request_experience_id
+            join tbl_experience_notice en
+                on en.id = re.experience_notice_id
+            join tbl_company c
+                on en.company_id = c.user_id
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+    </select>
+
+    <!--  승인된 결제 총액  -->
+    <select id="totalAcceptPaymentExperience" resultType="com.example.kok.dto.AdminPaymentExperienceCountDTO">
+        select COALESCE(sum(p.payment_price), 0) as acceptTotal
+        from tbl_request_experience re
+                 join tbl_user u
+                      on re.member_id = u.id and u.user_role = 'member'
+                 join tbl_payment p
+                      on re.id = p.request_experience_id
+                 join tbl_experience_notice en
+                      on en.id = re.experience_notice_id
+                 join tbl_company c
+                      on en.company_id = c.user_id
+        where p.payment_status = 'active'
+    </select>
+
+    <!--  거절된 결제 총액  -->
+    <select id="totalRejectPaymentExperience" resultType="com.example.kok.dto.AdminPaymentExperienceCountDTO">
+        select COALESCE(sum(p.payment_price), 0) as rejectTotal
+        from tbl_request_experience re
+                 join tbl_user u
+                      on re.member_id = u.id and u.user_role = 'member'
+                 join tbl_payment p
+                      on re.id = p.request_experience_id
+                 join tbl_experience_notice en
+                      on en.id = re.experience_notice_id
+                 join tbl_company c
+                      on en.company_id = c.user_id
+        where p.payment_status = 'inactive'
+    </select>
+</mapper>

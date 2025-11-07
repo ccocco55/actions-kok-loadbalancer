@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.InternNoticeMapper">
+    <sql id="companyInternNoticeSearch">
+        <if test="search.keyword != null and search.keyword != ''">
+            and (
+            lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_introduce_job) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_main_tasks) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%')
+            or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+
+    <!-- 기업별 인턴 공고 목록 -->
+    <select id="selectInternNoticeByCompanyId" resultType="InternNoticeDTO">
+        select i.id, i.intern_notice_title, i.intern_notice_subtitle as internNoticeSubTitle, i.intern_notice_introduce_job,
+        i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name, i.company_id
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id = i.company_id
+        left join tbl_company_scale_category_bridge cscb on i.company_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        left join tbl_intern_job_category ijc on ijc.intern_notice_id = i.id
+        left join tbl_job_category j on j.id = ijc.job_category
+        where i.intern_notice_end_date >= now()
+        and i.intern_notice_status = 'active'
+        and i.company_id = #{companyId}
+        <include refid="companyInternNoticeSearch"/>
+        order by i.created_datetime desc
+        limit #{criteria.rowCount} offset #{criteria.offset}
+    </select>
+
+    <select id="selectInternNoticeCountByCompanyId" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id = i.company_id
+        left join tbl_experience_job_category ejc on ejc.experience_notice_id = i.id
+        left join tbl_job_category j on j.id = ejc.job_category
+        where i.intern_notice_end_date >= now()
+        and i.intern_notice_status = 'active'
+        and i.company_id = #{companyId}
+        <include refid="companyInternNoticeSearch"/>
+    </select>
+
+    <!--  기업별 인턴 모집  -->
+    <select id="selectListById">
+        select intern_notice_title, intern_notice_subtitle, intern_notice_status
+        from tbl_intern_notice
+        where company_id = #{userId}
+        order by created_datetime desc
+        limit 3
+    </select>
+
+    <!--  기업별 인턴 모집 총 개수  -->
+    <select id="selectListCountById">
+        select count(*)
+        from tbl_intern_notice
+        where company_id = #{userId}
+    </select>
+
+    <sql id="search">
+        <if test="search.keyword != null">
+            and (
+            lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%') or
+            lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
+            lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
+            lower(j.job_name) like concat('%', lower(#{search.keyword}), '%') or
+            lower(c.company_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+    <!--    조회-->
+    <select id="selectAllInternNotice">
+        select i.id,
+        i.intern_notice_title,
+        i.intern_notice_subtitle,
+        i.intern_notice_etc,
+        i.intern_main_tasks,
+        i.intern_notice_start_date,
+        i.intern_notice_end_date,
+        i.intern_notice_status,
+        i.created_datetime,
+        i.updated_datetime,
+        i.company_id,
+        c.company_name,
+        s.id as scale_id,
+        s.company_scale_name,
+        j.job_name,
+        count(sv.intern_notice_id) as save_count
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id=i.company_id
+        join tbl_company_scale_category_bridge b on i.company_id = b.company_id
+        join tbl_company_scale_category s on b.company_scale_category_id = s.id
+        left join tbl_intern_job_category ej on ej.intern_notice_id=i.id
+        left join tbl_job_category j on j.id=ej.job_category
+        left join tbl_save_intern_notice sv on i.id = sv.intern_notice_id
+        where i.intern_notice_end_date &gt;= now()
+        and i.intern_notice_status='active'
+        <include refid="search"></include>
+        group by i.id,
+        i.intern_notice_title,
+        i.intern_notice_subtitle,
+        i.intern_notice_etc,
+        i.intern_main_tasks,
+        i.intern_notice_start_date,
+        i.intern_notice_end_date,
+        i.intern_notice_status,
+        i.created_datetime,
+        i.updated_datetime,
+        i.company_id,
+        c.company_name,
+        s.id,
+        s.company_scale_name,
+        j.job_name;
+    </select>
+    <!--    전체 개수 조회-->
+    <select id="selectCountAll">
+        select count(*) from tbl_intern_notice
+        where intern_notice_status='active'
+    </select>
+    <!--    체험 공고 단일 조회-->
+    <select id="selectById">
+        select id, intern_notice_title, intern_notice_subtitle, intern_notice_introduce_job, intern_notice_etc, intern_main_tasks, intern_notice_start_date, intern_notice_end_date, intern_notice_status, created_datetime, updated_datetime, company_id
+        from tbl_intern_notice
+        where id=#{id}
+          and intern_notice_status='active'
+    </select>
+    <!--    직군 조회-->
+    <select id="selectJobNameByIntId">
+        select j.job_name
+        from tbl_job_category j
+                 join tbl_intern_job_category ij
+                      on ij.job_category=j.id
+                 join tbl_intern_notice i
+                      on i.id=ij.intern_notice_id
+        where ij.intern_notice_id=#{id}
+    </select>
+
+    <!-- 최신 체험 공고 4개 조회 -->
+    <select id="selectLatestFour">
+        select c.user_id, c.company_name, cpf.file_id, f.file_path, i.intern_notice_title, i.intern_notice_subtitle, i.created_datetime, i.updated_datetime
+        from tbl_company c
+                 join tbl_intern_notice i on c.user_id = i.company_id
+                 left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+                 left join tbl_file f on cpf.file_id = f.id
+        where intern_notice_status = 'active'
+        order by created_datetime desc
+        limit 4
+    </select>
+    <!--  인턴 공고 리스트 조회 -->
+    <select id="selectAllByKeyword">
+        select i.intern_notice_title,i.id,c.company_name,i.company_id from tbl_intern_notice i join tbl_company c
+        on i.company_id = c.user_id
+        where i.intern_notice_status = 'active'
+        <if test="keyword!=null">
+            and( c.company_name like concat('%', #{keyword}, '%')
+            or  i.intern_notice_title like concat('%', #{keyword}, '%')
+            or  i.intern_main_tasks like concat('%', #{keyword}, '%')
+            or  i.intern_notice_subtitle like concat('%', #{keyword}, '%')
+            or  i.intern_notice_introduce_job like concat('%', #{keyword}, '%')
+            or  i.intern_notice_etc like concat('%', #{keyword}, '%'))
+        </if>
+        order by created_datetime desc
+    </select>
+    <select id="selectCompanyNameById">
+        select i.id, i.intern_notice_title, i.intern_notice_subtitle, i.intern_notice_introduce_job, i.intern_notice_etc, i.intern_main_tasks, i.intern_notice_start_date, i.intern_notice_end_date, i.intern_notice_status, i.created_datetime, i.updated_datetime, i.company_id,c.company_name
+        from tbl_intern_notice i join tbl_company c
+                                      on i.company_id = c.user_id
+        where i.id=#{id}
+          and i.intern_notice_status='active'
+    </select>
+</mapper>

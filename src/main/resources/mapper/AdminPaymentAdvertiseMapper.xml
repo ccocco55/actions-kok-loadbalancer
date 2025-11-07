@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminPaymentAdvertiseMapper">
+    <sql id="searchCategory">
+        <if test="category != null and category != ''">
+            and a.advertisement_status::text = #{category}
+        </if>
+    </sql>
+
+    <sql id="searchKeyword">
+        <if test="keyword != null and keyword != ''">
+            and (
+                c.company_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!--  광고 결제 목록  -->
+    <select id="selectPaymentAdvertiseAllList">
+        select a.id,
+               a.advertisement_status,
+               a.advertise_start_datetime,
+               a.advertise_end_datetime,
+               u.user_email,
+               c.company_name,
+               p.payment_price,
+               p.payment_status,
+               p.payment_paid_datetime
+        from tbl_advertisement a
+            join tbl_user u
+                on u.id = a.company_id
+            join tbl_company c
+                on c.user_id = a.company_id
+            join tbl_payment p
+                on a.id = p.advertisement_id
+            join tbl_payment_user pu
+                on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'active'
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+        order by p.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  광고 결제 총 개수  -->
+    <select id="countAllPaymentAdvertise">
+        select count(*)
+        from tbl_advertisement a
+            join tbl_user u
+                on u.id = a.company_id
+            join tbl_company c
+                on c.user_id = a.company_id
+            join tbl_payment p
+                on a.id = p.advertisement_id
+            join tbl_payment_user pu
+                on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'active'
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+    </select>
+
+<!--  승인된 결제 총액  -->
+    <select id="totalAcceptPaymentAdvertise" resultType="com.example.kok.dto.AdminPaymentAdvertiseCountDTO">
+        select sum(p.payment_price) as acceptTotal
+        from tbl_advertisement a
+             join tbl_user u
+                  on u.id = a.company_id
+             join tbl_company c
+                  on c.user_id = a.company_id
+             join tbl_payment p
+                  on a.id = p.advertisement_id
+             join tbl_payment_user pu
+                  on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'active'
+    </select>
+
+<!--  승인된 결제 개수  -->
+    <select id="countAcceptPaymentAdvertise" resultType="com.example.kok.dto.AdminPaymentAdvertiseCountDTO">
+        select
+            sum(case when p.payment_status = 'active' then 1 else 0 end) as acceptCount
+        from tbl_advertisement a
+                 join tbl_user u
+                      on u.id = a.company_id
+                 join tbl_company c
+                      on c.user_id = a.company_id
+                 join tbl_payment p
+                      on a.id = p.advertisement_id
+                 join tbl_payment_user pu
+                      on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'active'
+    </select>
+</mapper>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleInternNoticeMapper">
+    <select id="selectInternByCompany">
+        select inn.id,
+               inn.intern_notice_title,
+               inn.intern_notice_subtitle,
+               inn.intern_notice_start_date,
+               inn.intern_notice_end_date,
+               inn.intern_notice_status,
+               inn.company_id,
+               inn.created_datetime,
+               inn.updated_datetime,
+               jc.job_name as job_category_name,
+               count(distinct ri.id) as applicant_count,
+               count(distinct sin.member_id) as save_count
+        from tbl_intern_notice inn
+             join tbl_intern_job_category ijc
+                  on inn.id = ijc.intern_notice_id
+             join tbl_job_category jc
+                  on ijc.job_category = jc.id
+             left join tbl_request_intern ri
+                       on inn.id = ri.intern_notice_id
+             left join tbl_save_intern_notice sin
+                       on inn.id = sin.intern_notice_id
+        where inn.company_id = #{companyId}
+            <if test="status != null">
+                <choose>
+                    <when test="status.name() == 'ACTIVE'">
+                        and inn.intern_notice_status = 'active'
+                    </when>
+                    <otherwise>
+                        and inn.intern_notice_status = 'inactive'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (
+                inn.intern_notice_title like concat('%', #{keyword}, '%')
+                or inn.intern_notice_subtitle like concat('%', #{keyword}, '%')
+                or jc.job_name like concat('%', #{keyword}, '%')
+                )
+            </if>
+        group by inn.id, jc.job_name
+        order by inn.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByCompany">
+        select count(distinct inn.id)
+        from tbl_intern_notice inn
+            join tbl_intern_job_category ijc on inn.id = ijc.intern_notice_id
+            join tbl_job_category jc on ijc.job_category = jc.id
+        where inn.company_id = #{companyId}
+            <if test="status != null">
+                <choose>
+                    <when test="status.name() == 'ACTIVE'">
+                        and inn.intern_notice_status = 'active'
+                    </when>
+                    <otherwise>
+                        and inn.intern_notice_status = 'inactive'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (
+                    inn.intern_notice_title ilike concat('%', #{keyword}, '%')
+                    or inn.intern_notice_subtitle ilike concat('%', #{keyword}, '%')
+                    or jc.job_name ilike concat('%', #{keyword}, '%')
+                )
+            </if>
+    </select>
+
+    <update id="updateNoticeStatus">
+        update tbl_intern_notice
+        set intern_notice_status = #{status},
+            updated_datetime = now()
+        where id = #{noticeId}
+    </update>
+
+    <select id="selectRequestCountByCompany">
+        select count(distinct ri.id)
+        from tbl_intern_notice inn
+            left join tbl_request_intern ri
+                on inn.id = ri.intern_notice_id
+        where inn.company_id = #{companyId}
+            <if test="active">
+                and inn.intern_notice_status = 'active'
+            </if>
+    </select>
+
+    <!-- 공고 insert -->
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_intern_notice
+        (
+            intern_notice_title,
+            intern_notice_subtitle,
+            intern_notice_start_date,
+            intern_notice_end_date,
+            company_id,
+            intern_notice_introduce_job,
+            intern_main_tasks,
+            intern_notice_etc,
+            created_datetime,
+            updated_datetime
+        )
+        values
+            (
+                #{internNoticeTitle},
+                #{internNoticeSubtitle},
+                #{internNoticeStartDate},
+                #{internNoticeEndDate},
+                #{companyId},
+                #{internNoticeIntroduceJob},
+                #{internMainTasks},
+                #{internNoticeEtc},
+                NOW(),
+                NOW()
+            )
+    </insert>
+
+    <!-- 직군 -->
+    <insert id="insertNoticeJobCategory">
+        insert into tbl_intern_job_category (intern_notice_id, job_category)
+        values (#{id}, #{jobCategoryId})
+    </insert>
+
+    <!-- 인턴 공고 수정 -->
+    <update id="updateNotice">
+        update tbl_intern_notice
+        set
+            intern_notice_title = #{internNoticeTitle},
+            intern_notice_subtitle = #{internNoticeSubtitle},
+            intern_notice_start_date = #{internNoticeStartDate},
+            intern_notice_end_date = #{internNoticeEndDate},
+            intern_notice_introduce_job = #{internNoticeIntroduceJob},
+            intern_main_tasks = #{internMainTasks},
+            intern_notice_etc = #{internNoticeEtc},
+            updated_datetime = now()
+        where id = #{id}
+    </update>
+
+    <!-- 직군 수정 -->
+    <update id="updateNoticeJobCategory">
+        update tbl_intern_job_category
+        set job_category = #{jobCategoryId}
+        where intern_notice_id = #{id}
+    </update>
+
+    <!-- 공고 상세 조회 -->
+    <select id="selectInternDetailById">
+        select
+            inn.id,
+            inn.intern_notice_title,
+            inn.intern_notice_subtitle,
+            inn.intern_notice_start_date,
+            inn.intern_notice_end_date,
+            inn.company_id,
+            inn.intern_notice_introduce_job,
+            inn.intern_main_tasks,
+            inn.intern_notice_etc,
+            jc.id as job_category_id,
+            jc.job_name as job_category_name,
+            count(distinct ri.id) as applicant_count,
+            count(distinct sin.member_id) as save_count
+        from tbl_intern_notice inn
+             join tbl_intern_job_category ijc
+                  on inn.id = ijc.intern_notice_id
+             join tbl_job_category jc
+                  on ijc.job_category = jc.id
+             left join tbl_request_intern ri
+                       on inn.id = ri.intern_notice_id
+             left join tbl_save_intern_notice sin
+                       on inn.id = sin.intern_notice_id
+        where inn.id = #{id}
+        group by inn.id, jc.id, jc.job_name
+    </select>
+
+    <!-- 수정 페이지 조회 -->
+    <select id="selectById">
+        select
+            inn.id,
+            inn.intern_notice_title,
+            inn.intern_notice_subtitle,
+            inn.intern_notice_start_date,
+            inn.intern_notice_end_date,
+            inn.company_id,
+            inn.intern_notice_introduce_job,
+            inn.intern_main_tasks,
+            inn.intern_notice_etc,
+            jc.id as job_category_id,
+            jc.job_name as job_category_name,
+            count(distinct ri.id) as applicant_count,
+            count(distinct sin.member_id) as save_count
+        from tbl_intern_notice inn
+             join tbl_intern_job_category ijc
+                  on inn.id = ijc.intern_notice_id
+             join tbl_job_category jc
+                  on ijc.job_category = jc.id
+             left join tbl_request_intern ri
+                       on inn.id = ri.intern_notice_id
+             left join tbl_save_intern_notice sin
+                       on inn.id = sin.intern_notice_id
+        where inn.id = #{id}
+        group by inn.id, jc.id
+    </select>
+
+    <!-- 인턴 지원서 삭제 -->
+    <delete id="deleteRequestInternByNoticeId">
+        delete from tbl_request_intern
+        where intern_notice_id = #{id}
+    </delete>
+
+    <!-- 스크랩 데이터 삭제-->
+    <delete id="deleteSaveInternByNoticeId">
+        delete from tbl_save_intern_notice
+        where intern_notice_id = #{id}
+    </delete>
+
+    <!-- 직군 매핑 삭제 -->
+    <delete id="deleteJobCategoryByNoticeId">
+        delete from tbl_intern_job_category
+        where intern_notice_id = #{id}
+    </delete>
+
+    <!-- 인턴 공고 삭제 -->
+    <delete id="deleteInternNoticeById">
+        delete from tbl_intern_notice
+        where id = #{id}
+    </delete>
+
+    <!-- 마감일 지나면 inactive -->
+    <update id="updateInternNoticeStatusToInactive">
+    <![CDATA[
+        update tbl_intern_notice
+        set intern_notice_status = 'inactive'
+        where intern_notice_end_date <= current_date
+        ]]>
+    </update>
+</mapper>

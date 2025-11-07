@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/member/join-company.css">
+    <title>회원가입 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <main class="main">
+            <div data-theme="light" class="signup-page">
+                <div class="signup-container">
+                    <div class="signup-header">
+                        
+                        <!-- 로그인 페이지로 돌아가는 버튼 -->
+                        <a onclick="window.location.href='/member/login'">
+                            <button class="back-button">
+                                <div draggable="false" class="back-icon">
+                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20">
+                                        <use href="#arrow-left-outline"></use>
+                                    </svg>
+                                </div>
+                                <p class="back-text">로그인</p>
+                            </button>
+                        </a>
+        
+                        <!-- 회원가입 타이틀 -->
+                        <div class="signup-title-wrapper">
+                            <div class="signup-title">회원가입</div>
+                        </div>
+        
+                        <!-- 입력란 -->
+                        <form action="/member/join-company" method="post" class="signup-form" enctype="multipart/form-data">
+                            <div class="form-section">
+                                <div class="form-label-container">
+                                    <!-- 기업 이름 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">기업 이름</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="companyName" id="input-company-name" placeholder="○○기업" style="cursor:text" class="input-text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 대표자 이름 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">대표자 이름</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="userName" id="input-name" placeholder="홍길동" style="cursor:text" class="input-text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 전화번호 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">전화번호</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="userPhone" id="input-number"  type="text" placeholder="01012345678" style="cursor:text" class="input-text" value="" maxlength="11" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 이메일 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">이메일</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="userEmail" id="input-email" placeholder="example@gmail.com" style="cursor:text" class="input-text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 비밀번호 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">비밀번호</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="userPassword" id="input-password" type="password" placeholder="비밀번호" style="cursor:text" class="input-text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 사업자 번호 -->
+                                    <div class="form-group">
+                                        <div class="form-label-wrapper">
+                                            <div class="form-label">사업자 등록증</div>
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <div style="cursor:text" class="form-input">
+                                                <input name="file" id="input-company-number" type="file"  style="cursor:pointer" class="input-text" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- 회원가입 버튼 -->
+                            <button class="submit-button" >
+                                <span class="submit-text">회원가입하기</span>
+                            </button>
+                        </form>
+        
+                        <!-- 이용약관 -->
+                        <div class="agreement-wrapper">
+                            <div class="agreement-item">
+                                <div draggable="false" class="check-icon">
+                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="16" role="img" width="16">
+                                        <use href="#check-thick-outline"></use>
+                                    </svg>
+                                </div>
+                                <span class="agreement-text">인증을 위해 인증주체에서 요구하는 <span class="highlight">개인정보 수집 및 이용</span>, <span class="highlight">고유식별정보 처리</span>, <span class="highlight">서비스 이용약관</span>, <span class="highlight">통신사 이용약관</span>, <span class="highlight">개인정보 제3자 제공</span>에 대한 동의합니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- toast - 기업 이름 입력 오류 -->
+            <div id="toast-company-name" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>기업 이름을 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 대표자 이름 입력 오류 -->
+            <div id="toast-name" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>대표자 이름을 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 전화번호 입력 오류 -->
+            <div id="toast-number" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>전화번호를 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 이메일 입력 오류 -->
+            <div id="toast-email" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>이메일 형식이 올바르지 않습니다.</p>
+                    </div>
+                </div>
+            </div>
+        
+             <!-- toast - 비밀번호 입력 오류 -->
+            <div id="toast-password" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>비밀번호를 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 사업자 번호 입력 오류 -->
+            <div id="toast-company-number" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>사업자 번호를 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 심볼 -->
+            <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+                <symbol id="arrow-left-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
+                </symbol>
+                <symbol id="chevron-down-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>
+                </symbol>
+                <symbol id="check-thick-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M20.49 5.51a1.4 1.4 0 0 1 0 1.98l-11 11a1.4 1.4 0 0 1-1.98 0l-4-4a1.4 1.4 0 0 1 1.98-1.98l3.01 3.01L18.51 5.51a1.4 1.4 0 0 1 1.98 0" fill-rule="evenodd"></path>
+                </symbol>
+            </svg>
+        </main>
+    </div>
+</body>
+<script src="/js/member/join-company/event.js"></script>
+</html>

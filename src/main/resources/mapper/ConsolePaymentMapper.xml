@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsolePaymentMapper">
+    <select id="selectPaymentByCompany">
+        select
+            a.advertisement_main_text,
+            p.payment_price,
+            p.payment_paid_datetime::date,
+            p.payment_status
+        from tbl_payment_user pu
+             join tbl_payment p
+                  on pu.payment_id = p.id
+             join tbl_advertisement a
+                  on pu.advertisement_id = a.id
+        where pu.user_id = #{companyId}
+        order by p.payment_paid_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByCompany">
+        select count(distinct pu.id)
+        from tbl_payment_user pu
+                 join tbl_payment p
+                      on pu.payment_id = p.id
+                 join tbl_advertisement a
+                      on pu.advertisement_id = a.id
+        where pu.payment_id = #{companyId}
+    </select>
+
+    <!-- 결제 등록 -->
+    <insert id="insertPayment" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_payment (
+            payment_price,
+            payment_status,
+            advertisement_id,
+            user_id
+        )
+        values (
+                   #{paymentPrice},
+                   'active',
+                   #{advertisementId},
+                   #{userId}
+               )
+    </insert>
+
+    <delete id="deletePaymentUserByAdvertisementId">
+        delete from tbl_payment_user
+        where payment_id in (
+            select id
+            from tbl_payment
+            where advertisement_id = #{advertisementId}
+        )
+    </delete>
+
+    <!-- 광고 삭제 시 결제 내역 삭제 -->
+    <delete id="deleteByAdvertisementId">
+        delete from tbl_payment
+        where advertisement_id = #{advertisementId}
+    </delete>
+</mapper>
+

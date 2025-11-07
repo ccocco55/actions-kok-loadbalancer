@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/profile/console-profile.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>프로필 수정 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="home-wrap">
+                <div class="home-wrap-2">
+                    <div class="home-wrap-inner">
+                        <div class="home-wrap-inner-2">
+                            <div class="home-top">
+                                <div>
+                                    <h1 class="top-h1">기업 프로필 관리</h1>
+                                    <p class="top-p">플랫폼에 노출될 기업 정보를 관리하세요</p>
+                                </div>
+                            </div>
+                            <div class="profile-main">
+                                <div class="profile-main-inner">
+                                    <div class="profile-main-inner-2">
+                                        <form id="profile-form"
+                                              th:action="@{/enterprise-console/profile/update}"
+                                              th:object="${profile}"
+                                              method="post"
+                                              enctype="multipart/form-data">
+                                            <input type="hidden" th:field="*{companyId}">
+
+                                            <div class="profile-head">
+                                                <div class="profile-head-inner">
+                                                    <div>
+                                                        <div class="head-text-main">기본 정보</div>
+                                                        <div class="head-text-sub">기업의 기본 정보를 입력하세요</div>
+                                                    </div>
+                                                    <div class="button-wrap">
+                                                        <button type="button" class="cancle" style="display: none;" id="cancle-btn">취소</button>
+                                                        <button type="button" class="edit-profile" id="edit-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="edit-icon"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
+                                                            편집
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="profile-content">
+                                            <div class="contents">
+                                                <p class="profile-label">배경 이미지</p>
+                                                <div class="img-wrap">
+                                                    <div class="back-wrap">
+                                                        <div class="back-img-div">
+                                                            <img th:src="${profile.backgroundFiles != null && !profile.backgroundFiles.isEmpty()
+                                                            ? profile.backgroundFiles[0].filePath
+                                                            : '/images/mypage/banner.jpg'}"
+                                                                 alt="배경 이미지"
+                                                                 class="back-img">
+                                                        </div>
+                                                    </div>
+                                                    <div class="img-up-btn-wrap" style="display: none;">
+                                                        <button class="img-up" id="back-file-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="img-up-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+                                                            이미지 변경
+                                                        </button>
+                                                    </div>
+                                                    <input type="file" class="back-input" name="backgroundFile" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="contents">
+                                                <p class="profile-label">프로필 이미지</p>
+                                                <div class="img-wrap">
+                                                    <div class="pro-wrap">
+                                                        <img th:src="${(profile.uploadedFiles != null and !profile.uploadedFiles.isEmpty())
+                                                        ? profile.uploadedFiles[0].filePath
+                                                        : '/images/member/profile.png'}"
+                                                             alt="프로필 이미지"
+                                                             class="profile-img">
+                                                    </div>
+                                                    <div class="img-up-btn-wrap" style="display: none;">
+                                                        <button class="img-up" id="prof-file-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="img-up-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+                                                            이미지 변경
+                                                        </button>
+                                                    </div>
+                                                    <input type="file" class="pro-input" name="profileFile">
+                                                </div>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="company-name" class="profile-label">기업명</label>
+                                                <input id="company-name" type="text" class="name not-allowed" th:field="*{companyName}" readonly>
+                                                <p class="explain">기업을 찾기 쉽도록 회사명이나 운영 중인 서비스 이름을 사용하세요 / 예: 비바리퍼블리카(토스)</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="company-intro" class="profile-label">기업 소개</label>
+                                                <input id="company-intro" type="text" class="name not-allowed" th:field="*{companyInfo}" readonly>
+                                                <p class="explain">기업에 대한 간단한 소개를 설정하세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="company-url" class="profile-label">홈페이지 URL</label>
+                                                <input id="company-url" type="text" class="name not-allowed" th:field="*{companyUrl}" readonly>
+                                            </div>
+                                            <div class="contents">
+                                                <p class="profile-label">산업 분야</p>
+                                                <div class="category">
+                                                    <button type="button" class="category-button not-allowed">
+                                                        <span th:text="${profile.companySectorName} != null ? ${profile.companySectorName} : '선택해주세요'" class="selected">IT/웹/통신</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                        <div class="job">
+                                                            <div class="job-1">
+                                                                <div class="job-2">
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">IT/웹/통신</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">서비스업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">제조/화학</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">의료/제약/복지</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">유통/무역/운송</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">교육업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">건설업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">미디어/디자인</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">은행/금융업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">기관/협회</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                    <input type="hidden" name="companySectorName" th:field="*{companySectorName}">
+                                                </div>
+                                                <p class="explain">기업이 속한 산업분야를 선택해주세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <p class="profile-label">기업 규모</p>
+                                                <div class="category">
+                                                    <button type="button" class="category-button not-allowed">
+                                                        <span th:text="${profile.companyScaleName} != null ? ${profile.companyScaleName} : '선택해주세요'" class="selected">매우 작은 규모</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                        <div class="job">
+                                                            <div class="job-1">
+                                                                <div class="job-2">
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">매우 작은 규모</p>
+                                                                        </div>
+                                                                        <!-- <div class="setting-31">
+                                                                            <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                            </svg>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">작은 규모</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">중간 규모</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">큰 규모</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">매우 큰 규모</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                    <input type="hidden" name="companyScaleName" th:field="*{companyScaleName}">
+                                                </div>
+                                                <p class="explain">기업의 규모를 선택해주세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="company-owner-name" class="profile-label">대표자명</label>
+                                                <input id="company-owner-name" type="text" class="name not-allowed" th:field="*{ceoName}" readonly>
+                                                <p class="explain">대표자명을 입력하세요</p>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="/js/console/sidebar/event.js"></script>
+<script src="/js/console/profile/event.js"></script>
+</html>

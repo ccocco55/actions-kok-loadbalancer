@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleInternApplicationMapper">
+    <!-- 인턴 상세 - 지원자 조회 -->
+    <select id="selectApplicationDetail">
+        select distinct
+            re.id as request_id,
+            re.request_intern_status,
+            re.created_datetime as request_datetime,
+            u.id as user_id,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            inn.id as intern_notice_id,
+            inn.intern_notice_title,
+            inn.company_id,
+            f.id as resumeFileId,
+            f.file_path,
+            f.file_name
+        from tbl_request_intern re
+            join tbl_user u
+                on re.member_id = u.id
+            join tbl_intern_notice inn
+                on re.intern_notice_id = inn.id
+            left join tbl_member_storage_file msf
+                  on msf.member_id = u.id
+            left join tbl_file f
+                  on msf.file_id = f.id
+        where re.member_id = #{memberId}
+            and inn.id = #{internNoticeId}
+        order by re.id desc
+        limit 1
+    </select>
+
+    <!-- 이력서 -->
+    <select id="selectResumeFileByMemberId" resultType="com.example.kok.dto.FileDTO">
+        select
+            f.id,
+            f.file_origin_name,
+            f.file_path,
+            f.file_name
+        from tbl_request_intern re
+             join tbl_request_intern_file rif
+                  on re.id = rif.request_intern_id
+             join tbl_file f
+                  on rif.file_id = f.id
+        where re.member_id = #{memberId}
+          and re.intern_notice_id = #{internNoticeId}
+    </select>
+
+    <select id="selectApplicantsByNoticeId">
+        select
+            re.id as request_id,
+            re.member_id as user_id,
+            re.request_intern_status,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            re.created_datetime
+        from tbl_request_intern re
+             join tbl_user u on re.member_id = u.id
+        where re.intern_notice_id = #{internNoticeId}
+        order by re.id desc
+    </select>
+
+    <!-- 지원자 상태 변경 -->
+    <update id="updateApplicantStatus">
+        update tbl_request_intern
+        set request_intern_status = #{requestInternStatus},
+            updated_datetime = now()
+        where member_id = #{userId}
+          and intern_notice_id = #{internNoticeId};
+    </update>
+</mapper>

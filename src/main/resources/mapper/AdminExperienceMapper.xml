@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminExperienceMapper">
+    <sql id="search">
+        <if test="keyword != null and keyword != ''">
+            and (
+            c.company_name like concat('%', #{keyword}, '%') or
+            en.experience_notice_title like concat('%', #{keyword}, '%') or
+            en.experience_notice_subtitle like concat('%', #{keyword}, '%') or
+            jc.job_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectAdminExperienceAll">
+        select c.company_name,
+               en.id,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_notice_introduce_job,
+               en.experience_notice_etc,
+               en.experience_end_date,
+               en.experience_notice_status,
+               en.created_datetime,
+               en.updated_datetime,
+               en.company_id,
+               jc.job_name
+        from tbl_experience_notice en
+            join tbl_company c
+                on en.company_id = c.user_id
+            left join tbl_experience_job_category ejc
+                on en.id = ejc.experience_notice_id
+            left join tbl_job_category jc
+                on ejc.job_category = jc.id
+        <include refid="search"/>
+        order by en.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectAdminExperienceSearchCountAll">
+        select count(*)
+        from tbl_experience_notice en
+            join tbl_company c
+                on en.company_id = c.user_id
+            left join tbl_experience_job_category ejc
+                on en.id = ejc.experience_notice_id
+            left join tbl_job_category jc
+                on ejc.job_category = jc.id
+        <include refid="search"/>
+    </select>
+
+    <select id="selectAdminExperienceById">
+        select en.id,
+               en.experience_notice_etc,
+               en.experience_start_date,
+               en.experience_end_date,
+               en.experience_notice_start_date,
+               en.experience_notice_end_date,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_notice_introduce_job,
+               en.experience_main_tasks,
+               en.experience_notice_etc,
+               en.created_datetime,
+               en.updated_datetime,
+               en.company_id,
+               c.company_name
+        from tbl_experience_notice en
+                 join tbl_company c
+                      on en.company_id = c.user_id
+        where en.id = #{id}
+    </select>
+
+    <select id="selectRequestUser">
+        select u.id,
+               u.user_name,
+               u.user_phone,
+               u.user_email,
+               u.user_role,
+               u.user_status,
+               en.company_id,
+               re.request_experience_status,
+               re.member_id
+        from tbl_request_experience re
+             join tbl_experience_notice en
+                  on en.id = re.experience_notice_id
+             join tbl_user u
+                  on re.member_id = u.id
+        where en.id = #{id} and u.user_role = 'member' and u.user_status = 'active'
+        order by
+                case request_experience_status
+                    when 'accept' then 1
+                    when 'await' then 2
+                    when 'reject' then 3
+                end,
+                re.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="countRequestUser">
+        select count(*)
+        from tbl_request_experience re
+             join tbl_experience_notice en
+                  on en.id = re.experience_notice_id
+             join tbl_user u
+                  on re.member_id = u.id
+        where en.id = #{id}
+    </select>
+
+    <select id="selectUserEvaluation">
+        select u.id,
+               u.user_name,
+               u.user_phone,
+               u.user_email,
+               u.user_role,
+               u.user_status,
+               en.company_id,
+               e.evaluation_content,
+               e.evaluation_avg_score,
+               e.request_experience_id,
+               e.member_id,
+               e.company_id
+        from tbl_evaluation e
+             join tbl_request_experience re
+                  on re.id = e.request_experience_id
+             join tbl_experience_notice en
+                  on en.id = re.experience_notice_id
+             join tbl_user u
+                  on e.member_id = u.id
+        where en.id = #{id} and u.user_role = 'member' and u.user_status = 'active' and re.request_experience_status = 'accept'
+        order by e.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="countUserEvaluation">
+        select count(*)
+        from tbl_evaluation e
+             join tbl_request_experience re
+                  on re.id = e.request_experience_id
+             join tbl_experience_notice en
+                  on en.id = re.experience_notice_id
+             join tbl_user u
+                  on e.member_id = u.id
+        where en.id = #{id} and re.request_experience_status = 'accept'
+    </select>
+</mapper>

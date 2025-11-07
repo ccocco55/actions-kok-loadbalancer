@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.CommunityLikeMapper">
+<!-- 게시글 좋아요 -->
+    <insert id="insertPostLike">
+        insert into tbl_post_like (member_id, post_id)
+        values (#{memberId}, #{postId})
+    </insert>
+
+<!-- 게시글 좋아요 취소 -->
+    <delete id="deletePostLike">
+        delete from tbl_post_like
+        where member_id = #{memberId} and post_id = #{postId}
+    </delete>
+
+<!-- 게시글 좋아요 갯수 -->
+    <select id="countByPostId" resultType="int">
+        select count(*)
+        from tbl_post_like
+        where post_id = #{postId}
+    </select>
+
+<!-- 좋아요 확인 -->
+    <select id="checkPostLiked" resultType="boolean">
+        select count(*) > 0
+        from tbl_post_like
+        where member_id = #{memberId} and post_id = #{postId}
+    </select>
+</mapper>

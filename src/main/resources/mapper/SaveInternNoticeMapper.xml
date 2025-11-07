@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.SaveInternNoticeMapper">
+<!--    공고 저장 insert-->
+    <insert id="insertSaveInt">
+        insert into tbl_save_intern_notice(member_id, intern_notice_id)
+        values(#{memberId}, #{internNoticeId})
+    </insert>
+<!--    공고 저장 취소-->
+    <delete id="deleteSaveInt">
+        delete from tbl_save_intern_notice
+        where intern_notice_id=#{internNoticeId}
+        and member_id=#{memberId}
+    </delete>
+<!--    공고 저장 여부 반환(1, 0)-->
+    <select id="selectCountSavedIntByIntId">
+        select count(*)
+        from tbl_save_intern_notice
+        where intern_notice_id=#{internNoticeId}
+        and member_id=#{memberId}
+    </select>
+</mapper>

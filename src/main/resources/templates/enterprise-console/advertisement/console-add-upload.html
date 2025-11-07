@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/enterprise-console/advertisement/console-add-upload.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>광고 등록 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="add-upload-wrap">
+                <div class="add-upload-wrap2">
+                    <div class="add-upload-inner">
+                        <div class="add-upload-inner2">
+                            <div class="add-upload-top">
+                                <div th:if="${page} == 'create'">
+                                    <h1 class="top-h1">새 광고</h1>
+                                    <p class="top-p">새로운 배너 광고를 설정하세요</p>
+                                </div>
+                                <div th:unless="${page} == 'create'">
+                                    <h1 class="top-h1">광고 수정</h1>
+                                    <p class="top-p">배너 광고를 수정하세요</p>
+                                </div>
+                            </div>
+                            <div class="add-upload-main">
+                                <div class="left-area">
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">미리보기</div>
+                                            <div class="sub-title">내용을 기재하면 미리보기가 표시됩니다</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="preview">
+                                                <div>
+                                                    <div class="preview-head">2:1 (300x150)</div>
+                                                    <div class="preview-main">
+                                                        <div class="preview-img-wrap">
+                                                            <img th:if="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()
+             and !notice.uploadedFiles[0].filePath.contains('/images/experience/ad_bg_img.jpg')}"
+                                                                 th:src="${notice.uploadedFiles[0].filePath}"
+                                                                 alt="등록된 광고 배경 이미지"
+                                                                 class="preview-img"
+                                                                 id="add-back">
+
+                                                            <img th:unless="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()
+                and !notice.uploadedFiles[0].filePath.contains('/images/experience/ad_bg_img.jpg')}"
+                                                                 src="/images/experience/ad_bg_img.jpg"
+                                                                 alt="기본 이미지"
+                                                                 class="preview-img"
+                                                                 id="add-back">
+
+                                                        </div>
+                                                        <div class="preview-text-wrap">
+                                                            <div class="pre-text-main">
+                                                                <h6 class="pre-h6">메인 텍스트</h6>
+                                                                <p class="pre-p">서브 텍스트</p>
+                                                            </div>
+                                                            <div class="pre-bottom"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right-area">
+                                    <input type="hidden" name="id" th:value="${id}">
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">내용 기재</div>
+                                            <div class="sub-title">텍스트와 배경 사진을 설정하세요.</div>
+                                        </div>
+                                        <div class="card-content contents">
+                                            <div class="yoso">
+                                                <label for="" class="card-label">메인 텍스트<span class="must">(필수)</span></label>
+                                                <input th:value="${notice.advertisementMainText}" type="text" id="ad-main-text" class="ad-text-input" placeholder="예) 신년 채용 공고">
+                                                <div class="sub-text">최대 30자까지 입력 가능합니다.</div>
+                                            </div>
+                                            <div class="yoso">
+                                                <label for="" class="card-label">서브 텍스트<span class="must">(필수)</span></label>
+                                                <input th:value="${notice.advertisementSubText}" type="text" id="ad-sub-text" class="ad-text-input" placeholder="배너에 대한 간단한 설명을 입력해주세요.">
+                                                <div class="sub-text">최대 50자까지 입력 가능합니다.</div>
+                                            </div>
+                                            <div class="yoso">
+                                                <label for="" class="card-label">배경 미디어(선택)</label>
+                                                <label for="" class="media-label">
+                                                    <p class="media-span">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="media-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+                                                        <span>배경 미디어 선택</span>
+                                                    </p>
+                                                </label>
+                                                <div class="sub-text">2:1 비율의 이미지를 업로드해주세요.</div>
+                                                <div class="sub-text">업로드하지 않으면 기본 이미지로 업로드됩니다.</div>
+                                                <input type="file" name="files" class="media-input" id="add-background">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cards contents">
+                                        <div class="card-title">
+                                            <div class="main-title">광고 기간</div>
+                                            <div class="sub-text">광고 시작일은 신청일 2일 후부터로만 입력 가능합니다.</div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="date-wrap">
+                                                <div class="date-main">
+                                                    <div class="input-wrap create-input-wrap">
+                                                        <input th:value="${notice.advertiseStartDatetime}" th:disabled="${page != 'create'}" type="text" id="start-date" class="date-input" placeholder="시작일">
+                                                        <input th:value="${notice.advertiseEndDatetime}" th:disabled="${page != 'create'}" type="text" id="end-date" class="date-input" placeholder="종료일">
+                                                        <button type="button" class="confirm-btn" th:disabled="${page != 'create'}">✓</button>
+                                                    </div>
+                                                </div>
+                                                <div class="date-sub">
+                                                    <div class="date-sub-inner">
+                                                        <div class="main-date-text">1일</div>
+                                                        <div class="sub-date-text">총 광고 기간</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cards">
+                                        <div class="card-title">
+                                            <div class="main-title">광고 시작하기</div>
+                                            <div class="sub-title"></div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="start-main">
+                                                <div th:if="${page} == 'create'" class="start-price">￦<span class="price">200,000</span></div>
+                                                <div th:unless="${page} == 'create'" class="start-price">￦<span class="price" th:text="${#numbers.formatInteger(notice.paymentPrice, 3, 'COMMA')}">200,000</span></div>
+                                                <div class="start-explain">
+                                                    <div class="explains">일일 비용: ￦200,000</div>
+                                                    <div class="explains" id="add-date-text">광고 기간: 1일</div>
+                                                </div>
+                                            </div>
+                                            <button th:if="${page} == 'create'" type="button" id="btn-register-ad" class="start-add">배너 광고 시작하기</button>
+                                            <button th:unless="${page} == 'create'" type="button" id="btn-update-ad" class="start-add">배너 광고 시작하기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </main>
+    </div>
+</body>
+<script th:inline="javascript">
+    const id = [[${id}]];
+    const page = [[${page}]];
+    const companyId = [[${companyId}]];
+</script>
+<script src="https://js.bootpay.co.kr/bootpay-5.0.2.min.js"></script>
+<script src="/js/console/add-upload/module/service.js"></script>
+<script src="/js/console/add-upload/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

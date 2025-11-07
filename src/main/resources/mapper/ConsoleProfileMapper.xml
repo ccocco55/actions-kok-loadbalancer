@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleProfileMapper">
+    <select id="selectCompanyProfileByUserId">
+        select
+            c.user_id as companyId,
+            c.company_name,
+            c.company_info,
+            c.company_url,
+            cs.company_sector_name,
+            sc.company_scale_name,
+            u.user_name as ceo_name
+        from tbl_company c
+            join tbl_user u
+                on u.id = c.user_id
+            left join tbl_company_sector_category csc
+                on c.user_id = csc.company_id
+            left join tbl_company_sector cs
+                on csc.company_sector_id = cs.id
+            left join tbl_company_scale_category_bridge csb
+                on c.user_id = csb.company_id
+            left join tbl_company_scale_category sc
+                on csb.company_scale_category_id = sc.id
+        where c.user_id = #{companyId}
+    </select>
+
+    <!-- 기업 프로필 수정 -->
+    <update id="updateCompanyProfile">
+        update tbl_company
+        set
+            company_name = #{companyName},
+            company_info = #{companyInfo},
+            company_url = #{companyUrl}
+        where user_id = #{companyId}
+    </update>
+
+    <update id="updateCeoName">
+        update tbl_user
+        set user_name = #{ceoName}
+        where id = #{companyId}
+    </update>
+
+    <!-- 업종(산업 분야) 수정 -->
+    <update id="updateCompanySector">
+        update tbl_company_sector_category
+        set company_sector_id = (
+            select id from tbl_company_sector
+            where company_sector_name = #{companySectorName}
+        )
+        where company_id = #{companyId};
+    </update>
+
+    <!-- 기업 규모 수정 -->
+    <update id="updateCompanyScale">
+        update tbl_company_scale_category_bridge
+        set company_scale_category_id = (
+            select id from tbl_company_scale_category
+            where company_scale_name = #{companyScaleName}
+        )
+        where company_id = #{companyId};
+    </update>
+</mapper>
+

@@ -1,0 +1,318 @@
+body *{
+    border-color: #e5e5e5;
+    outline-color: #a1a1a180;
+}
+
+*, ::backdrop, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+menu, ol, ul {
+    list-style: none;
+}
+
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    padding-inline-start: 40px;
+    unicode-bidi: isolate;
+}
+
+body {
+    background-color: white;
+    color: #0a0a0a;
+}
+
+header {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+nav {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    unicode-bidi: isolate;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+section {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+button, input:where([type=button],[type=reset],[type=submit]) {
+    appearance: button;
+}
+
+button, input, optgroup, select, textarea {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    opacity: 1;
+    background-color: #000;
+    border-radius: 0;
+}
+
+table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+
+main.main{
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    border-radius: 14px;
+    margin-left: 0px;
+    margin: 8px;
+    background-color: white;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+div.wrap-enter{
+    background-color: #fafafa;
+    width: 100%;
+    min-height: 898px;
+    height: 898px;
+    display: flex;
+}
+
+div.home-wrap{
+    overflow: auto;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    color-scheme: light;
+}
+
+div.home-wrap-2{
+    gap: 8px;
+    flex-direction: column;
+    flex: 1;
+    display: flex;
+    container: main / inline-size;
+    color-scheme: light;
+}
+
+div.home-wrap-inner{
+    padding-block: 24px;
+    gap: 24px;
+    flex-direction: column;
+    display: flex;
+}
+
+div.home-wrap-inner-2{
+    padding: 24px;
+    margin-inline: auto;
+    max-width: 96rem;
+    width: 80%;
+}
+
+div.home-top{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin-block-start: 0px;
+    margin-block-end: 24px;
+}
+
+h1.top-h1{
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+p.top-p{
+    font-size: 16px;
+    line-height: 1.5;
+    color: #737373;
+    margin-top: 4px;
+}
+
+body * {
+    border-color: #e5e5e5;
+    outline-color: #a1a1a180;
+}
+
+body {
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.left {
+  flex: 3;
+}
+
+.right {
+  flex: 1;
+  margin-left: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  /* 그림자 추가 */
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+              0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.section {
+  margin-bottom: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  /* 그림자 추가 */
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+              0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+}
+
+.section h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.form-grid label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.form-grid input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0 16px;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-label {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: all 0.2s;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+}
+
+.radio-group input[type="radio"]:checked + .radio-label {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 20px;
+  width: 100%;
+  /* 버튼에도 그림자 */
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+              0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+}
+
+.submit-btn:hover {
+  background-color: #333;
+}
+
+div.content-in-box{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    display: grid;
+}
+
+div.main-content{
+  grid-column: span 2 / span 2;
+}
+
+div.sub-content{
+  height: 190px;
+  top: 0;
+  position: sticky;
+}

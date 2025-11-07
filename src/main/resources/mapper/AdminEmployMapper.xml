@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminEmployMapper">
+    <sql id="search">
+        <if test="keyword != null and keyword != ''">
+            and (
+            c.company_name like concat('%', #{keyword}, '%') or
+            tin.intern_notice_title like concat('%', #{keyword}, '%') or
+            tin.intern_notice_subtitle like concat('%', #{keyword}, '%') or
+            jc.job_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!--  인턴 공고 목록  -->
+    <select id="selectEmployAll">
+        select tin.id,
+               tin.intern_notice_title,
+               tin.intern_notice_subtitle,
+               tin.intern_notice_introduce_job,
+               tin.intern_main_tasks,
+               tin.intern_notice_status,
+               tin.company_id,
+               tin.intern_notice_start_date,
+               tin.intern_notice_end_date,
+               tin.intern_notice_etc,
+               tin.created_datetime,
+               tin.updated_datetime,
+               c.company_name,
+               jc.job_name
+        from tbl_intern_notice tin
+            join tbl_company c
+                on tin.company_id = c.user_id
+            join tbl_intern_job_category ijc
+                on tin.id = ijc.intern_notice_id
+            join tbl_job_category jc
+                on ijc.job_category = jc.id
+        <include refid="search"/>
+        order by tin.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  전체 개수  -->
+    <select id="selectEmploySearchCountAll">
+        select count(*)
+        from tbl_intern_notice tin
+            join tbl_company c
+                on tin.company_id = c.user_id
+            join tbl_intern_job_category ijc
+                on tin.id = ijc.intern_notice_id
+            join tbl_job_category jc
+                on ijc.job_category = jc.id
+        <include refid="search"/>
+    </select>
+
+<!--  인턴 공고 상세정보(1)  -->
+    <select id="selectEmployById">
+        select tin.id,
+               tin.intern_notice_title,
+               tin.intern_notice_subtitle,
+               tin.intern_notice_introduce_job,
+               tin.intern_main_tasks,
+               tin.intern_notice_status,
+               tin.company_id,
+               tin.intern_notice_start_date,
+               tin.intern_notice_end_date,
+               tin.intern_notice_etc,
+               tin.created_datetime,
+               tin.updated_datetime,
+               c.user_id,
+               c.company_name
+        from tbl_intern_notice tin
+            join tbl_company c
+                on tin.company_id = c.user_id
+        where tin.id = #{id}
+    </select>
+
+<!--  인턴 공고 상세정보(2)  -->
+    <select id="selectRequestUser">
+        select ri.id,
+               ri.request_intern_status,
+               u.user_name,
+               u.user_email,
+               u.user_phone
+        from tbl_request_intern ri
+            join tbl_intern_notice tin
+                on ri.intern_notice_id = tin.id
+            join tbl_user u
+                on ri.member_id = u.id
+        where tin.id = #{id} and u.user_role = 'member' and u.user_status = 'active'
+        order by
+            case request_intern_status
+                when 'accept' then 1
+                when 'await' then 2
+                when 'reject' then 3
+                end,
+            ri.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  인턴 공고 상세정보(2) 개수  -->
+    <select id="countRequestUser">
+        select count(*)
+        from tbl_request_intern ri
+                 join tbl_intern_notice tin
+                      on ri.intern_notice_id = tin.id
+                 join tbl_user u
+                      on ri.member_id = u.id
+        where tin.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kok</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/font/font.css">
+</head>
+<body>
+    <div class="pc"><!--나중에 서버하기전에 삭제 해야함-->
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-top-content">
+                    <a style="align-items:center; display:flex" href="">
+                        <div class="sidebar-logo">
+                            <img alt="image" width="40" height="40" srcset="" src="/images/member/kok_logo.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                        </div>
+                    </a>
+                    <button class="sidebar-search">
+                        <div class="sidebar-search-text">
+                            <p class="sidebar-search-placeholder">체험공고, 고용공고</p>
+                        </div>
+                        <div class="sidebar-search-shortcut">
+                            <div class="sidebar-search-key">
+                                <p class="sidebar-search-key-text">⌘</p>
+                            </div>
+                            <div class="sidebar-search-key">
+                                <p class="sidebar-search-key-text">K</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <!-- sidebar 리스트 -->
+            <div class="sidebar-menu">
+                <div class="sidebar-menu-section">
+                    <div class="sidebar-menu-list">
+                        <div class="start-line">
+                            <!-- 체험공고 -->
+                            <a onclick="window.location.href='/experience/list'">
+                                <div id="experience" class="sidebar-item">
+                                    <div data-name="experience" class="sidebar-item-icon">
+                                        <svg color="foregrounds.surface.inverted" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">체험공고</p>
+                                        <p class="sidebar-item-subtitle">새로운 체험 탐색</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 인턴공고 -->
+                            <a onclick="window.location.href='/intern/list'">
+                                <div id="intern" class="sidebar-item">
+                                    <div data-name="intern" class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">인턴공고</p>
+                                        <p class="sidebar-item-subtitle">새로운 기회 탐색</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 커뮤니티 -->
+                            <a onclick="window.location.href='/community/page'">
+                                <div id="community" class="sidebar-item">
+                                    <div data-name="community" class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path d="M15 5a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v9a1 1 0 0 0 1.555.832l2.496-1.664A1 1 0 0 1 6.606 13H7v-1a5 5 0 0 1 5-5h3z"></path>
+                                            <path d="M12 9a3 3 0 0 0-3 3v5a3 3 0 0 0 3 3h5.394a1 1 0 0 1 .555.168l2.496 1.664A1 1 0 0 0 22 21v-9a3 3 0 0 0-3-3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">커뮤니티</p>
+                                        <p class="sidebar-item-subtitle">가장 빠른 소식</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 기업 --> 
+                            <a onclick="window.location.href='/company/list'">
+                                <div id="company" class="sidebar-item">
+                                    <div data-name="company" class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M16.088 2.134a1 1 0 0 1 1.366.366l4 6.928a1 1 0 1 1-1.732 1l-5.196 3a2 2 0 0 1-2 0l-1.545.892 2.892 5.194a1 1 0 1 1-1.747.973l-2.37-4.255-1.736 4.154a1 1 0 0 1-1.845-.772L7.59 16.23a2 2 0 0 1-1.627-.168l-1.097.634a2 2 0 1 1-2-3.464l1.097-.634a2 2 0 0 1 1-1.732l4.562-2.634a2 2 0 0 1 1-1.732l5.197-3a1 1 0 0 1 .366-1.366" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">기업</p>
+                                        <p class="sidebar-item-subtitle">기업 모아보기</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="start-line">
+                    <!-- 비로그인시 메뉴 삭제 -->
+                    <th:block>
+                        <th:replace th:if="${userDTO.userRole.getValue() == 'member'}">
+                            <div class="sidebar-setting-wrap">
+                                <div class="sidebar-setting">
+                                    <p class="sidebar-setting-text">설정</p>
+                                </div>
+                            </div>
+                        </th:replace>
+                    </th:block>
+
+                    <!-- 비로그인시 메뉴 삭제 -->
+                    <div class="sidebar-support-wrap">
+                        <div class="sidebar-support">
+                            <p class="sidebar-support-text">고객지원</p>
+                        </div>
+                    </div>
+                    <div class="sidebar-service-wrap">
+                        <a onclick="window.location.href='/service/kok-service'" class="sidebar-service">
+                            <p class="sidebar-service-text">서비스 소개</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="sidebar-notice">
+                    <div class="start-line">
+                        <div class="sidebar-line"></div>
+                    </div>
+                    <div class="sidebar-legal">
+                        <p class="sidebar-legal-text">
+                            본 서비스에서 제공하는 사용자의 개인정보 데이터를 포함하여 각 정보주체의 동의 없이 데이터를 무단으로 수집하는 행위를 금지 및 거부합니다. 공개된 데이터도 크롤링 등 기술적 장치를 이용해 허가 없이 수집하는 경우 개인정보 보호법에 따라 형사처벌 될 수 있음을 알려드립니다.
+                        </p>
+                    </div>
+                    <div class="sidebar-address">
+                        <p class="sidebar-address-text">
+                            © 2025 Kok, 대한민국 서울특별시 강남구 테헤란로 146
+                        </p>
+                    </div>
+                    <!-- 사업자 번호 더보기/접기 -->
+                    <div class="sidebar-business collapsed">
+                        <div class="sidebar-business-text">
+                            <p>
+                                사업자등록번호 000-11-22222 <br>
+                                <span class="extra-text">
+                                    통신판매업신고번호 2025-서울역삼-0102 <br>
+                                    직업정보제공사업신고번호: J12020202334456 <br>
+                                    유료직업소개사업등록번호: 제2025-0000000-11-2-00003
+                                </span>
+                            </p>
+                        </div>
+                        <div class="sidebar-business-text">
+                            <p><span class="sidebar-business-toggle">더보기</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 로그인 한 회원 버튼 -->
+            <div class="sidebar-login-user">
+                <div class="sidebar-login-inner">
+                    <div class="start-line">
+                        <div class="sidebar-line"></div>
+                    </div>
+                    <div class="sidebar-login-user-btn-wrap">
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue() == 'member' }">
+                                <a onclick="window.location.href='/mypage/page'">
+                                    <div class="sidebar-login-user-btn">
+                                        <img alt="image" width="32" height="32" style="background-color: #ccc;color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
+                                        <div class="sidebar-login-user-wrap">
+                                            <span class="sidebar-login-user-name" th:text="${userDTO.username}+' 님'"></span>
+                                        </div>
+                                        <div class="sidebar-login-user-icon-wrap">
+                                            <div class="sidebar-login-user-icon">
+                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                                    <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </th:replace>
+                        </th:block>
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue() == 'company' }">
+                                <a onclick="window.location.href='/enterprise-console'">
+                                    <div class="sidebar-login-user-btn">
+                                        <img alt="image" width="32" height="32" style="background-color: #ccc;color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
+                                        <div class="sidebar-login-user-wrap">
+                                            <span class="sidebar-login-user-name" th:text="${userDTO.companyName}+' 님'"></span>
+                                        </div>
+                                        <div class="sidebar-login-user-icon-wrap">
+                                            <div class="sidebar-login-user-icon">
+                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                                    <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </th:replace>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 검색 모달창 -->
+    <div class="search-modal-wrap">
+        <div class="search-modal">
+            <div>
+                <div class="search-modal-height-auto">
+                    <!-- 모달창 헤더 -->
+                    <div class="search-modal-header-wrap">
+                        <div class="search-modal-header">
+                            <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" class="search-magnify-icon" viewBox="0 0 24 24">
+                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input id="search" maxlength="50" placeholder="체험공고, 고용공고" class="search-modal-input" value="">
+                        <button class="close-search-modal">
+                            <div class="close-search-modal-icon">
+                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- 왼쪽 리스트 -->
+                    <div class="search-modal-main-wrap">
+                        <div class="search-modal-list-wrap">
+                            <div class="search-modal-list-wrap2">                               
+                                <div class="search-modal-body-wrap">
+                                    <div class="search-modal-group">
+                                        <div class="search-modal-group-section-active">
+                                            <p class="search-modal-group-context-active">체험공고</p>
+                                        </div>
+                                        <div class="search-modal-group-section">
+                                            <p class="search-modal-group-context">인턴공고</p>
+                                        </div>
+                                    </div>
+                                    <!-- 체험 공고 클릭 시 -->
+                                    <div id="experienceWarp" class="search-modal-list member-list">
+
+                                    </div>
+                                    <!-- 인턴 공고 클릭 시 -->
+                                    <div id="internWarp" class="search-modal-list company-list" style="display: none">
+
+                                    </div>
+                                </div>                               
+                                <!-- 오른쪽 리스트 -->
+                                <div class="search-modal-company-wrap">
+                                    <div class="search-modal-company-wrap-top">
+                                        <div class="search-modal-company-text-wrap">
+                                            <span class="search-modal-company-text">가장 주목받는 기업</span>
+                                        </div>
+                                        <div class="search-modal-company-all-wrap">
+                                            <a onclick="window.location.href='/company/list'">
+                                                <button class="search-modal-company-all-button">
+                                                    <p class="search-modal-company-all-text">모두 보기</p>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- 6개 기업 팔로워 순 -->
+                                    <div id="company-list-wrap" class="search-modal-company-list-wrap">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 설정 모달창 -->
+    <div class="sidebar-setting-modal">
+        <div class="sidebar-setting-modal-wrap1">
+            <div class="sidebar-setting-modal-wrap2">
+                <div class="sidebar-setting-modal-wrap3">
+                    <div class="sidebar-setting-modal-top-wrap">
+                        <div class="sidebar-setting-modal-top">
+                            <div class="sidebar-setting-modal-title-wrap">
+                                <div class="sidebar-setting-modal-title">
+                                    <div class="sidebar-setting-modal-title-text">설정</div>
+                                </div>
+                            </div>
+                            <div class="setting-modal-empty-area"></div>
+                            <div class="sidebar-setting-modal-close-wrap">
+                                <button class="sidebar-setting-modal-close-button">
+                                    <p class="sidebar-setting-modal-close-text">닫기</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-modal-main">
+                        <div class="setting-modal-left-list-wrap">
+                            <div class="setting-modal-left-list">
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">계정</span>
+                                        </div>
+                                    </div>
+                                    <div class="setting-modal-member-profile-wrap">
+                                                <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="background-color: #ccc; color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                        <div class="setting-modal-profile">
+                                            <p class="setting-modal-member-name" th:text="${userDTO.username}">회원이름</p>
+                                            <p class="setting-modal-member-set">내 정보 및 로그인</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">활동</span>
+                                        </div>
+                                    </div>
+                                    <div class="start-line">
+                                        <div class="setting-modal-alarm-wrap">
+                                            <div class="setting-modal-alarm-icon">
+                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                    <path clip-rule="evenodd" d="M12 1.2a.8.8 0 0 1 .8.8v1.236c2.215.202 3.71 1.242 4.65 2.547C18.467 7.198 18.8 8.873 18.8 10v3c0 1.499.313 2.32.607 2.744.294.423.565.456.593.456a.8.8 0 0 1 0 1.6h-4.2v.2a4.15 4.15 0 0 1-.75 2.343c-.6.83-1.59 1.457-3.05 1.457s-2.451-.626-3.05-1.457A4.15 4.15 0 0 1 8.2 18v-.2H4a.8.8 0 0 1 0-1.6c.028 0 .3-.033.593-.456.294-.423.607-1.245.607-2.744v-3c0-2.66 1.127-4.4 2.583-5.449 1.109-.799 2.377-1.175 3.417-1.3V2a.8.8 0 0 1 .8-.8m-5.827 15h11.654c-.382-.766-.627-1.822-.627-3.2v-3c0-.872-.268-2.198-1.05-3.282C15.4 5.674 14.14 4.8 12 4.8c-.872 0-2.198.268-3.283 1.05C7.673 6.6 6.8 7.86 6.8 10v3c0 1.378-.245 2.434-.627 3.2M9.8 17.8v.2c0 .372.118.948.45 1.408.3.419.81.792 1.75.792s1.449-.373 1.75-.792A2.55 2.55 0 0 0 14.2 18v-.2z" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="setting-modal-alarm-text-wrap">
+                                                <p class="setting-modal-alarm-text">알림</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 계정 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap" style="display: none;">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">내 정보</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-my-profile">
+                                            <div class="setting-modal-move-wrap">
+                                                        <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="background-color: #ccc; color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                                <div class="setting-modal-text-wrap">
+                                                    <p class="setting-modal-text-info">프로필 수정을 찾고 계신가요?</p>
+                                                    <p class="setting-modal-text-move">내 프로필에서 관리할 수 있습니다.</p>
+                                                </div>
+                                                <a onclick="window.location.href='/mypage/page'">
+                                                    <button class="setting-modal-move-button">
+                                                        <span class="setting-modal-move-button-text">이동</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이름</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.username}">회원이름</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">전화번호</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.userPhone}">01012345678</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이메일</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.userEmail}">test@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">연결된 로그인 방식</span>
+                                            </div>
+                                        </div>
+                                        <div id="link">
+
+                                        </div>
+
+                                    </div> 
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">기타</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-account-check-wrap">
+                                            <div class="setting-modal-account-check-text">
+                                                <span class="setting-modal-account-check-main">가입일</span>
+                                                <span class="setting-modal-account-check-sub" th:text="${userDTO.createdDateTime.split(' ')[0]}">2025년 9월 12일 (함께한지 1일째)</span>
+                                            </div>     
+                                        </div>
+                                    </div>                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 알림 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">알림 설정 - 등록된 이메일로 전송됩니다.</span>
+                                            </div>
+                                        </div>      
+                                        <!-- 알림 설정 할 리스트 -->
+                                        <div class="setting-modal-alarm-list-wrap">
+
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">팔로우 기업 체험 공고 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">팔로우한 기업의 새로운 체험 공고를 알려드립니다.</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button" data-keyword="company_experience_notice_alarm">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">팔로우 기업 인턴 공고 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">팔로우한 기업의 새로운 인턴 공고를 알려드립니다.</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button" data-keyword="company_intern_notice_alarm">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>                      
+                                    </div>                                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 고객지원 모달창 -->
+    <div class="crisp-chatbox-chat" id="crisp-chatbox-chat">
+        <div class="customer-support-wrap">
+            <div class="customer-support">
+                <!-- 고객지원 모달 top -->
+                <div class="customer-support-top-wrap">
+                    <div class="customer-support-top">
+                        <span class="customer-support-top-section">
+                            <div class="customer-support-talk-wrap" role="button" tabindex="0">
+                                <span class="customer-support-talk-icon"></span>
+                                <span class="customer-support-talk-text">대화</span>
+                            </div>
+                            <div class="customer-support-center-wrap" role="button" tabindex="0">
+                                <span class="customer-support-center-icon"></span>
+                                <span class="customer-support-center-text">지원 센터</span>
+                            </div>
+                        </span>
+                        <div class="customer-support-top-title-wrap">
+                            <span class="customer-support-top-title">
+                                <span class="customer-support-top-text">공지사항</span>
+                            </span>
+                        </div>
+                        <span class="customer-support-top-close-wrap">
+                            <span class="customer-support-top-close-button" role="button" tabindex="0">
+                                <span class="customer-support-top-close-icon"></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="customer-support-body-wrap1">
+                    <div class="customer-support-body-wrap2">
+                        <div class="customer-support-body-wrap3">
+                            <div class="customer-support-body-wrap4">
+                                <div class="customer-support-body-wrap5">
+                                    <div class="customer-support-body-wrap6">                                        
+                                        <ul class="customer-support-list" id="support-wrap">
+                                            <li id="supportLoading" style="display: block; width: 100px; height: 100px; margin: 0 auto;">
+                                                <img src="/images/experience/loading.gif" style="width: 100%; height: 100%" alt="loading">
+                                            </li>
+                                            <!-- 자주 묻는 질문 list -->
+<!--                                            <li class="customer-support-list-section">-->
+<!--                                                <div class="customer-support-list-content">-->
+<!--                                                    <span class="customer-support-list-title-wrap">-->
+<!--                                                        <span class="customer-support-list-title-icon"></span>로켓펀치 고유계정 원칙 안내-->
+<!--                                                    </span>-->
+<!--                                                    <span class="customer-support-list-text">-->
+<!--                                                        고유계정 원칙이란?-->
+<!--                                                        로켓펀치는 원활한 서비스 운영과 부정 이용 방지를 위해 본인인증을 기반으로 한 1인 1계정(프로필) 정책을 운영하고 있습니다.-->
+<!--                                                        이는 서비스의 신뢰성과 안전한 커뮤니티 운영을 위한 조치입니다.-->
+<!--                                                        매번 본인인증을 통해 서비스에 로그인하는 것도 가능하지만, 이를 더 빠르게 수행하기 위해 원하는 소셜 미디어 계정(Google, Apple, 네이버, 카카오)을 통해 간편하게 가입 및 로그인이 가능합니다.-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                            </li>                                           -->
+                                        </ul>
+                                    </div>
+                                    <!-- 검색 -->
+<!--                                    <div class="customer-support-bottom">-->
+<!--                                        <form class="customer-support-search" name="form_helpdesk">-->
+<!--                                            <span class="customer-support-search-icon"></span>-->
+<!--                                            <input name="helpdesk_search" class="customer-support-search-text" placeholder="도움말 센터 검색..." type="text" maxlength="100">-->
+<!--                                        </form>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 고객지원 상세 모달창 -->
+    <div class="crisp-chatbox-chat-detail" id="crisp-chatbox-chat-detail">
+        <div class="customer-support-detail-wrap">
+            <div class="customer-support-detail">
+                <div class="customer-support-detail-top-wrap">
+                    <div class="customer-support-detail-top">
+                        <span class="detail-top-title-wrap">
+                            <div class="detail-top-title-section1" tabindex="0" role="button">
+                                <span class="detail-top-title-icon1"></span>
+                                <span class="detail-top-title-text">대화</span>
+                            </div>
+                            <div class="detail-top-title-section2" tabindex="0" role="button">
+                                <span class="detail-top-title-icon2"></span>
+                                <span class="detail-top-title-text">지원 센터</span>
+                            </div>
+                        </span>
+                        <div class="detail-top-center"></div>
+                        <span class="detail-top-close-wrap">
+                            <span class="detail-top-close-button" tabindex="0" role="button">
+                                <span class="detail-top-close-icon"></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="customer-support-detail-wrap1">
+                    <div class="customer-support-detail-wrap2">
+                        <div class="customer-support-detail-wrap3">
+                            <div class="customer-support-detail-wrap4">
+                                <div class="customer-support-detail-wrap5" id="member-support-detail">
+                                    <div class="detail-sub-top">
+                                        <span class="detail-back-wrap" tabindex="0" role="button">
+                                            <span class="detail-back-icon"></span>
+                                        </span>
+                                        <span class="detail-title-wrap">
+                                            <span class="detail-title">
+                                                <span class="detail-title-section">계정 및 프로필</span>
+                                                <span class="detail-title-section-icon">/</span>
+                                                <span class="detail-title-text">로켓펀치 고유계정 원칙 안내</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-main-body-wrap">
+                                        <div class="detail-main-body" id="detail-main-body">
+                                            <div class="detail-main-content-wrap1">
+                                                <div class="detail-main-content-wrap2">
+                                                    <div class="detail-main-content-wrap3" role="main">
+                                                        <article class="detail-main-article-wrap">
+                                                            <div class="detail-main-article" role="article">
+                                                                <h3 onclick="" id="detail-main-title" class="detail-main-title">
+                                                                    <span class="detail-main-title-text">고유계정 원칙이란?</span>
+                                                                </h3>
+                                                                <span class="detail-main-content-text">
+                                                                    <br>
+                                                                    로켓펀치는 원활한 서비스 운영과 부정 이용 방지를 위해 본인인증을 기반으로 한 1인 1계정(프로필) 정책을 운영하고 있습니다.
+                                                                    이는 서비스의 신뢰성과 안전한 커뮤니티 운영을 위한 조치입니다.
+                                                                    <br>
+                                                                    매번 본인인증을 통해 서비스에 로그인하는 것도 가능하지만, 이를 더 빠르게 수행하기 위해 원하는 소셜 미디어 계정(Google, Apple, 네이버, 카카오)을 통해 간편하게 가입 및 로그인이 가능합니다.
+                                                                    <br>
+                                                                    계정 생성 후,  메뉴에서 본인 인증 여부, 로그인 방식, 연결된 소셜 계정 등을 확인하고 변경할 수 있습니다.
+                                                                    계정과 관련된 문제가 발생했거나 문의 사항이 있는 경우, [지원 센터]를 통해 도움을 받으실 수 있습니다.
+                                                                </span>
+                                                                <span class="detail-main-content-space"></span>
+                                                                <p class="detail-main-update-date">업데이트 날짜: 2025/09/15</p>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/main-page/side-bar/module/service.js"></script>
+<script src="/js/main-page/side-bar/module/layout.js"></script>
+<script src="/js/main-page/side-bar/event.js"></script>
+</html>

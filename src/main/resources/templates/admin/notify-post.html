@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콕(KOK) 관리자</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/admin/notify-post.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+</head>
+<body>
+    <div id="kok">
+        <div id="kok-notify-container"></div>
+        <div class="popup-manager" style="width: 0px;"></div>
+        <!-- 사이드 바 시작 부분 -->
+        <aside id="kok-side">
+            <div class="d-flex flex-column" id="side-wrapper">
+                <div class="side-header">
+                    <div class="app-wrapper">
+                        <div class="provider-name hover-spin">
+                            <span class="comp-provider-name">
+                                <span class="pn-name">관리자 모드</span>
+                            </span>
+                        </div>
+                        <a class="app-name d-flex justify-content-between align-items-center">
+                            <span th:text="${admin.username}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-wrapper flex-grow-1">
+                    <ul class="menu-list">
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin" id="menu-home" class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M10.8 3.65a2 2 0 0 1 2.4 0l7 5.25a2 2 0 0 1 .8 1.6V19a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3h-2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8.5a2 2 0 0 1 .8-1.6z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">HOME</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10M9 14a5 5 0 0 0-5 5v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a5 5 0 0 0-5-5z"></path>
+                                </svg>
+                                <span class="menu-name">회원관리</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                    <!-- 리스트가 보이는 상태의 아이콘 i class="mdi mdi-chevron-down" -->
+                                </div>
+                            </a>
+                            <!-- 리스트가 보이는 상태 ul class="menu-sub-list collapse show" -->
+                            <ul class="menu-sub-list collapse" id="menu-6109064136799700f1ebced6">
+                                <li class="submenu menu-item">
+                                    <!-- 클릭 한 부분 active -->
+                                    <a href="/admin/member" class="kok-link">
+                                        - 
+                                        일반회원
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/company" class="kok-link">
+                                        - 
+                                        기업회원
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/experience" class="menu-btn d-flex w-100" id="menu-experience">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
+                                </svg>
+                                <span class="menu-name">체험</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/employ" class="menu-btn d-flex w-100" id="menu-employ">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">인턴</span>
+                            </a>
+                        </li>                                         
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M16.088 2.134a1 1 0 0 1 1.366.366l4 6.928a1 1 0 1 1-1.732 1l-5.196 3a2 2 0 0 1-2 0l-1.545.892 2.892 5.194a1 1 0 1 1-1.747.973l-2.37-4.255-1.736 4.154a1 1 0 0 1-1.845-.772L7.59 16.23a2 2 0 0 1-1.627-.168l-1.097.634a2 2 0 1 1-2-3.464l1.097-.634a2 2 0 0 1 1-1.732l4.562-2.634a2 2 0 0 1 1-1.732l5.197-3a1 1 0 0 1 .366-1.366" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">배너</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <ul class="menu-sub-list collapse" id="menu-6284cdfecf9f6d001b046f3a">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/advertise" class="kok-link">
+                                        - 
+                                        광고신청
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/banner" class="kok-link">
+                                        - 
+                                        현수막
+                                    </a>
+                                </li>                                  
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100" id="menu-payment">
+                                <svg fill="" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M2.2 7A2.8 2.8 0 0 1 5 4.2h14A2.8 2.8 0 0 1 21.8 7v5a.8.8 0 1 1-1.6 0V9.8H3.8V17A1.2 1.2 0 0 0 5 18.2h6a.8.8 0 0 1 0 1.6H5A2.8 2.8 0 0 1 2.2 17zm1.6 1.2h16.4V7A1.2 1.2 0 0 0 19 5.8H5A1.2 1.2 0 0 0 3.8 7zM6.2 13a.8.8 0 0 1 .8-.8h5a.8.8 0 0 1 0 1.6H7a.8.8 0 0 1-.8-.8M18 14.2a.8.8 0 0 1 .8.8v2.2H21a.8.8 0 0 1 0 1.6h-2.2V21a.8.8 0 0 1-1.6 0v-2.2H15a.8.8 0 1 1 0-1.6h2.2V15a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">결제</span>      
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>                         
+                            </a>
+                            <ul class="menu-sub-list collapse" id="">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/advertise" class="kok-link">
+                                        - 
+                                        광고비
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/experience" class="kok-link">
+                                        - 
+                                        체험비
+                                    </a>
+                                </li>                                  
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <!-- 상단 부분 -->
+        <div id="kok-main" class="has-menu">
+            <div id="header-wrapper">
+                <div id="kok-header" class="d-flex false">
+                    <div class="flex-grow-1"></div>
+                    <div>
+                        <div class="header-menu-group d-flex">
+                            <!-- 상단 신고 게시글 목록 이동 -->
+                            <a href="/admin/notify/post" class="kok-link mr-3">
+                                <div class="header-menu-btn-manage active">
+                                    <i class="mdi mdi-text-box-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 고객지원 - 자주 묻는 질문 이동 -->
+                            <a href="/admin/support" class="kok-link mr-3">
+                                <div class="header-menu-btn-notice">
+                                    <i class="mdi mdi-bullhorn-variant-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 관리자 이메일 -->
+                            <div class="user-menu">
+                                <div class="user-menu-wrapper d-flex align-items-center cursor-pointer" id="user-menu-handler">
+                                    <div class="user-avatar">E</div>
+                                    <div class="user-menu-email" th:text="${admin.userEmail}"></div>
+                                </div>
+                                <!-- 리스트가 보여질 때 -->
+                                <!-- <div class="user-menu-content dropdown-menu dropdown-menu-right show" style="position: absolute; transform: translate3d(1698px, 62px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-end"> -->
+                                <div class="user-menu-content dropdown-menu dropdown-menu-right">
+                                    <ul class="menu-body list-unstyled">     
+                                        <li>
+                                            <a href="" class="d-block text-dark" id="logout">
+                                                <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
+                                                로그아웃
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/admin/join" class="d-block text-dark">
+                                                <i class="mdi mdi-account-box-outline mr-2 mdi-18px"></i>
+                                                관리자 등록
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page notice-index narrow-center">
+                <div class="page-header">
+                    <div class="page-title">신고 게시글</div>
+                </div>
+                <div class="page-body">
+                    <div class="page-content white-panel p-5">
+                        <div class="table-wrapper border-top">
+                            <table class="table table-notice">
+                                <tbody>
+<!--                                    <tr class="post-detail">-->
+<!--                                        <td class="td-date text-grey">2025/09/16</td>-->
+<!--                                        <td class="td-title">-->
+<!--                                            <span class="notice-text">-->
+<!--                                                제 GitHub 프로젝트 중 별 400개를 받은 프로젝트가 나왔습니다! 여기까지 오는데 정말 많은 격려와 응원해주셔서 감사합니다. ㅠㅠ-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td class="td-writer">test01@gmail.com</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr class="post-detail">-->
+<!--                                        <td class="td-date text-grey">2025/09/16</td>-->
+<!--                                        <td class="td-title">-->
+<!--                                            <span class="notice-text">-->
+<!--                                                제 GitHub 프로젝트 중 별 400개를 받은 프로젝트가 나왔습니다! 여기까지 오는데 정말 많은 격려와 응원해주셔서 감사합니다. ㅠㅠ-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td class="td-writer">test01@gmail.com</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr class="post-detail">-->
+<!--                                        <td class="td-date text-grey">2025/09/16</td>-->
+<!--                                        <td class="td-title">-->
+<!--                                            <span class="notice-text">-->
+<!--                                                제 GitHub 프로젝트 중 별 400개를 받은 프로젝트가 나왔습니다! 여기까지 오는데 정말 많은 격려와 응원해주셔서 감사합니다. ㅠㅠ-->
+<!--                                            </span>-->
+<!--                                        </td>-->
+<!--                                        <td class="td-writer">test01@gmail.com</td>-->
+<!--                                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="kok-pagination-wrapper undefined">
+                            <ul class="pagination kok-pagination">
+                                <!-- 현재 페이지는 active 클래스 추가된다. -->
+<!--                                <li class="page-item page-num active">-->
+<!--                                    &lt;!&ndash; class명 앞에 kok-link를 사이드바 이벤트로 인해 배제했습니다. &ndash;&gt;-->
+<!--                                    <a href="" class="page-item-link page-item-num">1</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item page-num">-->
+<!--                                    <a href="" class="page-item-link page-item-num">2</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item page-num">-->
+<!--                                    <a href="" class="page-item-link page-item-num">3</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item page-num">-->
+<!--                                    <a href="" class="page-item-link page-item-num">4</a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item page-num">-->
+<!--                                    <a href="" class="page-item-link page-item-num">5</a>-->
+<!--                                </li>-->
+                            </ul>
+                            <div class="pagination-desc"></div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 신고 게시글 상세 모달 -->
+    <div class="post-modal-background">
+        <div class="post-modal-wrap1">
+            <div class="post-modal-wrap2">
+                <div class="post-modal-wrap3">
+                    <div class="post-modal-wrap4">
+<!--                        <div class="post-modal-top">-->
+<!--                            <div>-->
+<!--                                <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">-->
+<!--                            </div>-->
+<!--                            <div class="post-modal-top-section">-->
+<!--                                <div class="post-modal-top-name">-->
+<!--                                    <div class="post-modal-name-wrap">-->
+<!--                                        <div>-->
+<!--                                            <p class="post-modal-name-text">정희준</p>-->
+<!--                                        </div>-->
+<!--                                    </div>                                   -->
+<!--                                </div>-->
+<!--                                <div class="post-modal-info">-->
+<!--                                    <p class="post-modal-job">test01@gmail.com</p> &lt;!&ndash; 작성자ID (이메일) &ndash;&gt;-->
+<!--                                    <p class="post-modal-center">·</p>-->
+<!--                                    <p class="post-modal-time">2025/09/16</p> &lt;!&ndash; 작성날짜 &ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <button class="post-modal-top-button">-->
+<!--                                    <div class="post-modal-top-icon">-->
+<!--                                        <p class="post-modal-delete">삭제하기</p>-->
+<!--                                    </div>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="post-modal-middle">-->
+<!--                            <div class="post-modal-body-wrap">-->
+<!--                                <div class="post-modal-body">-->
+<!--                                    <div class="post-modal-text">-->
+<!--                                        <span>제 GitHub 프로젝트 중 별 400개를 받은 프로젝트가 나왔습니다! 여기까지 오는데 정말 많은 격려와 응원해주셔서 감사합니다. ㅠㅠ<br></span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="post-modal-file-wrap">-->
+<!--                                    <div class="post-modal-file">-->
+<!--                                        <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
+<!--                                        <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/1.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
+<!--                                        <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/2.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/admin/notify-post/module/service.js"></script>
+<script src="/js/admin/notify-post/module/layout.js"></script>
+<script src="/js/admin/logout/module/service.js"></script>
+<script src="/js/admin/logout/event.js"></script>
+<script src="/js/admin/notify-post/event.js"></script>
+</html>

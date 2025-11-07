@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/service/service.css">
+    <title>서비스 소개 | 콕</title>
+</head>
+<body>
+
+    <!-- 사이드바 -->
+    <div hidden=""></div>
+    <div id="main-content" class="ai_flex-start bg_backgrounds.canvas.standard d_flex flex-sh_0 gap_8px h_100svh p_8px w_100%">
+
+        <!-- sidebar -->
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
+
+
+            <!-- 헤더 -->
+
+
+        <!-- 본문 -->
+        <div id="main-content-1" class="main-content-1">
+            <main class="main-1">
+                <!-- 헤더 -->
+                <th:block th:if="${userDTO==null}">
+                    <div th:replace="~{main-page/header}"></div>
+                </th:block>
+                <th:block th:if="${userDTO!=null}">
+                    <div th:replace="~{main-page/login-header}"></div>
+                </th:block>
+                <!-- 서비스 소개 -->
+                <div class="main-body">
+                    
+                    <!-- 배너 이미지 -->
+                    <div class="banner-row">
+                        <div class="banner-wrap">
+                            <div class="banner-inner">
+                                <img alt="company-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="company-banner" style="color:transparent" src="/images/service/service.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 내용 -->
+                    <div class="content-panel">
+                        <div class="panel-inner">
+                            <div class="content-wrap">
+                                <div class="content-stack">
+                                    <!-- 내용 - 타이틀 -->
+                                    <div class="copy-block">
+                                        <div class="copy-title-container">
+                                            <p class="copy-title" style="color: #0aa5ff;">빈 자리에 '콕',</p><p class="copy-title"> 가능성이 채워집니다.</p>
+                                        </div>
+                                        <p class="copy-subtitle">기회가 부족한 청년들과 자연스럽게 인재를 찾기 어려운 기업을 위한 만남의 장</p>
+                                        <p class="copy-description" style="font-size: 16px;">현대 사회에서 청년들은 일자리 경험을 쌓고 싶지만 기회가 부족하고, 기업은 잠재적 인재와 자연스럽게 만날 접점을 찾기 어렵습니다. 우리는 이 간극을 메워 누구나 다양한 직무를 직접 체험하고 성장의 발판을 마련함으로써, 단순한 체험을 넘어 기업과 청년이 서로를 이해하고 연결되는 새로운 고리가 되고자 합니다.</p>
+                                    </div>
+                                    <!-- 내용 - 본문 -->
+                                    <div class="copy-content-container">
+                                        <div class="copy-content-wrap">
+                                            <div class="copy-content">
+                                                <p class="copy-subtitle02">경력과 상관없이 지원할 수 있는 직업 체험</p>
+                                                <p class="copy-description">기업의 휴가·공백 기간 동안 다양한 직무를 대신 맡아볼 수 있습니다. 사무직부터 전문 기술직까지, 대기업·중견기업 등 폭넓은 영역에서 실제 현장의 흐름을 경험할 수 있습니다. 짧은 체험이지만, 이력서보다 더 강한 '현장 경험'이 됩니다. 책이나 강의로는 알 수 없는 실제 일의 결을 피부로 느끼기 위한 서비스입니다. </p>
+                                            </div>
+                                            <div class="copy-side-image">
+                                                <img src="/images/service/1.jpg" class="side-image">
+                                            </div>
+                                        </div>
+                                        <div class="copy-content-wrap">
+                                            <div class="copy-side-image left-side">
+                                                <img src="/images/service/2.jpg" class="side-image">
+                                            </div>
+                                            <div class="copy-content">
+                                                <p class="copy-subtitle02">체험을 통한 새로운 채용</p>
+                                                <p class="copy-description">체험에서 가능성과 열정을 보여준 참가자들에게 기업은 인턴십이나 채용 기회를 제공합니다. 단순히 이력서를 통한 평가가 아닌, 실제 경험에서 비롯된 연결이 이루어집니다. 체험에서 채용까지, 자연스럽게 이어지는 성장의 흐름을 만들 수 있습니다.</p>
+                                            </div>
+                                        </div>
+                                        <div class="copy-content-wrap">
+                                            <div class="copy-content">
+                                                <p class="copy-subtitle02">새로운 기회와 교류의 장</p>
+                                                <p class="copy-description">참여자들이 경험을 공유하고 서로에게 조언을 건네는 열린 공간입니다. 정보 교류와 네트워킹은 물론, 새로운 기회를 발견하는 장으로 확장됩니다. 누구나 자유롭게 질문하고 답하며, 서로의 성장 여정을 함께할 수 있습니다. 이런 경험이 모여 또 다른 배움과 연결을 만들어냅니다.</p>
+                                            </div>
+                                            <div class="copy-side-image">
+                                                <img src="/images/service/3.jpg" class="side-image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 마무리 문구 -->
+                                    <div class="closing-message">
+                                        <p class="closing-text">여러분의 도전을 응원합니다.</p>
+                                        <img class="closing-icon" src="/images/member/kok_logo.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- 검색 모달창 -->
+    <!-- <div>
+        <div class="search-modal-wrap">
+            ...
+        </div>
+    </div> -->
+        
+
+</body>
+</html>

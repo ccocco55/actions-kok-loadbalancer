@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/experience/list.css">
+    <link rel="stylesheet" href="/css/main-page/login-header.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">
+    <title>기업정보 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO == null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO != null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
+        <main class="main">
+            <th:block th:if="${userDTO == null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO != null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
+            <div class="content-layout">
+                <div class="content">
+                    <div class="main-wrapper">
+                        <div class="content-section">
+                            <div class="search-container wide">
+                                <div class="search-box">
+                                    <div class="search-list">
+                                        <div class="search-item search-input-item">
+                                            <input type="text" id="keyword-input" placeholder="기업명">
+                                            <button type="button" class="keyword-delete">
+                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="search-item">
+                                            <div class="search-label">
+                                                <p class="search-name">산업 분야</p>
+                                            </div>
+
+                                            <div class="dropdown-container">
+                                                <button class="dropdown-open-btn">전체</button>
+
+                                                <div class="dropdown-menu">
+                                                    <p class="dropdown-name">산업 분야</p>
+                                                    <div class="dropdown-content">
+                                                        <ul class="dropdown-list">
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>IT/웹/통신</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>서비스업</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>제조/화학</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>의료/제약/복지</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>유통/무역/운송</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>교육업</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>건설업</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>미디어/디자인</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>은행/금융업</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>기관/협회</p>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="dropdown-actions">
+                                                            <button class="select-all-btn">전체 선택</button>
+                                                            <button class="apply-btn">적용</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="search-item">
+                                            <div class="search-label">
+                                                <p class="search-name">기업 규모</p>
+                                            </div>
+                                            
+                                            <div class="dropdown-container">
+                                                <button class="dropdown-open-btn">전체</button>
+
+                                                <div class="dropdown-menu">
+                                                    <p class="dropdown-name">기업 규모</p>
+                                                    <div class="dropdown-content">
+                                                        <ul class="dropdown-list">
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>매우 작은 규모</p>
+                                                                    <span>30명 미만</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>작은 규모</p>
+                                                                    <span>30-100명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>중간 규모</p>
+                                                                    <span>100-400명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>큰 규모</p>
+                                                                    <span>400-2,000명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>매우 큰 규모</p>
+                                                                    <span>2,000명 초과</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="dropdown-actions">
+                                                            <button class="select-all-btn">전체 선택</button>
+                                                            <button class="apply-btn">적용</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="pc"> -->
+                                        <button class="search-button">
+                                            <svg viewBox="0 0 24 24" fill="#fff" height="24" role="img" width="24">
+                                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                            <div class="content-box pd-0">
+                                <div class="list-container pd-0">
+                                    <!-- 기업 목록 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-wrapper">
+                        <!-- 일반 회원 로그인 -->
+                        <th:block th:if="${userDTO != null}">
+                            <div class="content-box" th:if="${userDTO.userRole.getValue() == 'member' }">
+                                <div class="profile-card">
+                                    <div class="profile-avatar">
+                                        <img alt="image" width="60" height="60" srcset="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                    </div>
+                                    <div class="profile-info">
+                                        <div class="profile-name">
+                                            <p class="member-name" th:text="${userDTO.username}"></p>
+                                        </div>
+                                        <p class="member-role" th:text="${userDTO.userRole}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 기업 회원 로그인 -->
+                            <div class="content-box" th:if="${userDTO.userRole.getValue() == 'company' }">
+                                <div class="profile-card">
+                                    <div class="profile-avatar">
+                                        <img alt="image" width="60" height="60" srcset="" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                    </div>
+                                    <div class="profile-info">
+                                        <div class="profile-name">
+                                            <p class="member-name" th:text="${userDTO.username}"></p>
+                                        </div>
+                                        <p class="member-role" th:text="${companyDTO.companyName}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                        <!-- 비 로그인시 -->
+                        <div class="content-box" th:if="${userDTO == null}">
+                            <div class="profile-card">
+                                <div class="profile-message">
+                                    <p class="title">콕! 찍으면, <br/>오늘은 내가 그 회사의 직원</p>
+                                    <p class="desc">지금 프로필을 만들고 기회를 찾아보세요.</p>
+                                </div>
+                                <a th:href="@{/member/login}" class="btn-login btn-primary">
+                                    <button class="btn-login btn-primary">로그인</button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 광고 배너 -->
+                        <div class="content-box pd-0" th:if="${advertisements != null}">
+                            <div class="banner-list">
+                                <div class="ad-banner" th:each="advertisement : ${advertisements}">
+                                    <div class="ad-text-box">
+                                        <p class="title" th:text="${advertisement.advertisementMainText}">
+                                        <p class="desc" th:text="${advertisement.advertisementSubText}"></p>
+                                    </div>
+                                    <div class="ad-img">
+                                        <img th:src="${advertisement.filePath}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="~{main-page/mobile-footer}"></div>
+    </div>
+
+    <!-- toast - red -->
+    <div id="toast-red" class="toast-warning">
+        <div class="toast-warning-content">
+            <div class="toast-inner">
+                <div class="toast-icon">
+                    <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                        <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <p class="toast-text">키워드는 50자 이내로 입력해주세요</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/company/list/module/layout.js"></script>
+<script src="/js/company/list/module/service.js"></script>
+<script src="/js/company/list/event.js"></script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/member/find-email-ok.css">
+    <title>이메일 찾기 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <main class="main">
+            <div data-theme="light" class="page-container">
+                <div class="form-container">
+                    <div class="form-layout">
+                        
+                        <!-- 안내 문구 -->
+                        <div class="title-box">
+                            <div class="title-text">고객님의 콕 계정을 찾았습니다.</div>
+                            <div class="account-result-message">아이디 확인 후 로그인해 주세요.</div>
+                        </div>
+            
+                        <!-- 계정 정보 박스 -->
+                        <div class="account-info-box">
+                            <ul class="account-info-list">
+                                <li class="account-info-item">
+                                    <div class="account-info">
+                                        <div class="account-email" th:text="${userDTO.userEmail}">exam***@gmail.com</div>
+                                        <div class="account-join-date" th:text="${userDTO.createdDateTime}">가입일 2025.09.15.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+            
+                        <!-- 비밀번호 찾기/로그인 버튼 -->
+                        <div class="account-result-actions">
+                            <a onclick="window.location.href='/member/find-password'">
+                                <button class="btn-find-password" type="button">
+                                    <span class="btn-text">비밀번호 찾기</span>
+                                </button>
+                            </a>
+                            <a onclick="window.location.href='/member/login'">
+                                <button class="btn-login" type="button">
+                                    <span class="btn-text">로그인</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="/js/member/find-email-ok/event.js"></script>
+</html>

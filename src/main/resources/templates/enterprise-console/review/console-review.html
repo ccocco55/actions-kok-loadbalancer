@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/enterprise-console/review/console-review.css">
+  <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+  <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <title>평가 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <div th:replace="~{enterprise-console/sidebar/console-sidebar}"></div>
+
+        <main class="main">
+
+                <header class="header">
+                    <div class="header-wrap">
+                        <nav class="breadcrumb">
+                            <ol class="header-ol">
+                                <li class="header-li">
+                                    <span class="header-span">기업용 콘솔</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </header>
+                    <div class="home-wrap">
+                        <div class="home-wrap-2">
+                            <div class="home-wrap-inner">
+                                <div class="home-wrap-inner-2">
+
+            <!-- 왼쪽 영역 -->
+
+                                        <div class="home-top">
+                                            <div>
+                                                <h1 class="top-h1">평가서</h1>
+                                                <p class="top-p">우리 기업을 체험한 지원자에 대해 평가를 남겨 주세요</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-in-box">
+
+            <!-- 기본 정보 -->          <div class="main-content">
+                                        <div class="section">
+                                            <h3>기본 정보</h3>
+                                            <div class="form-grid">
+                                                <div>
+                                                    <label>지원자 이름</label>
+                                                    <input type="text" placeholder="지원자 이름" th:value="${user.getUserName()}">
+                                                </div>
+                                                <div>
+                                                    <label>체험 시작 일자</label>
+                                                    <input type="text" placeholder="yyyy-mm-dd" th:value="${exp.getExperienceStartDate()}">
+                                                </div>
+                                                <!-- <div>
+                                                    <label>채용부서</label>
+                                                    <input type="text" placeholder="부서 입력">
+                                                </div>
+                                                <div>
+                                                    <label>채용담당자</label>
+                                                    <input type="text" placeholder="담당자 입력">
+                                                </div> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="left">
+
+                                                <!-- 평가 상세 : 태도/자세 평가 -->
+                                            <div class="section">
+                                                <h3>태도/자세 평가</h3>
+                                                <p>시간 준수 (출근·수행·업무 시간 관리)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="time1" name="time" value="1"><label for="time1" class="radio-label">1</label>
+                                                    <input type="radio" id="time2" name="time" value="2"><label for="time2" class="radio-label">2</label>
+                                                    <input type="radio" id="time3" name="time" value="3"><label for="time3" class="radio-label">3</label>
+                                                    <input type="radio" id="time4" name="time" value="4"><label for="time4" class="radio-label">4</label>
+                                                    <input type="radio" id="time5" name="time" value="5"><label for="time5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>성실성 (맡은 일을 끝까지 책임지는 정도)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="diligence1" name="diligence" value="1"><label for="diligence1" class="radio-label">1</label>
+                                                    <input type="radio" id="diligence2" name="diligence" value="2"><label for="diligence2" class="radio-label">2</label>
+                                                    <input type="radio" id="diligence3" name="diligence" value="3"><label for="diligence3" class="radio-label">3</label>
+                                                    <input type="radio" id="diligence4" name="diligence" value="4"><label for="diligence4" class="radio-label">4</label>
+                                                    <input type="radio" id="diligence5" name="diligence" value="5"><label for="diligence5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>적극성 (스스로 참여하고 몰입하는 태도)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="active1" name="active" value="1"><label for="active1" class="radio-label">1</label>
+                                                    <input type="radio" id="active2" name="active" value="2"><label for="active2" class="radio-label">2</label>
+                                                    <input type="radio" id="active3" name="active" value="3"><label for="active3" class="radio-label">3</label>
+                                                    <input type="radio" id="active4" name="active" value="4"><label for="active4" class="radio-label">4</label>
+                                                    <input type="radio" id="active5" name="active" value="5"><label for="active5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>협업 태도 (동료·멘토와의 소통, 팀워크)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="team1" name="team" value="1"><label for="team1" class="radio-label">1</label>
+                                                    <input type="radio" id="team2" name="team" value="2"><label for="team2" class="radio-label">2</label>
+                                                    <input type="radio" id="team3" name="team" value="3"><label for="team3" class="radio-label">3</label>
+                                                    <input type="radio" id="team4" name="team" value="4"><label for="team4" class="radio-label">4</label>
+                                                    <input type="radio" id="team5" name="team" value="5"><label for="team5" class="radio-label">5</label>
+                                                </div>
+                                            </div>
+
+            <!-- 평가 상세 : 업무/역량 평가 -->
+                                            <div class="section">
+                                                <h3>업무/역량 평가</h3>
+                                                <p>업무 이해도 (지시 사항을 파악하고 적용하는 능력)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="understanding1" name="understanding" value="1"><label for="understanding1" class="radio-label">1</label>
+                                                    <input type="radio" id="understanding2" name="understanding" value="2"><label for="understanding2" class="radio-label">2</label>
+                                                    <input type="radio" id="understanding3" name="understanding" value="3"><label for="understanding3" class="radio-label">3</label>
+                                                    <input type="radio" id="understanding4" name="understanding" value="4"><label for="understanding4" class="radio-label">4</label>
+                                                    <input type="radio" id="understanding5" name="understanding" value="5"><label for="understanding5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>문제 해결력 (예상치 못한 상황에 대처하는 능력)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="clue1" name="clue" value="1"><label for="clue1" class="radio-label">1</label>
+                                                    <input type="radio" id="clue2" name="clue" value="2"><label for="clue2" class="radio-label">2</label>
+                                                    <input type="radio" id="clue3" name="clue" value="3"><label for="clue3" class="radio-label">3</label>
+                                                    <input type="radio" id="clue4" name="clue" value="4"><label for="clue4" class="radio-label">4</label>
+                                                    <input type="radio" id="clue5" name="clue" value="5"><label for="clue5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>학습 속도 (새로운 툴, 프로세스를 받아들이는 능력)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="speed1" name="speed" value="1"><label for="speed1" class="radio-label">1</label>
+                                                    <input type="radio" id="speed2" name="speed" value="2"><label for="speed2" class="radio-label">2</label>
+                                                    <input type="radio" id="speed3" name="speed" value="3"><label for="speed3" class="radio-label">3</label>
+                                                    <input type="radio" id="speed4" name="speed" value="4"><label for="speed4" class="radio-label">4</label>
+                                                    <input type="radio" id="speed5" name="speed" value="5"><label for="speed5" class="radio-label">5</label>
+                                                </div>
+                                                
+                                                <p>창의성/아이디어 (개선 의견, 새로운 접근 제안)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="idea1" name="idea" value="1"><label for="idea1" class="radio-label">1</label>
+                                                    <input type="radio" id="idea2" name="idea" value="2"><label for="idea2" class="radio-label">2</label>
+                                                    <input type="radio" id="idea3" name="idea" value="3"><label for="idea3" class="radio-label">3</label>
+                                                    <input type="radio" id="idea4" name="idea" value="4"><label for="idea4" class="radio-label">4</label>
+                                                    <input type="radio" id="idea5" name="idea" value="5"><label for="idea5" class="radio-label">5</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="section">
+                                                <h3>커뮤니케이션</h3>
+                                                <p>표현력 (자신의 생각을 명확히 전달)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="communication1" name="communication" value="1"><label for="communication1" class="radio-label">1</label>
+                                                    <input type="radio" id="communication2" name="communication" value="2"><label for="communication2" class="radio-label">2</label>
+                                                    <input type="radio" id="communication3" name="communication" value="3"><label for="communication3" class="radio-label">3</label>
+                                                    <input type="radio" id="communication4" name="communication" value="4"><label for="communication4" class="radio-label">4</label>
+                                                    <input type="radio" id="communication5" name="communication" value="5"><label for="communication5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>경청 태도 (피드백을 수용하고 반영)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="taedo1" name="taedo" value="1"><label for="taedo1" class="radio-label">1</label>
+                                                    <input type="radio" id="taedo2" name="taedo" value="2"><label for="taedo2" class="radio-label">2</label>
+                                                    <input type="radio" id="taedo3" name="taedo" value="3"><label for="taedo3" class="radio-label">3</label>
+                                                    <input type="radio" id="taedo4" name="taedo" value="4"><label for="taedo4" class="radio-label">4</label>
+                                                    <input type="radio" id="taedo5" name="taedo" value="5"><label for="taedo5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>매너/예절 (기본적인 직장 매너)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="manner1" name="manner" value="1"><label for="manner1" class="radio-label">1</label>
+                                                    <input type="radio" id="manner2" name="manner" value="2"><label for="manner2" class="radio-label">2</label>
+                                                    <input type="radio" id="manner3" name="manner" value="3"><label for="manner3" class="radio-label">3</label>
+                                                    <input type="radio" id="manner4" name="manner" value="4"><label for="manner4" class="radio-label">4</label>
+                                                    <input type="radio" id="manner5" name="manner" value="5"><label for="manner5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>협업 태도 (동료·멘토와의 소통, 팀워크)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="listen1" name="listen" value="1"><label for="listen1" class="radio-label">1</label>
+                                                    <input type="radio" id="listen2" name="listen" value="2"><label for="listen2" class="radio-label">2</label>
+                                                    <input type="radio" id="listen3" name="listen" value="3"><label for="listen3" class="radio-label">3</label>
+                                                    <input type="radio" id="listen4" name="listen" value="4"><label for="listen4" class="radio-label">4</label>
+                                                    <input type="radio" id="listen5" name="listen" value="5"><label for="listen5" class="radio-label">5</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="section">
+                                                <h3>종합 잠재력 평가</h3>
+                                                <p>열정 지수 (의욕, 동기부여 수준)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="passione1" name="passione" value="1"><label for="passione1" class="radio-label">1</label>
+                                                    <input type="radio" id="passione2" name="passione" value="2"><label for="passione2" class="radio-label">2</label>
+                                                    <input type="radio" id="passione3" name="passione" value="3"><label for="passione3" class="radio-label">3</label>
+                                                    <input type="radio" id="passione4" name="passione" value="4"><label for="passione4" class="radio-label">4</label>
+                                                    <input type="radio" id="passione5" name="passione" value="5"><label for="passione5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>적합도 (해당 직무/조직과의 궁합)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="good1" name="good" value="1"><label for="good1" class="radio-label">1</label>
+                                                    <input type="radio" id="good2" name="good" value="2"><label for="good2" class="radio-label">2</label>
+                                                    <input type="radio" id="good3" name="good" value="3"><label for="good3" class="radio-label">3</label>
+                                                    <input type="radio" id="good4" name="good" value="4"><label for="good4" class="radio-label">4</label>
+                                                    <input type="radio" id="good5" name="good" value="5"><label for="good5" class="radio-label">5</label>
+                                                </div>
+
+                                                <p>성장 가능성 (잠재력, 미래 발전 가능성)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="jeonmang1" name="jeonmang" value="1"><label for="jeonmang1" class="radio-label">1</label>
+                                                    <input type="radio" id="jeonmang2" name="jeonmang" value="2"><label for="jeonmang2" class="radio-label">2</label>
+                                                    <input type="radio" id="jeonmang3" name="jeonmang" value="3"><label for="jeonmang3" class="radio-label">3</label>
+                                                    <input type="radio" id="jeonmang4" name="jeonmang" value="4"><label for="jeonmang4" class="radio-label">4</label>
+                                                    <input type="radio" id="jeonmang5" name="jeonmang" value="5"><label for="jeonmang5" class="radio-label">5</label>
+                                                </div>
+                                                
+                                                <p>재참여 의사 (기업에서 다시 보고 싶은가?)</p>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="re1" name="re" value="1"><label for="re1" class="radio-label">1</label>
+                                                    <input type="radio" id="re2" name="re" value="2"><label for="re2" class="radio-label">2</label>
+                                                    <input type="radio" id="re3" name="re" value="3"><label for="re3" class="radio-label">3</label>
+                                                    <input type="radio" id="re4" name="re" value="4"><label for="re4" class="radio-label">4</label>
+                                                    <input type="radio" id="re5" name="re" value="5"><label for="re5" class="radio-label">5</label>
+                                                </div>
+                                            </div>
+
+                                            <!-- 종합 잠재력 평가 -->
+                                            <div class="section">
+                                                <h3>총평</h3>
+                                                <textarea placeholder="지원자에 대해 간단한 총평을 작성해주세요." id="text-review"></textarea>
+                                            </div>
+                                        </div>
+                                        </div>
+
+            <!-- 오른쪽 영역 -->        <div class="sub-content">
+                                        <div class="right">
+                                            <h3>채점 등록</h3>
+                                            <p>모든 정보를 확인하고 등록하세요.</p>
+                                            <button class="submit-btn">등록하기</button>
+                                        </div>
+                                        </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+</body>
+<script th:inline="javascript">
+    const memberId = [[${memberId}]];
+    const requestExperienceId = [[${requestExperienceId}]];
+    const companyId=[[${companyId}]];
+</script>
+<script src="/js/console/review/event.js"></script>
+<script src="/js/console/sidebar/event.js"></script>
+</html>

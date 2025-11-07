@@ -1,0 +1,120 @@
+@media (max-width: 1023px) {
+    .main-content {
+        padding-bottom: 58px;
+        flex-direction: column;
+        background: #ffffff;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+
+    .main-footer {
+        bottom: 0;
+        justify-content: space-between;
+        border-color: rgba(24,37,61,0.0600) !important;
+        flex-direction: column;
+        padding: 8px;
+        background: #ffffff;
+        z-index: 1000;
+        border-top: 1px solid;
+        position: fixed;
+        width: 100%;
+        display: flex;
+    }
+
+    .footer-list-wrap {
+        justify-content: space-between;
+        align-items: center;
+        gap: 9px;
+        width: 100%;
+        display: flex;
+    }
+
+    .footer-list-section {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        height: auto;
+        gap: 4px;
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+    }
+
+    .footer-list-icon-wrap {
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+    }
+
+    /* 활성화 */
+    .footer-list-icon.active {
+        border-radius: 0px;
+        height: 24px;
+        padding: 0px;
+        justify-content: center;
+        align-items: center;
+        display: inline-flex;
+        color: #0aa5ff;
+    }
+
+    .footer-list-text.active {
+        text-overflow: ellipsis;
+        text-align: center;
+        overflow: hidden;
+        color: rgba(18,19,20,1);
+        letter-spacing: -.2px;
+        font-family: "PretendardVariable","PretendardVariable Fallback";
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 14px;
+    }
+
+    /* 비활성화 */
+    .footer-list-icon {
+        border-radius: 0px;
+        height: 24px;
+        padding: 0px;
+        justify-content: center;
+        align-items: center;
+        display: inline-flex;
+        color: rgba(18,19,20,0.2400);
+    }
+
+    .footer-list-text {
+        text-overflow: ellipsis;
+        text-align: center;
+        overflow: hidden;
+        color: rgba(18,19,20,0.6000);
+        letter-spacing: -.2px;
+        font-family: "PretendardVariable","PretendardVariable Fallback";
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 14px;
+    }
+}
+
+.pc {
+    display: block;
+}
+.mob {
+    display: none;
+}
+
+/* 1023px 이하일 때: 모바일 */
+@media (max-width: 1023px) {
+    .pc {
+        display: none;
+    }
+    .mob {
+        display: block;
+    }
+}
+@media (min-width: 1024px) {
+    .top-wrap {
+        display: none;
+    }
+}

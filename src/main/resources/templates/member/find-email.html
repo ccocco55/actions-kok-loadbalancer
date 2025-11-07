@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/member/find-email.css">
+    <title>이메일 찾기 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <main class="main">
+            <div data-theme="light" class="page-container">
+                <div class="form-container">
+                    <div class="form-layout">
+                        
+                        <!-- 로그인 페이지로 돌아가는 버튼 -->
+                        <a onclick="window.location.href='/member/login'">
+                            <button class="btn-back">
+                                <div draggable="false" class="btn-icon">
+                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20">
+                                        <use href="#arrow-left-outline"></use>
+                                    </svg>
+                                </div>
+                                <p class="btn-text">로그인</p>
+                            </button>
+                        </a>
+        
+                        <!-- 이메일 찾기 -->
+                        <div class="title-box">
+                            <div class="title-text">이메일 찾기</div>
+                        </div>
+                        <form class="find-email-form" data-gtm-form-interact-id="0">
+                            <div class="form-body">
+                                <div class="form-group-wrapper">
+                                    <!-- 이름 입력 -->
+                                    <div class="form-group">
+                                        <div class="label-box">
+                                            <div class="label-text">이름</div>
+                                        </div>
+                                        <div class="input-box">
+                                            <div style="cursor:text" class="input-wrapper">
+                                                <input id="input-name" placeholder="홍길동" style="cursor:text" class="form-group-input" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 전화번호 입력 -->
+                                    <div class="form-group">
+                                        <div class="label-box">
+                                            <div class="label-text">전화번호</div>
+                                        </div>
+                                        <div class="input-box">
+                                            <div style="cursor:text" class="input-wrapper">
+                                                <input id="input-number" pattern="[0-9]*" type="text" inputmode="numeric" placeholder="01012345678" style="cursor:text" class="input-text" value="" maxlength="11" oninput="formatPhoneNumber(this)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 인증번호 입력 -->
+                                    <div id="input-certi-container" class="form-group">
+                                        <div class="label-box">
+                                            <div class="label-text">인증번호</div>
+                                        </div>
+                                        <div class="input-box">
+                                            <div style="cursor:text" class="input-wrapper">
+                                                <input id="input-certi" class="form-group-input" type="text" inputmode="numeric" placeholder="인증번호 6자리 숫자 입력" style="cursor:text"  value="" maxlength="6" oninput="formatCertiNumber(this)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- 인증번호 받기 버튼 -->
+                            <button class="btn-submit inactive"  type="button">
+                                <span class="btn-submit-text">인증번호 받기</span>
+                            </button>
+
+                            <!-- 확인 버튼 -->
+                            <button class="btn-check inactive none"  type="button">
+                                <span class="btn-submit-text">확인</span>
+                            </button>
+        
+                            <!-- 이용약관 -->
+                            <div class="agreement-box">
+                                <div class="agreement-item">
+                                    <div draggable="false" class="agreement-icon">
+                                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="16" role="img" width="16">
+                                            <use href="#check-thick-outline"></use>
+                                        </svg>
+                                    </div>
+                                    <span class="agreement-text">인증을 위해 인증주체에서 요구하는 <span class="agreement-link">개인정보 수집 및 이용</span>, <span class="agreement-link">고유식별정보 처리</span>, <span class="agreement-link">서비스 이용약관</span>, <span class="agreement-link">통신사 이용약관</span>, <span class="agreement-link">개인정보 제3자 제공</span>에 대한 동의합니다.</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 이름 입력 오류 -->
+            <div id="toast-name" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>이름을 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 전화번호 입력 오류 -->
+            <div id="toast-number" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>전화번호를 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 인증번호 공란 오류 -->
+            <div id="toast-certi-number" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>인증번호 6자리를 입력해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 인증번호 입력 오류 -->
+            <div id="toast-wrong-certi" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>인증번호를 다시 확인해주세요.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 인증번호 발송 -->
+            <div id="toast-send-certi" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg aria-label="icon" color="foregrounds.surface.static" fill="currentColor" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12.141 5.07a4.8 4.8 0 1 1 6.788 6.789l-1.414 1.414a.8.8 0 1 1-1.131-1.131l1.414-1.415a3.2 3.2 0 0 0-4.526-4.525l-1.414 1.414a.8.8 0 0 1-1.131-1.131zm3.253 3.536a.8.8 0 0 1 0 1.131l-5.657 5.657a.8.8 0 0 1-1.132-1.131l5.657-5.657a.8.8 0 0 1 1.132 0m-7.778 2.121a.8.8 0 0 1 0 1.132L6.2 13.273a3.2 3.2 0 0 0 4.526 4.525l1.414-1.414a.8.8 0 0 1 1.131 1.131l-1.414 1.415a4.8 4.8 0 0 1-6.788-6.788l1.414-1.415a.8.8 0 0 1 1.132 0" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>인증번호가 발송되었습니다.</p>
+                    </div>
+                    <p class="toast-p">핸드폰 메시지함을 확인해주세요</p>
+                </div>
+            </div>
+        
+            <!-- toast - 인증번호 발송 오류 -->
+            <div id="toast-fail-send" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>인증번호 발송에 실패했습니다.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- toast - 회원정보 오류 -->
+            <div id="toast-fail-member" class="toast-warning">
+                <div class="toast-warning-content">
+                    <div class="toast-inner">
+                        <div class="toast-icon">
+                            <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <p>회원 정보가 존재하지 않습니다.</p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 심볼 -->
+            <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+                <symbol id="arrow-left-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
+                </symbol>
+                <symbol id="check-thick-outline" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M20.49 5.51a1.4 1.4 0 0 1 0 1.98l-11 11a1.4 1.4 0 0 1-1.98 0l-4-4a1.4 1.4 0 0 1 1.98-1.98l3.01 3.01L18.51 5.51a1.4 1.4 0 0 1 1.98 0" fill-rule="evenodd"></path>
+                </symbol>
+            </svg>
+
+        </main>
+    </div>
+</body>
+<script src="/js/member/find-email/module/service.js"></script>
+<script src="/js/member/find-email/event.js"></script>
+</html>

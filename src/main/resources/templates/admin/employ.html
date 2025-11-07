@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콕(KOK) 관리자</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/admin/experience.css">
+</head>
+<body>
+    <div id="kok">
+        <div id="kok-notify-container"></div>
+        <div class="popup-manager" style="width: 0px;"></div>
+        <!-- 사이드 바 -->
+        <aside id="kok-side">
+            <div class="d-flex flex-column" id="side-wrapper">
+                <div class="side-header">
+                    <div class="app-wrapper">
+                        <div class="provider-name hover-spin">
+                            <span class="comp-provider-name">
+                                <span class="pn-name">관리자 모드</span>
+                            </span>
+                        </div>
+                        <a class="app-name d-flex justify-content-between align-items-center">
+                            <span th:text="${admin.username}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-wrapper flex-grow-1">
+                    <ul class="menu-list">
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin" id="menu-home" class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M10.8 3.65a2 2 0 0 1 2.4 0l7 5.25a2 2 0 0 1 .8 1.6V19a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3h-2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8.5a2 2 0 0 1 .8-1.6z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">HOME</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10M9 14a5 5 0 0 0-5 5v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a5 5 0 0 0-5-5z"></path>
+                                </svg>
+                                <span class="menu-name">회원관리</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                    <!-- 리스트가 보이는 상태의 아이콘 i class="mdi mdi-chevron-down" -->
+                                </div>
+                            </a>
+                            <!-- 리스트가 보이는 상태 ul class="menu-sub-list collapse show" -->
+                            <ul class="menu-sub-list collapse" id="menu-6109064136799700f1ebced6">
+                                <li class="submenu menu-item">
+                                    <!-- 클릭 한 부분 active -->
+                                    <a href="/admin/member" class="kok-link">
+                                        -
+                                        일반회원
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/company" class="kok-link">
+                                        -
+                                        기업회원
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/experience" class="menu-btn d-flex w-100" id="menu-experience">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
+                                </svg>
+                                <span class="menu-name">체험</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a href="/admin/employ" class="menu-btn d-flex w-100 current" id="menu-employ">
+                                <svg fill="rgb(255, 255, 255)" height="24" role="img" width="24" stroke="black" stroke-width="1.5">
+                                    <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">인턴</span>
+                            </a>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100">
+                                <svg fill="" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M13.694 6.8a1.2 1.2 0 0 0-1.184 1.003l-1.333 8a1.2 1.2 0 0 0 1.184 1.397h6.13a1.2 1.2 0 0 0 1.154-.87l1.294-4.53h-2.5a2.8 2.8 0 0 1-2.745-3.349l.33-1.65zm3.943.094-.374 1.87A1.2 1.2 0 0 0 18.44 10.2h2.582a1.2 1.2 0 0 0-.173-.22L18.02 7.152a1.2 1.2 0 0 0-.383-.258m-6.705.646a2.8 2.8 0 0 1 2.762-2.34h3.478a2.8 2.8 0 0 1 1.98.82l2.828 2.83a2.8 2.8 0 0 1 .82 1.98V11q0 .113-.03.22l-1.586 5.55a2.8 2.8 0 0 1-2.693 2.03h-6.13a2.8 2.8 0 0 1-2.762-3.26zM3.2 9a.8.8 0 0 1 .8-.8h5a.8.8 0 1 1 0 1.6H4a.8.8 0 0 1-.8-.8m-2 3a.8.8 0 0 1 .8-.8h6a.8.8 0 0 1 0 1.6H2a.8.8 0 0 1-.8-.8m2 3a.8.8 0 0 1 .8-.8h3a.8.8 0 0 1 0 1.6H4a.8.8 0 0 1-.8-.8" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">배너</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <ul class="menu-sub-list collapse" id="menu-6284cdfecf9f6d001b046f3a">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/advertise" class="kok-link">
+                                        -
+                                        광고신청
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/banner" class="kok-link">
+                                        -
+                                        현수막
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu menu-item d-flex flex-column">
+                            <a class="menu-btn d-flex w-100" id="menu-payment">
+                                <svg fill="" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M2.2 7A2.8 2.8 0 0 1 5 4.2h14A2.8 2.8 0 0 1 21.8 7v5a.8.8 0 1 1-1.6 0V9.8H3.8V17A1.2 1.2 0 0 0 5 18.2h6a.8.8 0 0 1 0 1.6H5A2.8 2.8 0 0 1 2.2 17zm1.6 1.2h16.4V7A1.2 1.2 0 0 0 19 5.8H5A1.2 1.2 0 0 0 3.8 7zM6.2 13a.8.8 0 0 1 .8-.8h5a.8.8 0 0 1 0 1.6H7a.8.8 0 0 1-.8-.8M18 14.2a.8.8 0 0 1 .8.8v2.2H21a.8.8 0 0 1 0 1.6h-2.2V21a.8.8 0 0 1-1.6 0v-2.2H15a.8.8 0 1 1 0-1.6h2.2V15a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                </svg>
+                                <span class="menu-name">결제</span>
+                                <div class="icon-wrapper flex-grow-1 text-right">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <ul class="menu-sub-list collapse" id="">
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/advertise" class="kok-link">
+                                        -
+                                        광고비
+                                    </a>
+                                </li>
+                                <li class="submenu menu-item">
+                                    <a href="/admin/payment/experience" class="kok-link">
+                                        -
+                                        체험비
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <!-- 상단 시작 부분 -->
+        <div id="kok-main" class="has-menu">
+            <div id="header-wrapper">
+                <div id="kok-header" class="d-flex false">
+                    <div class="flex-grow-1"></div>
+                    <div>
+                        <div class="header-menu-group d-flex">
+                            <!-- 상단 신고 게시글 목록 이동 -->
+                            <a href="/admin/notify/post" class="kok-link mr-3">
+                                <div class="header-menu-btn-manage">
+                                    <i class="mdi mdi-text-box-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 고객지원 - 자주 묻는 질문 이동 -->
+                            <a href="/admin/support" class="kok-link mr-3">
+                                <div class="header-menu-btn-notice">
+                                    <i class="mdi mdi-bullhorn-variant-outline"></i>
+                                </div>
+                            </a>
+                            <!-- 상단 관리자 이메일 -->
+                            <div class="user-menu">
+                                <div class="user-menu-wrapper d-flex align-items-center cursor-pointer" id="user-menu-handler">
+                                    <div class="user-avatar">E</div>
+                                    <div class="user-menu-email" th:text="${admin.userEmail}"></div>
+                                </div>
+                                <!-- 리스트가 보여질 때 -->
+                                <!-- <div class="user-menu-content dropdown-menu dropdown-menu-right show" style="position: absolute; transform: translate3d(1698px, 62px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-end"> -->
+                                <div class="user-menu-content dropdown-menu dropdown-menu-right">
+                                    <ul class="menu-body list-unstyled">     
+                                        <li>
+                                            <a href="" class="d-block text-dark" id="logout">
+                                                <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
+                                                로그아웃
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/admin/join" class="d-block text-dark">
+                                                <i class="mdi mdi-account-box-outline mr-2 mdi-18px"></i>
+                                                관리자 등록
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page ana-user-index wide-page">
+                <div class="page-header">
+                    <div class="page-title">인턴공고</div>
+                    <div class="page-subtitle"></div>
+                </div>
+                <div class="page-body">
+                    <div class="page-content">
+                        <div class="table-layout white-panel">
+                            <div class="filter-section">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <span class="member-count">총
+                                            <span class="count-amount">  </span>건
+                                        </span>
+                                    </div>
+                                    <!-- PG 선택, 결제방식선택, 결제상태선택 버튼 -->
+                                    <!-- <div class="col-auto"></div> -->
+                                    <div class="col-auto"></div>
+                                    <div class="col-auto"></div>
+                                    <div class="col-auto"></div>
+                                    <div class="col text-right"></div>
+                                    <div class="col-auto">
+                                        <div class="filter-wrapper filter-search ml-1">
+                                            <div class="input-group">
+                                                <input name="keyword" class="form-control flex-grow-1" type="text" placeholder="기업명/제목/부제목/직군" value="">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-search">
+                                                        <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
+                                                            <svg class="icon-img" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path class="icon-color fill" d="m13.523 12.463 3.212 3.211-1.06 1.061-3.212-3.212A6.72 6.72 0 0 1 8.25 15 6.752 6.752 0 0 1 1.5 8.25 6.752 6.752 0 0 1 8.25 1.5 6.752 6.752 0 0 1 15 8.25a6.72 6.72 0 0 1-1.477 4.213zm-1.504-.557A5.233 5.233 0 0 0 13.5 8.25C13.5 5.349 11.15 3 8.25 3A5.248 5.248 0 0 0 3 8.25c0 2.9 2.349 5.25 5.25 5.25a5.233 5.233 0 0 0 3.656-1.481l.113-.113z" fill="#292929"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fill-table-layout">
+                                <table class="table grey-header-table w-100 member-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="td-name">기업명</th>
+                                            <th class="td-main-title">인턴공고 제목</th>
+                                            <th class="td-sub-title">인턴공고 부제목</th>
+                                            <th class="td-status">모집상태</th>
+                                            <th class="td-date">모집 종료일</th>                                           
+                                            <th class="td-job">직군</th>
+                                            <th class="td-action">상세</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        <tr>
+                                            <td class="td-name">
+                                                <p>코리아IT</p>
+                                            </td>
+                                            <td class="td-main-title">
+                                                <p>SW 개발 백엔드</p>
+                                            </td>
+                                            <td class="td-sub-title">
+                                                <p>AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</p>
+                                            </td>
+                                            <td class="td-status">
+                                                <p>모집중</p>
+                                            </td>
+                                            <td class="td-date">
+                                                <p>2025/09/19</p>
+                                            </td>  
+                                            <td class="td-job">
+                                                <p>SW 개발</p>
+                                            </td>
+                                            <td class="td-action text-center">
+                                                <div class="action-btn">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 페이지 번호 -->
+                            <nav class="kok-pagination-wrapper mt-5 mb-4">
+                                <ul class="pagination kok-pagination">
+                                    <li class="page-item page-num active">
+                                        <a href="" class="page-item-link page-item-num">1</a>
+                                    </li>
+                                    <li class="page-item page-num">
+                                        <a href="" class="page-item-link page-item-num">2</a>
+                                    </li>
+                                    <li class="page-item page-num">
+                                        <a href="" class="page-item-link page-item-num">3</a>
+                                    </li>
+                                    <li class="page-item page-num">
+                                        <a href="" class="page-item-link page-item-num">4</a>
+                                    </li>
+                                    <li class="page-item page-num">
+                                        <a href="" class="page-item-link page-item-num">5</a>
+                                    </li>
+                                </ul>
+                                <div class="pagination-desc">
+                                    <!-- 회원이 1페이지(10명 미만)일 때 -->
+                                    <!-- <div class="des text-ignore">
+                                        <span>
+                                            <span class="highlight">last</span>
+                                            of
+                                            1
+                                        </span>
+                                        results
+                                    </div> -->
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- 인턴공고 상세 모달 창 -->
+                <div class="modal fade member-modal" style="display: none;">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">
+                                    SW 개발 백엔드
+                                    <span class="badge-label text-danger font-weight-bold ml-2">코리아IT</span>
+                                </div>
+                                <button class="close">
+                                    <i class="mdi mdi-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="divider">
+                                    <div class="tab-view">
+                                        <div class="tab-view-header"></div>
+                                        <div class="tab-view-body">
+                                            <div style="display: block;">
+                                                <div class="tab-inner tab-detail">
+                                                    <div class="info-layout detail-info" id="info-table">
+                                                        <div class="info-title justify-content-between">
+                                                            <div class="flex-left d-flex">
+                                                                <div class="title">인턴공고 상세정보</div>
+                                                            </div>
+                                                            <div class="flex-right"></div>
+                                                        </div>
+                                                        <table class="info-table w-100">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th>모집 시작일</th>
+                                                                    <td>2025/09/16</td>
+                                                                    <th>모집 종료일</th>
+                                                                    <td>2025/09/19</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>인턴공고 제목</th>
+                                                                    <td colspan="3">SW 개발 백엔드 체험</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>인턴공고 부제목</th>
+                                                                    <td colspan="3">AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>직무소개</th>
+                                                                    <td colspan="3">-</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>주요업무</th>
+                                                                    <td colspan="3">-</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>참고사항</th>
+                                                                    <td colspan="3">-</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- 신청자 내역 -->
+                                                    <div class="info-layout detail-info" id="info-request">
+                                                        <div class="info-title justify-content-between">
+                                                            <div class="flex-left d-flex">
+                                                                <div class="title">신청자 내역</div>
+                                                            </div>
+                                                            <div class="flex-right"></div>
+                                                        </div>
+                                                        <div class="d-table w-100">
+                                                            <table class="info-table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="middle">이름</th>
+                                                                        <th class="middle">이메일</th>
+                                                                        <th class="middle">전화번호</th>
+                                                                        <th class="middle" style="text-align: center;">지원상태</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>                                                                   
+                                                                    <tr>
+                                                                        <td>테스트01</td>
+                                                                        <td>test01@gmail.com</td>
+                                                                        <td>010-1234-5678</td>
+                                                                        <td style="text-align: center;">합격</td>
+                                                                    </tr>                                                                   
+                                                                    <tr>
+                                                                        <td>테스트01</td>
+                                                                        <td>test01@gmail.com</td>
+                                                                        <td>010-1234-5678</td>
+                                                                        <td style="text-align: center;">서류 접수</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>테스트01</td>
+                                                                        <td>test01@gmail.com</td>
+                                                                        <td>010-1234-5678</td>
+                                                                        <td style="text-align: center;">불합격</td>
+                                                                    </tr> 
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <nav class="kok-pagination-wrapper undefined">
+                                                            <!-- 페이징 번호 -->
+                                                            <ul class="pagination kok-pagination detail-request">
+                                                                <!-- 번호 배치 -->
+                                                            </ul>
+                                                            <div class="pagination-desc"></div>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn-close btn btn-outline-filter">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/admin/employ/module/service.js"></script>
+<script src="/js/admin/employ/module/layout.js"></script>
+<script src="/js/admin/logout/module/service.js"></script>
+<script src="/js/admin/logout/event.js"></script>
+<script src="/js/admin/employ/event.js"></script>
+</html>

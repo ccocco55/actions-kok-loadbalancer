@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleAdMapper">
+    <!--회사별 광고 목록-->
+    <select id="selectAdByCompany">
+        select
+            a.id,
+            a.advertisement_main_text,
+            a.advertisement_sub_text,
+            a.advertisement_status,
+            a.advertisement_request_status,
+            a.advertise_start_datetime,
+            a.advertise_end_datetime,
+            coalesce(max(p.payment_price),0) as payment_price
+        from tbl_advertisement a
+        join tbl_payment p
+            on a.id = p.advertisement_id
+        where a.company_id = #{companyId}
+        <if test="keyword != null and keyword != ''">
+            and (
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
+            )
+        </if>
+        group by
+            a.id, a.advertisement_main_text, a.advertisement_sub_text,
+            a.advertisement_request_status, a.advertise_start_datetime, a.advertise_end_datetime,
+            a.created_datetime
+        order by a.created_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <!-- 회사별 광고 총 개수 조회 -->
+    <select id="selectCountByCompany">
+        select count(distinct a.id)
+        from tbl_advertisement a
+            left join tbl_payment p
+                on a.id = p.advertisement_id
+        where a.company_id = #{companyId}
+        <if test="status != null">
+            <choose>
+                <when test="status.name() == 'ACCEPT'">
+                    and a.advertisement_request_status = 'accept'
+                </when>
+            </choose>
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </select>
+
+    <!-- 활성(ACCEPT 상태) 광고의 총 결제 금액 합계 조회 -->
+    <select id="selectActiveTotalPriceByCompany">
+        select coalesce(sum(p.payment_price), 0)
+        from tbl_advertisement a
+            join tbl_payment p
+                on a.id = p.advertisement_id
+        where a.company_id = #{companyId}
+            and a.advertisement_request_status = 'accept'
+    </select>
+
+    <!-- 광고 등록 -->
+    <insert id="insertAdvertisement" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_advertisement (
+            advertisement_main_text,
+            advertisement_sub_text,
+            advertisement_status,
+            advertisement_request_status,
+            advertise_start_datetime,
+            advertise_end_datetime,
+            company_id
+        )
+        values (
+            #{advertisementMainText},
+            #{advertisementSubText},
+            'active',
+            'await',
+            #{advertiseStartDatetime}::date,
+            #{advertiseEndDatetime}::date,
+            #{companyId}
+        )
+    </insert>
+
+    <!-- 결제 내역 등록 -->
+    <insert id="insertPayment" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_payment (
+            payment_price,
+            payment_status,
+            advertisement_id,
+            user_id
+        )
+        values (
+            #{paymentPrice},
+            'active',
+            #{advertisementId},
+            #{userId}
+        )
+    </insert>
+
+    <!-- 광고 수정 -->
+    <update id="updateNotice">
+        update tbl_advertisement
+        set
+            advertisement_main_text = #{advertisementMainText},
+            advertisement_sub_text = #{advertisementSubText},
+            advertise_start_datetime = #{advertiseStartDatetime}::date,
+            advertise_end_datetime = #{advertiseEndDatetime}::date,
+            updated_datetime = now()
+        where id = #{id}
+    </update>
+
+    <!-- 광고 상태 업데이트 (활성/비활성 전환) -->
+    <update id="updateNoticeStatus">
+        update tbl_advertisement
+        set advertisement_status = #{status},
+            updated_datetime = now()
+        where id = #{noticeId}
+    </update>
+
+    <!-- 광고 상세 조회 -->
+    <select id="selectAdDetailById">
+        select
+            a.id,
+            a.advertisement_main_text,
+            a.advertisement_sub_text,
+            a.advertise_start_datetime,
+            a.advertise_end_datetime,
+            a.advertisement_request_status,
+            p.payment_price
+        from tbl_advertisement a
+                 left join tbl_payment p on a.id = p.advertisement_id
+        where a.id = #{id}
+    </select>
+
+    <!-- 광고 삭제 -->
+    <delete id="deleteById">
+        delete from tbl_advertisement
+        where id = #{id}
+    </delete>
+
+    <!-- 마감일 지나면 inactive -->
+    <update id="updateAdStatusToInactive">
+    <![CDATA[
+        update tbl_advertisement
+        set advertisement_status = 'inactive'
+        where advertise_end_datetime <= current_date
+        ]]>
+    </update>
+</mapper>
+

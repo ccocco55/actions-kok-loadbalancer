@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdvertisementMapper">
+    <select id="selectAllAdvertisement">
+        select a.id, a.advertisement_main_text as advertisementMainText, a.advertisement_sub_text as advertisementSubText,
+               c.user_id as companyId, c.company_name
+        from tbl_advertisement a
+                 join tbl_company c on a.company_id = c.user_id
+        where a.advertisement_request_status = 'accept'
+        and a.advertisement_status = 'active'
+        and now() between a.advertise_start_datetime and a.advertise_end_datetime
+    </select>
+</mapper>

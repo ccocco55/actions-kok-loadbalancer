@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 | 콕</title>
+    <link rel="stylesheet" href="/css/mypage/page.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/main-page/login-header.css">
+<!--    <link rel="stylesheet" href="/css/experience/list.css">-->
+    <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
+        <main class="main">
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/mobile-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/mobile-login-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
+            <div class="main-0">
+                <div class="main-1" style="display: none">
+                    <div class="main-2">
+                        <input type="file" style="display: none;">
+                        <div class="main-3">
+                            <th:block th:if="${userDTO.memberProfileUrl!=null}">
+                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4 back-gray" th:src="${userDTO.memberProfileUrl}" style="color: transparent;">
+                            </th:block>
+                            <th:block th:if="${userDTO.memberProfileUrl==null}">
+                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4 back-gray"  src="/images/member/profile.png" style="color: transparent;">
+                            </th:block>
+                            <div class="main-5">
+                                <div>
+                                    <label for="background" class="label">                                                      
+                                        <button class="main-6">
+                                            <span class="main-7">배경 이미지 편집</span>                                  
+                                        </button>
+                                    </label> 
+                                    <input id="background" type="file" style="display: none;"> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-1">
+                        <div class="content-2">
+                            <div class="content-3">
+                                <div class="content-4">
+                                    <div class="content-5">
+<!--                                        <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">-->
+                                        <th:block th:if="${profileFile}!=null">
+                                            <img alt="image" class="back-gray" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${profileFile}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        </th:block>
+                                        <th:block th:if="${profileFile == null and userDTO.memberProfileUrl != null}">
+                                            <img alt="image" class="back-gray" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        </th:block>
+                                        <th:block th:if="${profileFile == null and userDTO.memberProfileUrl == null}">
+                                            <img alt="image" class="back-gray" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/images/member/profile.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        </th:block>
+                                    </div>
+                                    <div class="content-6">
+                                        <div class="content-7">
+                                            <p class="content-8" th:text="${userDTO.getUsername}"></p>
+                                        </div>
+                                        <p class="content-9" th:text="${userDTO.getUserJobName}"></p>
+                                    </div>
+                                </div>
+                                <div class="content-10">
+                                    <a href="">
+                                        <div class="content-11">
+                                            <p class="content-12">게시물</p>
+                                            <p class="content-13" th:text="${postCount}"></p>
+                                        </div>
+                                    </a>
+<!--                                    <div class="content-11">-->
+<!--                                        <p class="content-12">팔로잉</p>-->
+<!--                                        <p class="content-13" th:text=""></p>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="content-10">
+                                    <div class="company-intro">
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="content-14">
+                                    <button class="set content-15" type="button" >
+                                        <span class="content-16">프로필 편집</span>
+                                    </button>
+<!--                                    <button class="content-15" type="button">-->
+<!--                                        <span class="content-16">프로필 공유</span>-->
+<!--                                    </button>-->
+                                </div>
+                                <!-- 프로필 편집 -->
+                                <div class="setting" id="profile-wrap">
+
+                                </div>
+                            </div>
+                            <div class="content-17">
+                                <div class="content-18">
+                                    <div class="content-19 first active">
+                                        <p class="content-20 first active">내 게시물</p>
+                                    </div>
+                                    <div class="content-19 second">
+                                        <p class="content-20 second">저장한 공고</p>
+                                    </div>
+                                    <div class="content-19 third">
+                                        <p class="content-20 third">체험 지원 내역</p>
+                                    </div>
+                                    <div class="content-19 third-1">
+                                        <p class="content-20 third-1">인턴 지원 내역</p>
+                                    </div>
+                                    <div class="content-19 fourth">
+                                        <p class="content-20 fourth">결제 내역</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 게시글 -->
+                        <div class="post-1 active" id="my-posts-wrap">
+                        </div>
+                        <!-- 저장한 공고 -->
+                        <div class="post-1" id="saved-list-wrap">
+                            <div class="post-2" style="align-items: start;">
+                                <div style="display: flex;">
+                                    <div class="content-14 list" style="width: 65px; margin-left: 10px; margin-top: 10px; display: inline-block">
+                                        <button class="content-15 exp-btn notice active" type="button" style=" border-radius: 10px;" >
+                                            <span class="content-16">체험 공고</span>
+                                        </button>
+                                    </div>
+                                    <div class="content-14 list" style="width: 65px; margin-left: 10px; margin-top: 10px; display: inline-block;">
+                                        <button class="content-15 intern-btn notice" type="button" style=" border-radius: 10px;">
+                                            <span class="content-16">인턴 공고</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- 체험 공고 -->
+                                <div id="experience-list" style="display: contents;">
+                                    <!-- 저장한 체험 공고가 없을 때 -->
+
+                                </div>
+                                <!-- 인턴 공고 -->
+                                <div id="intern-list" style="display: none;">
+
+                                    <!-- 공고들 -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 지원내역 -->
+                        <div class="post-1" id="request-list-wrap">
+                            <div class="post-2">
+                                <div id="experience" style="display: contents;">
+                                    <!-- 지원 내역이 없을 때 -->
+                                    <!-- <div class="post-3">                        
+                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">
+                                            <div class="post-14" style="margin: 0 auto;">
+                                                <div class="post-15" >
+                                                    <div class="post-8" style="margin: 0 auto;">
+                                                        <span>지원 내역이 없습니다.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="post-9" style="margin: 0 auto;">
+                                                    <p class="post-10">체험 신청을 해보세요.</p>
+                                                </div>
+                                            </div>
+                                            <div class="post-17">
+                                                <div class="post-18">
+                                                    <div class="post-19">
+                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">
+                                                            <button class="set content-15" type="button" >
+                                                                <span class="content-16">체험 공고 둘러보기</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- 지원 내역이 있을 때 -->
+                                    <div class="payment exp-request-div">
+                                        <table class="payment-1">
+                                            <!-- 목록 -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="payment-2">기업명</th>
+                                                    <th class="payment-2">공고 제목</th>
+                                                    <th class="payment-2">지원상태</th>                                     
+                                                    <th class="payment-2">비고</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- 지원 내역들 -->
+                                            <tbody class="exp-request-container">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="retract">
+                                        <div class="retract-1">
+                                            <div class="retract-2">
+                                                <div class="retract-3">
+                                                    <div class="retract-4">
+                                                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px" role="img" width="40px">
+                                                            <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="retract-5">
+                                                        <p class="retract-6">지원을 취소하시겠습니까?</p>
+                                                        <div class="retract-7">
+                                                            <p class="retract-8">지원 취소시 체험비용이 환불됩니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="retract-9">
+                                                    <button class="retract-10"><span class="retract-11">취소하기</span></button>
+                                                    <button class="retract-12"><span class="retract-11">닫기</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 지원내역 -->
+                        <div class="post-1" id="intern-list-wrap">
+                            <div class="post-2">
+                                <div id="interns" style="display: contents;">
+                                    <!-- 지원 내역이 있을 때 -->
+                                    <div class="payment int-request-div">
+                                        <table class="payment-1">
+                                            <!-- 목록 -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="payment-2">기업명</th>
+                                                    <th class="payment-2">공고 제목</th>
+                                                    <th class="payment-2">지원상태</th>
+                                                    <th class="payment-2">비고</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- 지원 내역들 -->
+                                            <tbody class="int-request-container">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="retract intern-cancle">
+                                        <div class="retract-1">
+                                            <div class="retract-2">
+                                                <div class="retract-3">
+                                                    <div class="retract-4">
+                                                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px" role="img" width="40px">
+                                                            <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="retract-5">
+                                                        <p class="retract-6">지원을 취소하시겠습니까?</p>
+                                                        <div class="retract-7">
+                                                            <p class="retract-8">지원 취소시 체험비용이 환불됩니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="retract-9">
+                                                    <button class="retract-10 intern-cancle-10"><span class="retract-11">취소하기</span></button>
+                                                    <button class="retract-12 intern-cancle-12"><span class="retract-11">닫기</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 결제내역 -->
+                        <div class="post-1" id="payment-list-wrap">
+                            <div class="post-2">
+                                <div id="" style="display: contents;" class="payment-wrap-div">
+                                    <!-- 결제 내역이 없을 때 -->
+                                    <!-- <div class="post-3">                        
+                                        <div class="post-13" style="padding-right: 0;padding-right: 0px;padding-left: 0; justify-content: center; display: flex;">
+                                            <div class="post-14" style="margin: 0 auto;">
+                                                <div class="post-15" >
+                                                    <div class="post-8" style="margin: 0 auto;">
+                                                        <span>결제 내역이 없습니다.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="post-9" style="margin: 0 auto;">
+                                                    <p class="post-10">체험 신청을 해보세요.</p>
+                                                </div>
+                                            </div>
+                                            <div class="post-17">
+                                                <div class="post-18">
+                                                    <div class="post-19">
+                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">
+                                                            <button class="set content-15" type="button" >
+                                                                <span class="content-16">체험 공고 둘러보기</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- 결제 내역이 있을 때 -->
+                                    <div class="payment">
+                                        <table class="payment-1">
+                                            <!-- 목록 -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="payment-2">기업명</th>
+                                                    <th class="payment-2">체험공고 제목</th>       
+                                                    <th class="payment-2">결제 상태</th>
+                                                    <th class="payment-2">금액</th>                                    
+                                                    <th class="payment-2">지원 날짜</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- 결제 내역들 -->
+                                            <tbody class="payment-tbody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="etc">
+                        <!-- 보관함 -->
+                        <div class="etc-1" id="add-area">
+
+                        </div>
+                        <div class="etc-25 content-side">
+                            <div class="content-side-top">
+                                <div class="banner-list" th:if="${advertisements != null}">
+                                    <div class="ad-banner" th:each="advertisement : ${advertisements}">
+                                        <div class="ad-text-box">
+                                            <p class="title" th:text="${advertisement.advertisementMainText}"></p>
+                                            <p class="desc" th:text="${advertisement.advertisementSubText}"></p>
+                                        </div>
+                                        <div class="ad-img">
+                                            <th:block th:if="${advertisement.filePath==null}">
+                                                <img src="/images/experience/ad_bg_img.jpg" alt="">
+                                            </th:block>
+                                            <th:block th:if="${advertisement.filePath!=null}">
+                                                <img th:src="${advertisement.filePath}" alt="">
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 댓글창 모달 -->
+            <div class="reply comment-modal">
+                <div class="reply-contain">
+                    <!-- 게시글 상세 -->
+                    <div class="reply-left">
+                    </div>
+                    <!-- 상세보기 우측 -->
+                    <div class="reply-right">
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div id="post-write-popup" class="popup-container pop-center" data-sticky="true">
+            <div class="popup-inner">
+                <div class="popup-header profile">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img alt="image" class="back-gray" src="/images/member/profile.png">
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name">
+                                <p class="member-name">지원자</p>
+                            </div>
+                            <p class="profile-category">SW개발</p>
+                        </div>
+
+                        <div class="popup-close-box">
+                            <button type="button" class="popup-write-close">
+                                <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
+                                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <form action="">
+                    <div class="popup-body">
+                        <div class="popup-input">
+                            <textarea class="popup-textarea" name="" id="" placeholder="오늘의 생각, 일에 대한 통찰, 커리어 궁금증을 남겨보세요"></textarea>
+                        </div>
+
+                        <div class="popup-preview">
+                            <div class="popup-preview-inner">
+                                <!-- 이미지 들어오는곳 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-action">
+                        <div class="popup-action-left">
+                            <label for="btn-add-photo" class="popup-btn-photo">
+                                <div class="phot-icon">
+                                    <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
+                                        <path d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
+                                    </svg>
+                                </div>
+                                <p class="popup-tool-label">사진</p>
+                            </label>
+
+                            <input type="file" name="" id="btn-add-photo" multiple hidden>
+                        </div>
+                        <div class="popup-action-right">
+                            <div class="count-num-box" style="width: 100px;">
+                                <span class="current-num">0</span>
+                                <span class="divider">/</span>
+                                <span class="max-num">5000</span>
+                            </div>
+                            <button type="button" class="pop-btn btn-primary pop-btn-write">글쓰기</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- toast - white -->
+<!--        <div id="toast-white" class="toast-warning">-->
+<!--            <div class="toast-warning-content">-->
+<!--                <div class="toast-inner">-->
+<!--                    <div class="toast-icon">-->
+<!--                        <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">-->
+<!--                            <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <p class="toast-text">업로드하려면 10자 이상 입력하거나 파일을 하나 이상 첨부해야 합니다.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!-- popup - 닫기 메세지 -->
+        <div id="message-popup2" class="popup-container pop-center pop-default">
+            <div class="popup-inner">
+                <div class="popup-body">
+                    <div class="popup-title-box">
+                        <strong class="popup-title">게시하지 않고 나가시겠어요?</strong>
+                        <p class="popup-sub-title">지금 나가면 작성했던 내용이 저장되지 않습니다.</p>
+                    </div>
+                </div>
+                <div class="popup-action popup-btn-row">
+                    <button class="pop-btn btn-primary popup-all-close">나가기</button>
+                    <button class="pop-btn btn-default popup-continue popup-remove">계속 작성하기</button>
+                </div>
+            </div>
+        </div>
+        <div class="change">
+            <div class="del-1">
+                <div class="del-2">
+                    <div class="del-3">
+                        <div class="del-5">
+                            <p class="del-6" style="margin: 0 auto;">작성 중인 글이 있습니다.</p>
+                            <div class="del-7" >
+                                <p class="del-8"style="margin: 0 auto;">지금 나가면 글이 반영되지 않습니다.<br>그래도 나가시겠습니까?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="del-9">
+                        <button class="del-10 exit-wrtie"><span class="del-11">작성하지 않고 나가기</span></button>
+                        <button class="del-12 keep-write"><span class="del-11">계속 작성하기</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="del-comment">
+            <div class="del-1">
+                <div class="del-2">
+                    <div class="del-3">
+                        <div class="del-4">
+                            <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px" role="img" width="40px">
+                                <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="del-5">
+                            <p class="del-6">답글을 삭제하시겠습니까?</p>
+                            <div class="del-7">
+                                <p class="del-8">삭제된 답글은 다시 복구할 수 없으며, 게시물에서 발생한 다른 사용자의 좋아요, 댓글도 함께 삭제됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="del-9">
+                        <button class="del-10 del-comment-btn"><span class="del-11">삭제하기</span></button>
+                        <button class="del-12 del-comment-cancle-btn"><span class="del-11">닫기</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script th:inline="javascript">
+    const profileFile = [[${profileFile}]];
+    const profileFile2=[[${userDTO.memberProfileUrl}]];
+</script>
+<!--<script src="/js/experience/event.js"></script>-->
+<script src="/js/mypage/module/service.js"></script>
+<script src="/js/mypage/module/layout.js"></script>
+<script src="/js/mypage/event.js"></script>
+</html>

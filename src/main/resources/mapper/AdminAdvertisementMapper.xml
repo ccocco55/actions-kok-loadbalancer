@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminAdvertisementMapper">
+    <sql id="searchCategory">
+        <if test="category != null and category != ''">
+             and a.advertisement_request_status::text = #{category}
+        </if>
+    </sql>
+
+    <sql id="searchKeyword">
+        <if test="keyword != null and keyword != ''">
+            and
+            (
+            c.company_name like concat('%', #{keyword}, '%') or
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!--  광고 목록  -->
+    <select id="selectAllAdvertisementList">
+        select a.id,
+               a.advertisement_main_text,
+               a.advertisement_sub_text,
+               a.advertise_start_datetime,
+               a.advertise_end_datetime,
+               a.company_id,
+               a.created_datetime,
+               a.updated_datetime,
+               a.advertisement_request_status,
+               c.company_name
+        from tbl_advertisement a
+            join tbl_company c
+                on a.company_id = c.user_id
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+        order by a.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  광고 개수  -->
+    <select id="countAllAdvertisement">
+        select count(*)
+        from tbl_advertisement a
+             join tbl_company c
+                  on a.company_id = c.user_id
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+    </select>
+
+<!--  광고 상태 각 개수  -->
+    <select id="countAdvertisementStatus" resultType="com.example.kok.dto.AdminAdvertisementCountDTO">
+        select
+            sum(case when advertisement_request_status = 'accept' then 1 else 0 end) as acceptCount,
+            sum(case when advertisement_request_status = 'await' then 1 else 0 end) as awaitCount,
+            sum(case when advertisement_request_status = 'reject' then 1 else 0 end) as rejectCount
+        from tbl_advertisement
+    </select>
+
+<!--  광고 상세  -->
+    <select id="selectAdvertisementById">
+        select a.id,
+               a.advertisement_main_text,
+               a.advertisement_sub_text,
+               a.advertise_start_datetime,
+               a.advertise_end_datetime,
+               a.company_id,
+               a.created_datetime,
+               a.updated_datetime,
+               a.advertisement_request_status,
+               c.company_name,
+               c.company_url,
+               u.user_email,
+               u.user_phone
+        from tbl_advertisement a
+            join tbl_company c
+                on a.company_id = c.user_id
+            join tbl_user u
+                on c.user_id = u.id
+        where a.id = #{id}
+    </select>
+
+<!--  광고 승인  -->
+    <update id="acceptAdvertisementById">
+        update tbl_advertisement
+        set advertisement_request_status = 'accept'
+        where id = #{id} and advertisement_request_status = 'await'
+    </update>
+
+<!--  광고 거절  -->
+    <update id="rejectAdvertisementById">
+        update tbl_advertisement
+        set advertisement_request_status = 'reject'
+        where id = #{id} and advertisement_request_status = 'await'
+    </update>
+</mapper>

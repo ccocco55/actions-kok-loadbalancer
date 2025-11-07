@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콕(KOK) 관리자</title>
+    <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="/css/admin/login.css">
+    <link rel="stylesheet" href="/font/materialdesignicons-webfont-d5cba82059f88bfa469e.woff2">
+    <link rel="stylesheet" href="/font/roboto-cyrillic-700-normal-d010f1f324e111a22e53.woff2">
+    <link rel="stylesheet" href="/font/roboto-cyrillic-ext-700-normal-be4d02458ce53887dc37.woff2">
+    <link rel="stylesheet" href="/font/roboto-greek-700-normal-50e795c1345353b0e996.woff2">
+    <link rel="stylesheet" href="/font/roboto-greek-ext-700-normal-bd9854c751441ccc1a70.woff2">
+    <link rel="stylesheet" href="/font/roboto-latin-700-normal-227c93190fe7f82de3f8.woff2">
+    <link rel="stylesheet" href="/font/roboto-latin-ext-700-normal-ed67ad54b1a8f5d21150.woff2">
+    <link rel="stylesheet" href="/font/roboto-vietnamese-700-normal-3425a701027d0699e369.woff2">
+</head>
+<body>
+    <div id="kok">
+        <!-- 모달 창 -->
+        <div class="kok-modal">
+            <div class="modal-inner raise">
+                <div class="modal-header">
+                    <h3 class="modal-header-title">알림</h3>
+                </div>
+                <!-- 이메일을 입력하지 않았을 때
+                <div class="body">이메일 형식에 맞게 입력해주세요.</div> -->
+
+                <!-- 비밀번호를 입력하지 않았을 때
+                <div class="body">비밀번호를 입력해주세요.</div> -->
+                
+                <!-- 가입된 회원정보가 없거나 비밀번호가 잘못 입력 되었을 때 -->
+                <div class="modal-body">가입된 회원정보가 없거나 비밀번호가 잘못 입력되었습니다.</div>
+                <div class="modal-footer">
+                    <div class="check-button">
+                        <a href="" id="kok-modal-check-button" class="kok-modal-check-button">확인</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="kok-notify-container" class="kok-notify-container"></div>
+        <div class="popup-manager"></div>
+        <div id="kok-main">
+            <div class="login-container">
+                <div class="horizontal-center">
+                    <div class="login-inner vertical-center">
+                        <div class="login-logo text-center">
+                            <span class="comp-icon bootpay-logo" id="bootpay/bootpay-logo.svg">
+                                <img alt="image" width="50" height="50" srcset="" src="/images/member/kok_logo.png">
+                                <p>ADMIN</p>                          
+                            </span>
+                            <div class="subtitle text-center text-grey">콕(KOK) 관리자 로그인</div>
+                        </div>
+                            <div class="login-box center-box">
+                                <div class="box-title roboto">
+                                    <span class="text-primary">LOG</span>IN
+                                </div>
+                                <div class="box-subtitle">콕(KOK) 관리자에 로그인하세요</div>
+                                <div class="form-group">
+                                    <input id="userEmail" class="form-control h65" placeholder="이메일 계정을 입력해주세요" name="kok">
+                                </div>
+                                <div class="form-group">
+                                    <input id="userPassword" type="password" class="form-control h65" placeholder="패스워드를 입력해주세요" name="password">
+                                </div>
+                                <div class="form-group form-kok-check">
+                                    <!-- 자동 로그인 체크 -->
+                                    <label>
+                                        <input type="checkbox" id="auto-login-checkbox" hidden>
+                                        <div class="kok-check d-flex align-items-center undefined">                           
+                                            <div class="kok-check-box" tabindex="0" style="width: 20px; height: 20px;">
+                                                <i class="mdi mdi-check" style="display: none;"></i>
+                                            </div>
+                                            <div class="kok-check-content flex-grow-1">자동로그인</div>
+                                        </div>  
+                                    </label>
+                                    <!-- 자동 로그인 체크 (클론코딩 버전) -->
+<!--                                    <div class="kok-check d-flex align-items-center undefined checked">-->
+<!--                                        <div class="kok-check-box checked" tabindex="0" style="width: 20px; height: 20px;">-->
+<!--                                            <i class="mdi mdi-check" style="display: inline-block;"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="btn-wrapper">
+                                    <button class="btn btn-primary btn-login h65 btn-block" type="button">로그인</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/admin/login/module/service.js"></script>
+<script src="/js/admin/login/event.js"></script>
+</html>
