@@ -34,7 +34,7 @@ jobs:
 
     - name: Copy project to EC2
       run: |
-        rsync -avz -e "ssh -i ~/.ssd/id_rsa" . ${{ secrets.EC2_USER }}@$HOST:/home/ubuntu/docker-kok
+        rsync -avz -e "ssh -i ~/.ssd/id_rsa" . ${{ secrets.EC2_USER }}@$HOST:/home/ubuntu/kok
 
     - name: Build & Run Docker on EC2
       run: |
@@ -58,7 +58,7 @@ jobs:
             --build-arg SMS_KEY=${{ secrets.SMS_KEY }} \
             --build-arg SMS_SECRET=${{ secrets.SMS_SECRET }} \
           -t docker-kok .
-          docker run -d -p 80:10000 --name docker-kok \
+          docker run -d -p 80:10000 --name kok \
             -e EC2_HOST=${{ secrets.EC2_HOST }} \
             -e MAIL_ID=${{ secrets.MAIL_ID }} \
             -e MAIL_PW="${{ secrets.MAIL_PW }}" \
