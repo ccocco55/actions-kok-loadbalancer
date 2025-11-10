@@ -55,8 +55,8 @@ jobs:
             --build-arg KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }} \
             --build-arg NAVER_CLIENT_ID=${{ secrets.NAVER_CLIENT_ID }} \
             --build-arg NAVER_CLIENT_SECRET=${{ secrets.NAVER_CLIENT_SECRET }} \
-            --build-arg SMS_KEY=${{ secrets.SMS_ACCESS }} \
-            --build-arg SMS_SECRET=${{ secrets.SMS_SECRET_KEY }} \
+            --build-arg SMS_ACCESS=${{ secrets.SMS_ACCESS }} \
+            --build-arg SMS_SECRET_KEY=${{ secrets.SMS_SECRET_KEY }} \
           -t kok .
           docker run -d -p 80:10000 --name kok \
             -e EC2_HOST=${{ secrets.EC2_HOST }} \
@@ -70,8 +70,8 @@ jobs:
             -e KAKAO_CLIENT_SECRET=${{ secrets.KAKAO_CLIENT_SECRET }} \
             -e NAVER_CLIENT_ID=${{ secrets.NAVER_CLIENT_ID }} \
             -e NAVER_CLIENT_SECRET=${{ secrets.NAVER_CLIENT_SECRET }} \
-            -e SMS_KEY=${{ secrets.SMS_ACCESS }} \
-            -e SMS_SECRET=${{ secrets.SMS_SECRET_KEY }} \
+            -e SMS_ACCESS=${{ secrets.SMS_ACCESS }} \
+            -e SMS_SECRET_KEY=${{ secrets.SMS_SECRET_KEY }} \
             -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
             kok
             
