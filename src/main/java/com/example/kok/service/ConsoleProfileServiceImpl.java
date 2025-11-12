@@ -28,7 +28,7 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
     private final ConsoleBackgroundFileDAO consoleBackgroundFileDAO;
     private final S3Service s3Service;
 
-//    조회
+    //    조회
     @Override
     @Cacheable(value = "profile", key = "'company_' + #companyId")
     public ConsoleCompanyProfileDTO getProfile(Long companyId) {
@@ -76,14 +76,14 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
 
         files.forEach(file -> {
             file.setFilePath(
-                s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
+                    s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
             );
         });
 
         profileDTO.setUploadedFiles(files);
     }
 
-//    수정
+    //    수정
     @Override
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = "profile", key = "'company_' + #companyProfileDTO.companyId")

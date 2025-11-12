@@ -43,7 +43,7 @@ public class InternRestController implements InternRestControllerDocs {
     public String profile(Long companyId){
         CompanyProfileFileDTO profile=companyProfileFileDAO.findFileByCompanyId(companyId);
         if(profile==null){
-            return "/images/member/profile.png";
+            return "/images/main-page/image.png";
         }
         internNoticeService.setPreSignedUrl(profile);
         return profile.getFilePath();
@@ -161,8 +161,8 @@ public class InternRestController implements InternRestControllerDocs {
 
     //    평가 있는지 여부
     @GetMapping("/is-reviewed")
-    public boolean isRequested(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        boolean result = evaluationService.isReviewed(customUserDetails.getId());
-        return result;
+    public ResponseEntity<Boolean> isRequested(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        boolean result=evaluationService.isReviewed(customUserDetails.getId());
+        return ResponseEntity.ok(result);
     }
 }

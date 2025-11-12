@@ -20,9 +20,4 @@ public class EvaluationDAO {
     public int selectCount(Long id) {
         return evaluationMapper.selectCount(id);
     }
-
-    //    해당 체험에서 평가한 개수 세기
-    public int selectCountThis(Long memberId, Long requestExperienceId){
-        return evaluationMapper.selectCountThis(memberId, requestExperienceId);
-    }
 }

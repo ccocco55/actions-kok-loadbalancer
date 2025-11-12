@@ -37,7 +37,7 @@ public class AdminCompaniesApiController implements AdminCompaniesApiControllerD
 
     @GetMapping("detail/{userId}")
     public ResponseEntity<?> findUserMemberById(@PathVariable("userId") Long userId) {
-        AdminCompanyDTO adminCompanyDTO = companyService.findCompany(userId);
+        Optional<AdminCompanyDTO> adminCompanyDTO = companyService.findCompany(userId);
         return ResponseEntity.ok(adminCompanyDTO);
     }
 

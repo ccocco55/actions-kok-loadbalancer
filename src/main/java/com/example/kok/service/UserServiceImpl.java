@@ -31,16 +31,16 @@ public class UserServiceImpl implements UserService {
     private final S3Service s3Service;
     private final FileDAO fileDAO;
     private final CompanyLicenseFileDAO companyLicenseFileDAO;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate redisTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinUser(UserDTO userDTO) {
 
-        userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
-        userDAO.saveUser(userDTO);
-        memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
-        memberAlarmSettingDAO.save(userDTO.getId());
+            userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
+            userDAO.saveUser(userDTO);
+            memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
+            memberAlarmSettingDAO.save(userDTO.getId());
     }
 
     @Override

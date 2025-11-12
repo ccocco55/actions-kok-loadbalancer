@@ -20,20 +20,20 @@ import java.util.Optional;
 
 public interface CompanyService {
 
-    //    회사 조회
+//    회사 조회
     public CompanyDTO findCompanyById(Long companyId);
 
 
-    //    기업 목록
+//    기업 목록
     public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId);
 
-    //    인기 기업 목록
+//    인기 기업 목록
     public List<CompanyDTO> getCompaniesByFollowerCount();
 
-    //    기업 목록 조회
+//    기업 목록 조회
     public AdminCompanyCriteriaDTO findAllCompanies(int page, String keyword);
 
-    //    아이디로 기업 조회
-    public AdminCompanyDTO findCompany(Long userId);
+//    아이디로 기업 조회
+    public Optional<AdminCompanyDTO> findCompany(Long userId);
 
 }

@@ -71,7 +71,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
             } else if (snsProfile != null && !snsProfile.isEmpty()) {
                 post.setMemberProfileUrl(snsProfile);
             } else {
-                post.setMemberProfileUrl("/images/member/profile.png");
+                post.setMemberProfileUrl("/images/main-page/image3.png");
             }
 
             List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
@@ -123,7 +123,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         } else if (snsProfile != null && !snsProfile.isEmpty()) {
             postDTO.setMemberProfileUrl(snsProfile);
         } else {
-            postDTO.setMemberProfileUrl("/images/member/profile.png");
+            postDTO.setMemberProfileUrl("/images/main-page/image3.png");
         }
 
         List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(postDTO.getId());

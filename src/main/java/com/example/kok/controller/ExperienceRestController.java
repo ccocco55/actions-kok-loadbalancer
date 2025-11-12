@@ -25,7 +25,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
     private final RequestExperienceService requestExperienceService;
     private final UserService userService;
 
-    //    목록
+//    목록
     @GetMapping("{page}")
     public ResponseEntity<?> expList(@PathVariable("page") int page, Search search) {
         ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = experienceNoticeService.selectAllExperienceNotice(page, search);
@@ -35,18 +35,18 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         return ResponseEntity.ok(experienceNoticeCriteriaDTO);
     }
 
-    //    프로필 사진 url
+//    프로필 사진 url
     @GetMapping("/profile")
     public String profile(Long companyId){
         CompanyProfileFileDTO profile=companyProfileFileDAO.findFileByCompanyId(companyId);
         if(profile==null){
-            return "/images/member/profile.png";
+            return "/images/main-page/image.png";
         }
         experienceNoticeService.setPreSignedUrl(profile);
         return profile.getFilePath();
     }
 
-    //    상세 불러오기
+//    상세 불러오기
     @GetMapping("/detail")
     public Map<String,Object> detail(Long companyId, Long experienceId) {
         Map<String,Object> result = new HashMap<>();
@@ -64,14 +64,14 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
 //        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
 //        reqDTO.setExperienceNoticeId(experienceId);
 //        reqDTO.setMemberId(customUserDetails.getId());
-    ////        reqDTO.setMemberAlarmSettingId();
+////        reqDTO.setMemberAlarmSettingId();
 //        requestExperienceService.applyForExperience(reqDTO, fileIds);
 //    }
 
 //    공고 저장하기
     @PostMapping("/save")
     public ResponseEntity<?> saveExperience(@RequestParam Long experienceId,
-                                            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if(customUserDetails!=null){
             SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
             saveExp.setExperienceNoticeId(experienceId);
@@ -82,20 +82,20 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         return ResponseEntity.notFound().build();
     }
 
-    //    공고 저장 취소하기
+//    공고 저장 취소하기
     @PostMapping("/unsave")
     public void unsaveExperience(@RequestParam Long experienceId,
-                                 @AuthenticationPrincipal CustomUserDetails customUserDetails){
+             @AuthenticationPrincipal CustomUserDetails customUserDetails){
         SaveExperienceNoticeDTO deleteExp=new SaveExperienceNoticeDTO();
         deleteExp.setExperienceNoticeId(experienceId);
         deleteExp.setMemberId(customUserDetails.getId());
         experienceNoticeService.deleteExp(deleteExp);
     }
 
-    //    지원 여부 판별
+//    지원 여부 판별
     @GetMapping("is-requested")
     public boolean isRequested(@RequestParam Long experienceId,
-                               @AuthenticationPrincipal CustomUserDetails customUserDetails){
+            @AuthenticationPrincipal CustomUserDetails customUserDetails){
         if(customUserDetails!=null){
             RequestExperienceDTO req=new RequestExperienceDTO();
             req.setMemberId(customUserDetails.getId());
@@ -127,7 +127,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
 
     }
 
-    //    간편지원 input에 넣을 유저 정보 불러오기
+//    간편지원 input에 넣을 유저 정보 불러오기
     @GetMapping("/user")
     public ResponseEntity<UserDTO> loadUserDetails(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if(customUserDetails!=null){
@@ -139,7 +139,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         return ResponseEntity.notFound().build();
     }
 
-    //    간편지원 완료
+//    간편지원 완료
     @PostMapping("/request")
     public void requestExperience(@RequestBody RequestExperienceDTO requestExperienceDTO,
                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {

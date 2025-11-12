@@ -18,9 +18,4 @@ public class EvaluationServiceImpl implements EvaluationService {
     public boolean isReviewed(Long id) {
         return (evaluationDAO.selectCount(id)>0);
     }
-
-    @Override
-    public boolean isReviewedThis(Long memberId, Long requestExperienceId) {
-        return (evaluationDAO.selectCountThis(memberId, requestExperienceId)>0);
-    }
 }

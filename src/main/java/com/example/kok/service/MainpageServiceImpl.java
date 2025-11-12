@@ -76,13 +76,13 @@ public class MainpageServiceImpl implements MainpageService {
                 if (userProfileService.findProfileById(customUserDetails.getId()) != null) {
                     customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));
                 } else {
-                    customUserDetails.setMemberProfileUrl("/images/member/profile.png");
+                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
                 }
             }else if(customUserDetails.getUserRole()== UserRole.COMPANY) {
                 if(companyProfileFileDAO.findCountByCompanyId(customUserDetails.getId()) > 0) {
                     customUserDetails.setMemberProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath(), Duration.ofMinutes(10)));
                 }else{
-                    customUserDetails.setMemberProfileUrl("/images/member/profile.png");
+                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
                 }
                 customUserDetails.setCompanyName(companyDAO.findCompanyById(customUserDetails.getId()).getCompanyName());
             }else{
@@ -94,34 +94,26 @@ public class MainpageServiceImpl implements MainpageService {
     }
 
     @Override
-    public List<RequestExperienceDTO> findRequestExperienceByCompanyId(Long companyId, Long experienceId) {
+    public List<RequestExperienceDTO> findRequestExperienceByCompanyId(Long companyId,Long experienceId) {
         List<RequestExperienceDTO> requestExperienceDTO = requestExperienceDAO.selectAllRequestByUserId(companyId, experienceId);
         requestExperienceDTO.forEach(experienceDTO -> {
-            var profileFile = companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId());
-
-            if (profileFile != null && profileFile.getFilePath() != null) {
-                experienceDTO.setCompanyProfileUrl(
-                        s3Service.getPreSignedUrl(profileFile.getFilePath(), Duration.ofMinutes(10))
-                );
-            } else {
-                experienceDTO.setCompanyProfileUrl("/images/member/profile.png");
+            if(companyProfileFileDAO.findCountByCompanyId(experienceDTO.getUserId())>0){
+                experienceDTO.setCompanyProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId()).getFilePath(),Duration.ofMinutes(10)));
+            }else{
+                experienceDTO.setCompanyProfileUrl("/images/main-page/image.png");
             }
         });
         return requestExperienceDTO;
     }
 
     @Override
-    public List<RequestInternDTO> findRequestInternByCompanyId(Long companyId, Long internId) {
+    public List<RequestInternDTO> findRequestInternByCompanyId(Long companyId,Long internId) {
         List<RequestInternDTO> requestInternDTO = requestInternDAO.selectAllInternByUserId(companyId, internId);
         requestInternDTO.forEach(internDTO -> {
-            var profileFile = companyProfileFileDAO.findFileByCompanyId(internDTO.getUserId());
-
-            if (profileFile != null && profileFile.getFilePath() != null) {
-                internDTO.setCompanyProfileUrl(
-                        s3Service.getPreSignedUrl(profileFile.getFilePath(), Duration.ofMinutes(10))
-                );
-            } else {
-                internDTO.setCompanyProfileUrl("/images/member/profile.png");
+            if(companyProfileFileDAO.findCountByCompanyId(internDTO.getUserId())>0){
+                internDTO.setCompanyProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(internDTO.getUserId()).getFilePath(),Duration.ofMinutes(10)));
+            }else{
+                internDTO.setCompanyProfileUrl("/images/main-page/image.png");
             }
         });
         return requestInternDTO;

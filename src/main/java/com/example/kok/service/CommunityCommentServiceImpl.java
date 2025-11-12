@@ -21,26 +21,26 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
     private final CommunityReplyDAO communityReplyDAO;
     private final S3Service s3Service;
 
-    //    댓글 작성
+//    댓글 작성
     @Override
     public void write(CommentDTO commentDTO) {
         communityCommentDAO.save(commentDTO);
-
+        
     }
 
-    //    댓글 수정
+//    댓글 수정
     @Override
     public void update(CommentDTO commentDTO) {
         communityCommentDAO.update(commentDTO);
     }
 
-    //    댓글 삭제
+//    댓글 삭제
     @Override
     public void delete(Long id) {
         communityCommentDAO.delete(id);
     }
 
-    //    게시글 내 댓글 목록
+//    게시글 내 댓글 목록
     @Override
     @Transactional(rollbackFor = Exception.class)
 //    실행되는 동안 오류 발생 시 롤백하기 위한 선언
@@ -65,7 +65,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
             } else if (snsProfile != null && !snsProfile.isEmpty()) {
                 comment.setMemberProfileUrl(snsProfile);
             } else {
-                comment.setMemberProfileUrl("/images/member/profile.png");
+                comment.setMemberProfileUrl("/images/main-page/image3.png");
             }
 
             List<ReplyDTO> replies = communityReplyDAO.findAll(comment.getId());
@@ -87,7 +87,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
                 } else if (replySnsProfile != null && !replySnsProfile.isEmpty()) {
                     reply.setMemberProfileUrl(replySnsProfile);
                 } else {
-                    reply.setMemberProfileUrl("/images/member/profile.png");
+                    reply.setMemberProfileUrl("/images/main-page/image3.png");
                 }
             });
 

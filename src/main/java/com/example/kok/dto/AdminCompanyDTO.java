@@ -23,7 +23,5 @@ public class AdminCompanyDTO {
     private int followCount;
     private String companyScaleName;
     private List<InternNoticeDTO> internNoticeDTO;
-    private int internNoticeCount;
     private List<ExperienceNoticeDTO> experienceNoticeDTO;
-    private int experienceNoticeCount;
 }

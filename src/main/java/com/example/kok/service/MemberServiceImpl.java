@@ -122,7 +122,7 @@ public class MemberServiceImpl implements MemberService {
     @Cacheable(value = "member", key = "'member_' + #memberId")
     public UserMemberDTO findMembersByMemberId(Long memberId) {
         UserMemberDTO userMemberDTO = memberDAO.selectMember(memberId)
-                .orElseThrow(MemberNotFoundException::new);
+                .orElseThrow();
 
         if (userMemberDTO == null) {
             return null;

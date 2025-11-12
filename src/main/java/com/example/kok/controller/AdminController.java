@@ -54,48 +54,48 @@ public class AdminController {
         }
     }
 
-//    관리자 로그인
+    //    관리자 로그인
     @GetMapping("login")
     public String goToLoginPage() {
         return "admin/login";
     }
 
-//    메인 페이지
+    //    메인 페이지
     @GetMapping("")
     public String goToMainPagePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/main-page";
     }
 
-//    회원관리 - 일반회원
+    //    회원관리 - 일반회원
     @GetMapping("member")
     public String goToMemberPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/member";
     }
 
-//    회원관리 - 기업회원
+    //    회원관리 - 기업회원
     @GetMapping("company")
     public String goToCompanyPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/company";
     }
 
-//    체험
+    //    체험
     @GetMapping("experience")
     public String goToExperiencePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/experience";
     }
 
-//    인턴공고
+    //    인턴공고
     @GetMapping("employ")
     public String goToEmployPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/employ";
     }
 
-//    배너 - 광고 신청
+    //    배너 - 광고 신청
     @GetMapping("advertise")
     public String goToAdvertisePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
@@ -112,7 +112,7 @@ public class AdminController {
         return new RedirectView("/admin/advertise");
     }
 
-//    배너 - 현수막
+    //    배너 - 현수막
     @GetMapping("banner")
     public String goToBannerPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
@@ -129,42 +129,42 @@ public class AdminController {
         return new RedirectView("/admin/banner");
     }
 
-//    결제 - 광고
+    //    결제 - 광고
     @GetMapping("payment/advertise")
     public String goToPaymentAdvertisePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/payment-advertise";
     }
 
-//    결제 - 체험비
+    //    결제 - 체험비
     @GetMapping("payment/experience")
     public String goToPaymentExperiencePage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/payment-experience";
     }
 
-//    신고 게시글
+    //    신고 게시글
     @GetMapping("notify/post")
     public String goToNotifyPostPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/notify-post";
     }
 
-//    신고 게시글 삭제
+    //    신고 게시글 삭제
     @GetMapping("notify/post/delete/{id}")
     public RedirectView notifyPostDelete(@PathVariable Long id) {
         adminReportService.deleteReportPost(id);
         return new RedirectView("/admin/notify/post");
     }
 
-//    고객지원 - 공지사항 목록
+    //    고객지원 - 공지사항 목록
     @GetMapping("support")
     public String goToSupportPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         return "admin/support";
     }
 
-//    고객지원 - 공지사항 상세
+    //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
     public String goToSupportDetailPage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -173,7 +173,7 @@ public class AdminController {
         return "admin/support-detail";
     }
 
-//    고객지원 - 공지사항 수정
+    //    고객지원 - 공지사항 수정
     @GetMapping("support/update/{id}")
     public String goToSupportUpdatePage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -188,7 +188,7 @@ public class AdminController {
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 
-//    고객지원 - 공지사항 등록
+    //    고객지원 - 공지사항 등록
     @GetMapping("support/write")
     public String goToSupportWritePage(AdminNoticeDTO adminNoticeDTO,
                                        Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -203,7 +203,7 @@ public class AdminController {
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 
-//    고객지원 - 공지사항 삭제
+    //    고객지원 - 공지사항 삭제
     @GetMapping("support/delete/{id}")
     public RedirectView delete (@PathVariable Long id) {
         adminService.delete(id);

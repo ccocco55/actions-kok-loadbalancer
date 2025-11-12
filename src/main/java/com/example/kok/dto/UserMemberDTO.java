@@ -28,10 +28,10 @@ public class UserMemberDTO {
     private String avgScore;
     private String jobName;
     private List<RequestExperienceDTO> requestExperiences;
-    private int requestExperienceCount;
     private List<PostDTO> posts;
     private List<RequestInternDTO> requestInterns;
-    private int requestInternCount;
     private int postsCount;
     private int followingCount;
+    private int requestExperienceCount;
+    private int requestInternCount;
 }

@@ -5,7 +5,6 @@ import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.UserMemberDTO;
 import com.example.kok.repository.FollowDAO;
 import com.example.kok.service.AdvertisementService;
-import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,7 +22,6 @@ import java.util.Optional;
 public class MyPageController {
     private final MemberService memberService;
     private final AdvertisementService advertisementService;
-    private final CommunityPostService communityPostService;
     @GetMapping("page")
     public String goToMyPage(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Optional<UserMemberDTO> member=memberService.findProfileByMemberId(customUserDetails.getId());
@@ -38,8 +36,6 @@ public class MyPageController {
 //        System.out.println("##############################################");
 //        System.out.println(advertisements);
         model.addAttribute("advertisements", advertisements);
-        int postCount=communityPostService.getPostsCountByMemberId(customUserDetails.getId());
-        model.addAttribute("postCount", postCount);
         return "mypage/page";
     }
 }

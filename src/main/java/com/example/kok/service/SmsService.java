@@ -20,7 +20,6 @@ public class SmsService {
     private String apiKey;
     @Value("${sms.api.secret}")
     private String apiSecret;
-
     //    코드 생성
     private String createCode(){
         String codes = "0123456789";
@@ -41,7 +40,7 @@ public class SmsService {
      DefaultMessageService messageService =  SolapiClient.INSTANCE.createInstance(apiKey, apiSecret);
     // Message 패키지가 중복될 경우 com.solapi.sdk.message.model.Message로 치환하여 주세요
     Message message = new Message();
-    message.setFrom("01083688745");
+    message.setFrom("01051133095");
     message.setTo(phone);
     message.setText(code);
 

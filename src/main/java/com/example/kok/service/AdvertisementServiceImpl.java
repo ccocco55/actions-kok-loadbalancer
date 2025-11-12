@@ -28,8 +28,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
             if (!files.isEmpty()) {
                 String preSignedUrl = s3Service.getPreSignedUrl(files.get(0).getFilePath(),Duration.ofMinutes(10));
                 advertisement.setFilePath(preSignedUrl);
-            } else {
-                advertisement.setFilePath("/images/experience/ad_bg_img.jpg");
             }
         });
 

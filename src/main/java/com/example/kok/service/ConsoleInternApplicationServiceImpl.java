@@ -24,13 +24,13 @@ public class ConsoleInternApplicationServiceImpl implements ConsoleInternApplica
 
     }
 
-    //    목록
+//    목록
     @Override
     public List<ConsoleInternApplicantDTO> getApplicantsByNoticeId(Long internNoticeId) {
         return consoleInternApplicationDAO.findApplicantsByNoticeId(internNoticeId);
     }
 
-    //    여러 명의 지원자 상세 조회
+//    여러 명의 지원자 상세 조회
     @Override
     public List<ConsoleInternApplicantDTO> getApplicationsDetailsByMemberIds(Long internNoticeId, List<Long> memberIdList) {
         List<ConsoleInternApplicantDTO> results = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ConsoleInternApplicationServiceImpl implements ConsoleInternApplica
         return results;
     }
 
-    //    지원자 상태 변경
+//    지원자 상태 변경
     @Override
     public void updateApplicantStatus(Long userId, Long internNoticeId, RequestStatus requestInternStatus) {
         consoleInternApplicationDAO.updateApplicantStatus(userId, internNoticeId, requestInternStatus);
