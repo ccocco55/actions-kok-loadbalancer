@@ -2,6 +2,7 @@ package com.example.kok.repository;
 
 import com.example.kok.domain.PostVO;
 import com.example.kok.dto.PostDTO;
+import com.example.kok.dto.PostWarningDTO;
 import com.example.kok.mapper.CommunityPostMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class CommunityPostDAO {
     }
 
 //    전체 개시물
-    public List<PostDTO> findAllPosts(){
+    public List<PostWarningDTO> findAllPosts(){
         return communityPostMapper.selectAllPosts();
     }
 

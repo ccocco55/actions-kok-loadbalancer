@@ -1,10 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.common.exception.PostNotFoundException;
-import com.example.kok.dto.FileDTO;
-import com.example.kok.dto.PostDTO;
-import com.example.kok.dto.PostFileDTO;
-import com.example.kok.dto.PostsCriteriaDTO;
+import com.example.kok.dto.*;
 import com.example.kok.repository.CommunityLikeDAO;
 import com.example.kok.repository.CommunityPostDAO;
 import com.example.kok.repository.CommunityPostFileDAO;
@@ -250,7 +247,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     }
 
     @Override
-    public List<PostDTO> findAllPosts() {
+    public List<PostWarningDTO> findAllPosts() {
         return communityPostDAO.findAllPosts();
     }
 

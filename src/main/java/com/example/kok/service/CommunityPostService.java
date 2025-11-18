@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.domain.PostVO;
 import com.example.kok.dto.PostDTO;
+import com.example.kok.dto.PostWarningDTO;
 import com.example.kok.dto.PostsCriteriaDTO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,5 +32,5 @@ public interface CommunityPostService {
     }
 
 //    전체 게시물 조회
-    public List<PostDTO> findAllPosts();
+    public List<PostWarningDTO> findAllPosts();
 }

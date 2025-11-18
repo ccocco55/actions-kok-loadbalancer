@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     postContent += warningService.allPosts();
     warnings += await warningService.warningList(postContent);
-    console.log(warnings)
+    console.log(postContent)
 
 
     const modal = document.querySelector(".member-modal.modal");
