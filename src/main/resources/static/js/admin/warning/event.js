@@ -50,6 +50,9 @@ document.addEventListener("click", (e) => {
 document.addEventListener("DOMContentLoaded", async () => {
     const page = 1;
 
+    const slangPostIds = await warningService.checkAllPosts();
+    console.log("욕설 포함 게시글 ID:", slangPostIds);
+
 
     const modal = document.querySelector(".member-modal.modal");
 
