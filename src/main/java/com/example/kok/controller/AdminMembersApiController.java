@@ -43,9 +43,4 @@ public class AdminMembersApiController implements AdminMembersApiControllerDocs 
         return ResponseEntity.ok(userMemberDTO);
     }
 
-    @GetMapping("all-posts")
-    public ResponseEntity<?> findAllPosts() {
-        communityPostService.findAllPosts();
-        return ResponseEntity.ok(communityPostService.findAllPosts());
-    }
 }

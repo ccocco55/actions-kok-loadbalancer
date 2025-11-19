@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>콕(KOK) 관리자</title>
     <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
-    <link rel="stylesheet" href="/css/admin/member.css">
+    <link rel="stylesheet" href="/css/admin/warning.css">
 </head>
 <body>
 <div id="kok">
@@ -218,70 +218,30 @@
                     <div class="table-layout white-panel">
                         <div class="filter-section">
                             <div class="row">
-                                <div class="col-auto">
-                                    <!-- 승인상태 필터 버튼 -->
-                                    <div class="filter-wrapper filter-pg" id="filter-pg">
-                                        <div class="kok-pop-checkbox">
-                                            <button class="kok-pop-checkbox-filter-btn btn btn-outline-filter" id="btn-filter-pg">
-                                                상태
-                                                <i class="mdi mdi-menu-down"></i>
-                                            </button>
-                                            <div class="kok-pop-menu">
-                                                <div class="kok-pop-menu-back"></div>
-                                                <div class="kok-pop-menu-context" style="top: 0px; bottom: unset; left: -10px; right: unset; transform: scale(0.9, 0.9) translate3d(0px, 0px, 0px);">
-                                                    <ul class="list-wrapper list-unstyled">
-                                                        <li class="text-center font-weight-bold">상태</li>
-                                                        <li class="list-item row"></li>
-                                                        <li class="list-item active">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-                                                                        <input id="cat-await" class="kok-radio-input" type="radio" name="category" value="await">
-                                                                        <label for="cat-await"></label>
-                                                                        <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                            <i class="mdi mdi-check" style="display: inline-block;"></i>
-                                                                        </div>
-                                                                        <div class="kok-check-content flex-grow-1">대기</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="list-item">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-                                                                        <input id="cat-accept" class="kok-radio-input" type="radio" name="category" value="accept">
-                                                                        <label for="cat-accept"></label>
-                                                                        <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                            <i class="mdi mdi-check" style="display: none;"></i>
-                                                                        </div>
-                                                                        <div class="kok-check-content flex-grow-1">보류</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="list-item">
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-                                                                        <input id="cat-reject" class="kok-radio-input" type="radio" name="category" value="reject">
-                                                                        <label for="cat-reject"></label>
-                                                                        <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                            <i class="mdi mdi-check" style="display: none;"></i>
-                                                                        </div>
-                                                                        <div class="kok-check-content flex-grow-1">삭제</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="list-item mt-2">
-                                                            <button type="button" class="btn btn-outline-primary btn-sm">확인</button>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="custom-radio-group">
+                                    <input type="radio" id="opt-all" name="status" value="all" data-keyword="all" checked>
+                                    <label for="opt-all">
+                                        <span class="dot"></span>
+                                        전체
+                                    </label>
+
+                                    <input type="radio" id="opt-delete" name="status" value="delete" data-keyword="delete">
+                                    <label for="opt-delete">
+                                        <span class="dot"></span>
+                                        삭제
+                                    </label>
+
+                                    <input type="radio" id="opt-hold" name="status" value="hold" data-keyword="hold">
+                                    <label for="opt-hold">
+                                        <span class="dot"></span>
+                                        보류
+                                    </label>
+
+                                    <input type="radio" id="opt-wait" name="status" value="wait" data-keyword="wait">
+                                    <label for="opt-wait">
+                                        <span class="dot"></span>
+                                        대기
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -291,8 +251,7 @@
                                 <tr>
                                     <th class="td-name">회원</th>
                                     <th class="td-amount pr-4">이름</th>
-                                    <th class="td-email">이메일</th>
-                                    <th class="td-phone">핸드폰 번호</th>
+                                    <th class="td-phone">게시글</th>
                                     <th class="td-profile">상태</th>
                                     <th class="td-job">주의 게시물 수</th>
                                     <th class="td-action">상세</th>
@@ -310,11 +269,8 @@
 <!--                                    <td class="td-amount pr-4 font-weight-bold">정희준-->
 <!--                                        <span class="amount-unit"> 님</span>-->
 <!--                                    </td>-->
-<!--                                    <td class="td-email">-->
-<!--                                        <p>test01@gmail.com</p>-->
-<!--                                    </td>-->
 <!--                                    <td class="td-phone">-->
-<!--                                        <p>010-1234-5678</p>-->
+<!--                                        <p>안녕하세요~!</p>-->
 <!--                                    </td>-->
 <!--                                    <td class="td-profile">-->
 <!--                                        <p>보류</p>-->
@@ -344,127 +300,127 @@
             </div>
             <!-- 일반회원 상세 모달 창 -->
             <div class="modal fade member-modal" style="display: none;">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-title">
-                                정희준
-                                <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>
-                            </div>
-                            <button class="close">
-                                <i class="mdi mdi-close"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="divider">
-                                <div class="tab-view">
-                                    <div class="tab-view-header"></div>
-                                    <div class="tab-view-body">
-                                        <div style="display: block;">
-                                            <div class="tab-inner tab-detail">
-                                                <div class="info-layout detail-info">
-                                                    <div class="info-title justify-content-between">
-                                                        <div class="flex-left d-flex">
-                                                            <div class="title">회원 상세정보</div>
-                                                        </div>
-                                                        <div class="flex-right"></div>
-                                                    </div>
-                                                    <div class="d-table w-100">
-                                                        <!-- &lt;!&ndash; 테이블 왼쪽 &ndash;&gt; -->
-                                                        <div class="d-table-cell">
-                                                            <table class="info-table">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <th>회원ID (이메일)</th>
-                                                                    <td>test01@gmail.com</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>핸드폰 번호</th>
-                                                                    <td>010-1234-5678</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>주의 게시물 수</th>
-                                                                    <td>3</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>체험신청 횟수</th>
-                                                                    <td>3</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <!-- &lt;!&ndash; 테이블 오른쪽 &ndash;&gt;                                                        -->
-                                                        <div class="d-table-cell">
-                                                            <table class="info-table">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <th>이름</th>
-                                                                    <td>정희준</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>프로필 URL</th>
-                                                                    <td>1234abcd</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>평균 평점</th>
-                                                                    <td>4.2</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>인턴신청 횟수</th>
-                                                                    <td>3</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- &lt;!&ndash; 회원 작성 게시글 &ndash;&gt; -->
-                                                <div class="info-layout detail-info">
-                                                    <div class="info-title justify-content-between">
-                                                        <div class="flex-left d-flex">
-                                                            <div class="title">주의 게시글</div>
-                                                        </div>
-                                                        <div class="flex-right"></div>
-                                                    </div>
-                                                    <div class="d-table w-100">
-                                                        <div class="text-div">
-                                                                                <textarea id="content-post" readonly>
-                                                                                    dfzsdl kfjd
-                                                                                    d
-                                                                                    flxkv;xlvm
-                                                                                    sd
-                                                                                    DFLmszd;flex-columnd
-                                                                                    dfms;modal-footer'
-                                                                                    dfs;ld,ff
-                                                                                    a[wpeer,we r]
-                                                                                    weoe
+<!--                <div class="modal-dialog modal-lg">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                            <div class="modal-title">-->
+<!--                                정희준-->
+<!--                                <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>-->
+<!--                            </div>-->
+<!--                            <button class="close">-->
+<!--                                <i class="mdi mdi-close"></i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!--                            <div class="divider">-->
+<!--                                <div class="tab-view">-->
+<!--                                    <div class="tab-view-header"></div>-->
+<!--                                    <div class="tab-view-body">-->
+<!--                                        <div style="display: block;">-->
+<!--                                            <div class="tab-inner tab-detail">-->
+<!--                                                <div class="info-layout detail-info">-->
+<!--                                                    <div class="info-title justify-content-between">-->
+<!--                                                        <div class="flex-left d-flex">-->
+<!--                                                            <div class="title">회원 상세정보</div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="flex-right"></div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="d-table w-100">-->
+<!--                                                        &lt;!&ndash; &lt;!&ndash; 테이블 왼쪽 &ndash;&gt; &ndash;&gt;-->
+<!--                                                        <div class="d-table-cell">-->
+<!--                                                            <table class="info-table">-->
+<!--                                                                <tbody>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>회원ID (이메일)</th>-->
+<!--                                                                    <td>test01@gmail.com</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>핸드폰 번호</th>-->
+<!--                                                                    <td>010-1234-5678</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>주의 게시물 수</th>-->
+<!--                                                                    <td>3</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>체험신청 횟수</th>-->
+<!--                                                                    <td>3</td>-->
+<!--                                                                </tr>-->
+<!--                                                                </tbody>-->
+<!--                                                            </table>-->
+<!--                                                        </div>-->
+<!--                                                        &lt;!&ndash; &lt;!&ndash; 테이블 오른쪽 &ndash;&gt;                                                        &ndash;&gt;-->
+<!--                                                        <div class="d-table-cell">-->
+<!--                                                            <table class="info-table">-->
+<!--                                                                <tbody>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>이름</th>-->
+<!--                                                                    <td>정희준</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>프로필 URL</th>-->
+<!--                                                                    <td>1234abcd</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>평균 평점</th>-->
+<!--                                                                    <td>4.2</td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>인턴신청 횟수</th>-->
+<!--                                                                    <td>3</td>-->
+<!--                                                                </tr>-->
+<!--                                                                </tbody>-->
+<!--                                                            </table>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                &lt;!&ndash; &lt;!&ndash; 회원 작성 게시글 &ndash;&gt; &ndash;&gt;-->
+<!--                                                <div class="info-layout detail-info">-->
+<!--                                                    <div class="info-title justify-content-between">-->
+<!--                                                        <div class="flex-left d-flex">-->
+<!--                                                            <div class="title">주의 게시글</div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="flex-right"></div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="d-table w-100">-->
+<!--                                                        <div class="text-div">-->
+<!--                                                                                <textarea id="content-post" readonly>-->
+<!--                                                                                    dfzsdl kfjd-->
+<!--                                                                                    d-->
+<!--                                                                                    flxkv;xlvm-->
+<!--                                                                                    sd-->
+<!--                                                                                    DFLmszd;flex-columnd-->
+<!--                                                                                    dfms;modal-footer'-->
+<!--                                                                                    dfs;ld,ff-->
+<!--                                                                                    a[wpeer,we r]-->
+<!--                                                                                    weoe-->
 
-                                                                                </textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div id="modal-button">
-                                                    <button type="button" class="btn-modal" id="btn-warning-remove">주의 해제</button>
-                                                    <button type="button" class="btn-modal" id="btn-warning">삭제</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn-close btn btn-outline-filter">닫기</button>
-                    </div>
-                </div>
-            </div>
+<!--                                                                                </textarea>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div id="modal-button">-->
+<!--                                                    <button type="button" class="btn-modal" id="btn-warning-remove">주의 해제</button>-->
+<!--                                                    <button type="button" class="btn-modal" id="btn-warning">삭제</button>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button class="btn-close btn btn-outline-filter">닫기</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
 </div>
 </body>
 <script src="/js/admin/warning/module/service.js"></script>
-<!--<script src="/js/admin/warning/module/layout.js"></script>-->
+<script src="/js/admin/warning/module/layout.js"></script>
 <script src="/js/admin/logout/module/service.js"></script>
 <script src="/js/admin/logout/event.js"></script>
 <script src="/js/admin/warning/event.js"></script>

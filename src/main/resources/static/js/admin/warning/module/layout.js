@@ -3,40 +3,44 @@ const layout = (() => {
         const noticeListContainer = document.querySelector("tbody.table-notice");
         let text = ``;
 
-        const countAmount = document.querySelector(".count-amount");
+        if (result.postWarningDTOList !== null && result.postWarningDTOList.length > 0) {
 
-        countAmount.innerText = result.total;
+            result.postWarningDTOList.forEach((postWarningDTO) => {
+                let status = null;
 
-        if (result.userMemberDTOList !== null && result.userMemberDTOList.length > 0) {
+                if (postWarningDTO.postWarningStatus === "wait") {
+                    status = "대기"
+                } else if (postWarningDTO.postWarningStatus === "delete") {
+                    status = "삭제 처리"
+                } else {
+                    status = "보류"
+                }
 
-            result.userMemberDTOList.forEach((userMemberDTO) => {
+
                 text += `
 
                     <tr>
                         <td class="td-name">
-                            <div class="member-name">정희준
+                            <div class="member-name">${postWarningDTO.userName}
                                 <span class="badge-label badge text-danger ml-2">일반회원</span>
                             </div>
-                            <div class="member-id">test01@gmail.com</div>
+                            <div class="member-id">${postWarningDTO.userEmail ?? '-'}</div>
                         </td>
-                        <td class="td-amount pr-4 font-weight-bold">정희준
+                        <td class="td-amount pr-4 font-weight-bold">${postWarningDTO.userName}
                             <span class="amount-unit"> 님</span>
                         </td>
-                        <td class="td-email">
-                            <p>test01@gmail.com</p>
-                        </td>
                         <td class="td-phone">
-                            <p>010-1234-5678</p>
+                            <p>${postWarningDTO.postContent}</p>
                         </td>
                         <td class="td-profile">
-                            <p>보류</p>
+                            <p>${status}</p>
                         </td>
                         <td class="td-job">
-                            <p>3</p>
+                            <p>${postWarningDTO.wraningCount}</p>
                         </td>
                         <td class="td-action text-center">
                             <div class="action-btn">
-                                <i class="mdi mdi-chevron-right"></i>
+                                <i class="mdi mdi-chevron-right" data-id="${postWarningDTO.id}"></i>
                             </div>
                         </td>
                     </tr>
@@ -98,274 +102,138 @@ const layout = (() => {
 
         const memberModal = document.querySelector(".member-modal");
 
-        let experiencesText = ``;
-        let internsText = ``;
-        let postsText = ``;
         let text = ``;
-
-        if (result.requestExperiences && result.requestExperiences.length > 0) {
-            result.requestExperiences.forEach((experiences) => {
-                let status = ``;
-
-                if (experiences.requestExperienceStatus === "await") {
-                    status = "서류접수"
-                }
-                else if (experiences.requestExperienceStatus === "accept") {
-                    status = "합격"
-                }
-                else if (experiences.requestExperienceStatus === "reject") {
-                    status = "불합격"
-                }
-
-
-
-
-                experiencesText += `
-                    <tr>
-                        <td>${experiences.companyName}</td>
-                        <td>${experiences.experienceNoticeTitle}</td>
-                        <td style="text-align: center;">${status}</td>
-                        <td style="text-align: center;">${experiences.evaluationAvgScore ?? '-'}</td>
-                    </tr>
-                `
-            })
-        } else {
-            experiencesText += `
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `
-        }
-
-        if (result.requestInterns && result.requestInterns.length > 0) {
-            result.requestInterns.forEach((requestIntern) => {
-                let status = ``;
-
-                if (requestIntern.requestInternStatus === "await") {
-                    status = "서류접수"
-                }
-                else if (requestIntern.requestInternStatus === "accept") {
-                    status = "합격"
-                }
-                else if (requestIntern.requestInternStatus === "reject") {
-                    status = "불합격"
-                }
-
-
-
-
-                internsText += `
-                    <tr>
-                        <td>${requestIntern.companyName}</td>
-                        <td>${requestIntern.internNoticeTitle}</td>
-                        <td style="text-align: center;">${status}</td>
-                    </tr>
-                `
-            })
-        } else {
-            internsText += `
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `
-        }
-
-        if (result.posts && result.posts.length > 0) {
-            result.posts.forEach((post) => {
-                let status = ``;
-
-                if (post.postStatus === "active") {
-                    status = "게시중"
-                }
-                else if (post.postStatus === "inactive") {
-                    status = "삭제"
-                }
-
-                postsText += `
-                    <tr>
-                        <td>${status}</td>
-                        <td>${post.postContent}</td>
-                        <td style="text-align: center;">${post.createdDateTime ? post.createdDateTime.split(" ")[0] : '-'}</td>
-                    </tr>
-                `
-            })
-        } else {
-            postsText += `
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `
-        }
-
 
 
 
         if (result !== null) {
+
+            let status = null;
+            let modalButtonText = ``
+
+            if (result.postWarningStatus === "wait") {
+                status = "대기"
+                modalButtonText = `
+                    <button type="button" class="btn-modal" id="btn-warning">보류</button>
+                    <button type="button" class="btn-modal" id="btn-warning-remove">삭제</button>
+                `
+            } else if (result.postWarningStatus === "delete") {
+                status = "삭제 처리"
+                modalButtonText = `
+                    <button type="button" class="btn-modal" id="btn-warning">보류</button>
+                `
+            } else {
+                status = "보류"
+                modalButtonText = `
+                    <button type="button" class="btn-modal" id="btn-warning-remove">삭제</button>
+                `
+            }
+
+
+
+            const createdDate = new Date(result.createdDateTime);
+            const createdFormatted = createdDate.toISOString().slice(0, 19).replace("T", " ");
+
+            const updatedDate = new Date(result.updatedDateTime);
+            const updatedFormatted = updatedDate.toISOString().slice(0, 19).replace("T", " ");
+
             text = `
-            <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="modal-title">
-                                    ${result.userName}
-                                    <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>
-                                </div>
-                                <button class="close close-button">
-                                    <i class="mdi mdi-close"></i>
-                                </button>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title">
+                                ${result.userName}
+                                <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>
                             </div>
-                            <div class="modal-body">
-                                <div class="divider">
-                                    <div class="tab-view">
-                                        <div class="tab-view-header"></div>
-                                        <div class="tab-view-body">
-                                            <div style="display: block;">
-                                                <div class="tab-inner tab-detail">
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">회원 상세정보</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
+                            <button class="close">
+                                <i class="mdi mdi-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="divider">
+                                <div class="tab-view">
+                                    <div class="tab-view-header"></div>
+                                    <div class="tab-view-body">
+                                        <div style="display: block;">
+                                            <div class="tab-inner tab-detail">
+                                                <div class="info-layout detail-info">
+                                                    <div class="info-title justify-content-between">
+                                                        <div class="flex-left d-flex">
+                                                            <div class="title">회원 상세정보</div>
                                                         </div>
-                                                        <div class="d-table w-100">
-                                                            <!-- 테이블 왼쪽 -->
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>회원ID (이메일)</th>
-                                                                            <td>${result.userEmail ?? '-'}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>핸드폰 번호</th>
-                                                                            <td>${result.userPhone}</td>
-                                                                        </tr>  
-                                                                        <tr>
-                                                                            <th>직군</th>
-                                                                            <td>${result.jobName ?? '-'}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>체험신청 횟수</th>
-                                                                            <td>${result.requestExperienceCount}</td>
-                                                                        </tr> 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <!-- 테이블 오른쪽 -->                                                        
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table">
-                                                                    <tbody>                                                                        
-                                                                        <tr>
-                                                                            <th>이름</th>
-                                                                            <td>${result.userName}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>프로필 URL</th>
-                                                                            <td>${result.memberProfileUrl ?? '-'}</td>
-                                                                        </tr>   
-                                                                        <tr>
-                                                                            <th>평균 평점</th>
-                                                                            <td>${result.avgScore ?? '-'}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>인턴신청 횟수</th>
-                                                                            <td>${result.requestInternCount}</td>
-                                                                        </tr>                                                                        
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                        <div class="flex-right"></div>
                                                     </div>
-                                                    <!-- 체험 신청 내역 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">체험신청 내역</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
+                                                    <div class="d-table w-100">
+                                                        <!-- &lt;!&ndash; 테이블 왼쪽 &ndash;&gt; -->
+                                                        <div class="d-table-cell">
                                                             <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="middle">회사명</th>
-                                                                        <th class="long">체험공고 제목</th>
-                                                                        <th class="short" style="text-align: center;">지원상태</th>
-                                                                        <th class="short" style="text-align: center;">평가점수</th>
-                                                                    </tr>
-                                                                </thead>
                                                                 <tbody>
-                                                                    ${experiencesText}                                                                                                                                 
+                                                                <tr>
+                                                                    <th>회원ID (이메일)</th>
+                                                                    <td>${result.userEmail}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>주의 게시물 수</th>
+                                                                    <td>${result.wraningCount}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>게시일</th>
+                                                                    <td>${createdFormatted}</td>
+                                                                </tr>
                                                                 </tbody>
                                                             </table>
-                                                        </div>                             
-                                                    </div>
-                                                    <!-- 인턴 신청 내역 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">인턴신청 내역</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
                                                         </div>
-                                                        <div class="d-table w-100">
+                                                        <!-- &lt;!&ndash; 테이블 오른쪽 &ndash;&gt;                                                        -->
+                                                        <div class="d-table-cell">
                                                             <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="middle">회사명</th>
-                                                                        <th class="long">인턴공고 제목</th>
-                                                                        <th class="middle" style="text-align: center;">지원상태</th>
-                                                                    </tr>
-                                                                </thead>
                                                                 <tbody>
-                                                                    ${internsText}                                                                                                                                   
+                                                                <tr>
+                                                                    <th>이름</th>
+                                                                    <td>${result.userName}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>상태</th>
+                                                                    <td>${status}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>수정일</th>
+                                                                    <td>${updatedFormatted}</td>
+                                                                </tr>
                                                                 </tbody>
                                                             </table>
-                                                        </div>                             
-                                                    </div>
-                                                    <!-- 회원 작성 게시글 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">작성 게시글</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
                                                         </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="long">게시글 제목</th>
-                                                                        <th>게시글 내용</th>
-                                                                        <th class="long" style="text-align: center;">게시글 작성 일자</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    ${postsText}                                                                                                                             
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
                                                     </div>
+                                                </div>
+                                                <!-- &lt;!&ndash; 회원 작성 게시글 &ndash;&gt; -->
+                                                <div class="info-layout detail-info">
+                                                    <div class="info-title justify-content-between">
+                                                        <div class="flex-left d-flex">
+                                                            <div class="title">주의 게시글</div>
+                                                        </div>
+                                                        <div class="flex-right"></div>
+                                                    </div>
+                                                    <div class="d-table w-100">
+                                                        <div class="text-div">
+                                                            <textarea id="content-post" readonly>${result.postContent}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div id="modal-button"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn-close btn btn-outline-filter">닫기</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-close btn btn-outline-filter">닫기</button>
                         </div>
                     </div>
+                </div>
         `;
 
             memberModal.innerHTML = text;
+            document.querySelector("#modal-button").innerHTML = modalButtonText;
         }
 
 

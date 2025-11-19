@@ -3,17 +3,6 @@ const icons = document.querySelectorAll(".icon-wrapper i");
 const modal = document.querySelector(".member-modal");
 const userMenuWrapper = document.querySelector(".user-menu-wrapper");
 const userMenuContent = document.querySelector(".user-menu-content");
-const actionButtons = document.querySelectorAll(".action-btn");
-const closeButtons = document.querySelectorAll(".close");
-const pageNums = document.querySelectorAll(".page-num");
-const pageItemNums = document.querySelectorAll(".page-item-num");
-const filterBtn = document.getElementById("btn-filter-pg");
-const filterWrapper = document.getElementById("filter-pg");
-const popMenu = filterWrapper.querySelector(".kok-pop-menu");
-const popBack = popMenu.querySelector(".kok-pop-menu-back");
-const popContext = popMenu.querySelector(".kok-pop-menu-context");
-const checkItems = popContext.querySelectorAll(".kok-check");
-const confirmBtn = popContext.querySelector("button.btn-outline-primary");
 
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
@@ -50,12 +39,28 @@ document.addEventListener("click", (e) => {
 document.addEventListener("DOMContentLoaded", async () => {
     const page = 1;
 
-    let warnings = []
-    let postContent = []
+    const features = await warningService.allPosts();
+    console.log(features);
 
-    postContent += warningService.allPosts();
-    warnings += await warningService.warningList(postContent);
-    console.log(postContent)
+    const warnings = await warningService.warningList(features);
+    console.log(warnings.isSlang);
+
+    await warningService.warningPostList(page, layout.showList, warnings.isSlang);
+
+    document.querySelectorAll('.custom-radio-group input[type="radio"]')
+        .forEach(radio => {
+            radio.addEventListener('change', async () => {
+                let keyword = radio.dataset.keyword; // ← 여기
+                console.log(keyword);
+
+                if (keyword === "all") {
+                    keyword = null;
+                }
+
+                await warningService.warningPostList(page, layout.showList, warnings.isSlang, keyword);
+            });
+        });
+
 
 
     const modal = document.querySelector(".member-modal.modal");
@@ -68,13 +73,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const id = target.dataset.id;
+        await warningService.postDetail(id, layout.showDetail);
+
         modal.style.display = "block";
         setTimeout(() => {
             modal.classList.add("show");
             modal.style.background = "rgba(0,0,0,0.5)";
             document.body.classList.add("modal-open");
         }, 100);
+
+        document.addEventListener("click", async (e) => {
+            // 삭제 버튼
+            if (e.target.closest("#btn-warning-remove")) {
+                await warningService.deletePost(id)
+            }
+
+            // 보류 버튼
+            if (e.target.closest("#btn-warning")) {
+                await warningService.changeStatusPost(id)
+            }
+
+            await warningService.postDetail(id, layout.showDetail);
+            await warningService.warningPostList(page, layout.showList, warnings.isSlang);
+        });
     });
+
+
 
     document.addEventListener("click", async (e) => {
         const pageButton = e.target.closest(".page-item-num");
@@ -130,61 +154,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-// 체크박스 클릭 이벤트 (라디오 버튼처럼 하나만 선택)
-// if (confirmBtn) {
-//     confirmBtn.style.display = "none";
-// }
-
-filterBtn.addEventListener("click", function () {
-    console.log("111");
-
-    popBack.classList.toggle("show");
-    popContext.classList.toggle("show");
-});
-
-document.addEventListener("click", function (e) {
-    if (!filterWrapper.contains(e.target)) {
-        popBack.classList.remove("show");
-        popContext.classList.remove("show");
-    }
-});
-
-checkItems.forEach((item) => {
-    const checkBox = item.querySelector(".kok-check-box");
-    const checkIcon = checkBox.querySelector("i");
-
-    item.addEventListener("click", function () {
-        const currentLi = item.closest("li");
-        const isActive = currentLi.classList.contains("active");
-
-        checkItems.forEach((otherItem) => {
-            const otherLi = otherItem.closest("li");
-            const otherBox = otherItem.querySelector(".kok-check-box");
-            const otherIcon = otherBox.querySelector("i");
-
-            otherIcon.style.display = "none";
-            if (otherLi) otherLi.classList.remove("active");
-        });
-
-        if (!isActive) {
-            checkIcon.style.display = "inline-block";
-            currentLi.classList.add("active");
-            // confirmBtn.style.display = "block";
-        } else {
-            checkIcon.style.display = "none";
-            currentLi.classList.remove("active");
-            // confirmBtn.style.display = "none";
-        }
-    });
-});
-
-if (confirmBtn) {
-    confirmBtn.addEventListener("click", function () {
-        popBack.classList.remove("show");
-        popContext.classList.remove("show");
-
-        if (pagination) {
-            delete pagination.dataset.category;
-        }
-    });
-}

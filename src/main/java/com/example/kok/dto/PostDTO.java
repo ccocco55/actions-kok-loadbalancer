@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.PostWarningStatus;
 import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class PostDTO {
     private String postContent;
     private Status postStatus;
     private long memberId;
+    private String userEmail;
     private String createdDateTime;
     private String updatedDateTime;
     private String relativeDate;
@@ -30,4 +32,6 @@ public class PostDTO {
     private List<CommentDTO> comments;
     private boolean owner;
     private String snsProfile;
+    private PostWarningStatus postWarningStatus;
+    private int wraningCount;
 }

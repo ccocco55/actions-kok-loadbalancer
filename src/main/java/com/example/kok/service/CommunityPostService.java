@@ -31,6 +31,6 @@ public interface CommunityPostService {
                 .build();
     }
 
-//    전체 게시물 조회
+    //    전체 게시물 조회
     public List<PostWarningDTO> findAllPosts();
 }
