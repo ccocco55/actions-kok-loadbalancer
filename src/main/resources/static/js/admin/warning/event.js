@@ -35,10 +35,13 @@ document.addEventListener("click", (e) => {
         userMenuContent.classList.remove("show");
     }
 });
-
 document.addEventListener("DOMContentLoaded", async () => {
-    const page = 1;
+    let page = 1;
+    let keyword = null;
 
+    const modal = document.querySelector(".member-modal.modal");
+
+    // 초기 데이터 로딩
     const features = await warningService.allPosts();
     console.log(features);
 
@@ -47,109 +50,85 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await warningService.warningPostList(page, layout.showList, warnings.isSlang);
 
+    // 라디오 버튼 필터 이벤트
     document.querySelectorAll('.custom-radio-group input[type="radio"]')
         .forEach(radio => {
             radio.addEventListener('change', async () => {
-                let keyword = radio.dataset.keyword; // ← 여기
-                console.log(keyword);
+                keyword = radio.dataset.keyword;
+                console.log("Selected keyword:", keyword);
 
-                if (keyword === "all") {
-                    keyword = null;
-                }
+                if (keyword === "all") keyword = null;
 
+                page = 1; // 필터 바뀌면 페이지 초기화
                 await warningService.warningPostList(page, layout.showList, warnings.isSlang, keyword);
             });
-
-            document.addEventListener("click", async (e) => {
-                const pageButton = e.target.closest(".page-item-num");
-                if (!pageButton) return;
-
-                e.preventDefault();
-                const page = pageButton.dataset.page;
-
-                if (page) {
-                    document.querySelectorAll(".page-number").forEach((li) => {
-                        li.classList.remove("active");
-                    });
-
-                    const parentLi = pageButton.closest(".page-number");
-                    if (
-                        parentLi &&
-                        !["이전", "다음"].includes(pageButton.textContent.trim())
-                    ) {
-                        parentLi.classList.add("active");
-
-                    }
-                    await warningService.warningPostList(page, layout.showList, warnings.isSlang, keyword);
-                }
-            });
-
         });
 
-
-
-    const modal = document.querySelector(".member-modal.modal");
-
+    // 페이지 버튼 이벤트 (이벤트 위임)
     document.addEventListener("click", async (e) => {
-        // 상세 모달 열기 (이벤트 위임)
-        const target = e.target.closest(".action-btn, .mdi-chevron-right");
-        if (!target) {
+        const pageButton = e.target.closest(".page-item-num");
+        if (pageButton) {
+            e.preventDefault();
+            const selectedPage = pageButton.dataset.page;
+            if (selectedPage) {
+                page = selectedPage;
+
+                // 페이지 active 클래스 토글
+                document.querySelectorAll(".page-number").forEach(li => li.classList.remove("active"));
+                const parentLi = pageButton.closest(".page-number");
+                if (parentLi && !["이전", "다음"].includes(pageButton.textContent.trim())) {
+                    parentLi.classList.add("active");
+                }
+
+                // 리스트 호출
+                await warningService.warningPostList(page, layout.showList, warnings.isSlang, keyword);
+            }
             return;
         }
 
-        const id = target.dataset.id;
-        await warningService.postDetail(id, layout.showDetail);
-
-        modal.style.display = "block";
-        setTimeout(() => {
-            modal.classList.add("show");
-            modal.style.background = "rgba(0,0,0,0.5)";
-            document.body.classList.add("modal-open");
-        }, 100);
-
-        document.addEventListener("click", async (e) => {
-            // 삭제 버튼
-            if (e.target.closest("#btn-warning-remove")) {
-                await warningService.deletePost(id)
-            }
-
-            // 보류 버튼
-            if (e.target.closest("#btn-warning")) {
-                await warningService.changeStatusPost(id)
-            }
-
+        // 모달 열기 이벤트
+        const modalTarget = e.target.closest(".action-btn, .mdi-chevron-right");
+        if (modalTarget) {
+            const id = modalTarget.dataset.id;
             await warningService.postDetail(id, layout.showDetail);
-            await warningService.warningPostList(page, layout.showList, warnings.isSlang);
-        });
-    });
 
+            modal.style.display = "block";
+            setTimeout(() => {
+                modal.classList.add("show");
+                modal.style.background = "rgba(0,0,0,0.5)";
+                document.body.classList.add("modal-open");
+            }, 100);
 
+            // 모달 내 삭제/보류 이벤트
+            const modalClickHandler = async (e) => {
+                if (e.target.closest("#btn-warning-remove")) {
+                    await warningService.deletePost(id);
+                }
 
+                if (e.target.closest("#btn-warning")) {
+                    await warningService.changeStatusPost(id);
+                }
 
+                await warningService.postDetail(id, layout.showDetail);
+                await warningService.warningPostList(page, layout.showList, warnings.isSlang, keyword);
+            };
 
-    // 닫기 버튼 / 푸터 닫기 버튼 / 배경 클릭 → 모두 위임 처리
-    document.addEventListener("click", (e) => {
-        // 닫기 버튼(X)
-        if (e.target.closest(".close")) {
-            closeModal();
+            // 한 번만 이벤트 등록
+            modal.addEventListener("click", modalClickHandler, { once: true });
             return;
         }
 
-        // 푸터 닫기 버튼
-        if (e.target.closest(".btn-close.btn-outline-filter")) {
-            closeModal();
-            return;
-        }
-
-        // 모달 배경 클릭 시
+        // 모달 닫기 이벤트
         if (
-            e.target.classList.contains("member-modal") &&
-            e.target.classList.contains("modal")
+            e.target.closest(".close") ||
+            e.target.closest(".btn-close.btn-outline-filter") ||
+            (e.target.classList.contains("member-modal") && e.target.classList.contains("modal"))
         ) {
             closeModal();
         }
     });
 
+    // 모달 닫기 함수
     function closeModal() {
         modal.classList.remove("show");
         document.body.classList.remove("modal-open");
@@ -158,4 +137,3 @@ document.addEventListener("DOMContentLoaded", async () => {
         }, 100);
     }
 });
-
