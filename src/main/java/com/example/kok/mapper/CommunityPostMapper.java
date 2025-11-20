@@ -34,6 +34,9 @@ public interface CommunityPostMapper {
             @Param("ids") List<Integer> ids,
             @Param("keyword") PostWarningStatus keyword);
 
+    // 개수
+    public int countWarningPosts(@Param("ids") List<Integer> ids, @Param("keyword") PostWarningStatus keyword);
+
     //    추가
     public void insert(PostDTO postDTO);
 

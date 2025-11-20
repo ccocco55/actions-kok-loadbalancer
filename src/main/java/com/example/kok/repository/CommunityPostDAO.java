@@ -46,6 +46,11 @@ public class CommunityPostDAO {
         return communityPostMapper.selectWarningPosts(criteria,  ids, keyword);
     }
 
+    //    개수
+    public int countWarningPosts(List<Integer> ids, PostWarningStatus keyword) {
+        return communityPostMapper.countWarningPosts(ids, keyword);
+    }
+
     //    추가
     public void save(PostDTO postDTO) {
         communityPostMapper.insert(postDTO);

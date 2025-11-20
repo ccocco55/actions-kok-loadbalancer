@@ -59,6 +59,25 @@
         limit #{criteria.rowCount} offset #{criteria.offset}
     </select>
 
+    <select id="countWarningPosts">
+        select count(*)
+        from tbl_user u
+        join tbl_member m on u.id = m.user_id
+        join tbl_post p on m.user_id = p.member_id
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                AND p.id IN
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+
+            <if test="keyword != null">
+                AND p.post_warning_status = #{keyword}
+            </if>
+        </where>
+    </select>
+
     <select id="selectCommunityPost">
         select u.id as member_id, u.user_name, m.member_profile_url as snsProfile, f.file_path as memberProfileUrl, p.id as id, p.post_content, p.post_status, p.post_warning_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count
         from tbl_user u

@@ -1,18 +1,22 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.AdimPostWarningDTO;
-import com.example.kok.dto.PostDTO;
-import com.example.kok.dto.PostWarningDTO;
-import com.example.kok.dto.UserDTO;
+import com.example.kok.common.exception.PostNotFoundException;
+import com.example.kok.dto.*;
 import com.example.kok.enumeration.PostWarningStatus;
+import com.example.kok.repository.AdminAdvertisementDAO;
+import com.example.kok.repository.AdvertisementBackgroundFileDAO;
 import com.example.kok.repository.CommunityPostDAO;
 import com.example.kok.repository.UserDAO;
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -50,12 +54,15 @@ public class AdminWarningMemberServiceImpl implements AdminWarningMemberService 
     @Override
     public AdimPostWarningDTO findWarningPosts(int page, List<Integer> ids, String keyword) {
         AdimPostWarningDTO adimPostWarningDTO = new AdimPostWarningDTO();
-        Criteria criteria = new Criteria(page, ids.size());
 
         PostWarningStatus status = null;
         if(keyword != null && !keyword.isBlank()) {
             status = PostWarningStatus.getStatusFromValue(keyword);
         }
+
+        int count = communityPostDAO.countWarningPosts(ids, status);
+
+        Criteria criteria = new Criteria(page, count);
 
         List<PostWarningDTO> posts = communityPostDAO.selectWarningPosts(criteria, ids, status);
 
@@ -63,6 +70,7 @@ public class AdminWarningMemberServiceImpl implements AdminWarningMemberService 
             postWarningDTO.setWraningCount(communityPostDAO.banPostCount(postWarningDTO.getMemberId()));
         }
 
+        criteria.setCount(posts.size() + 1);
         criteria.setHasMore(posts.size() > criteria.getRowCount());
         criteria.setHasPreviousPage(page > 1);
         criteria.setHasNextPage(page < criteria.getRealEnd());
